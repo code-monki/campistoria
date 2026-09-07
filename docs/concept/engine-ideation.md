@@ -65,6 +65,8 @@ These signals identify concerns that Requirements should examine. They are not m
 
 Ideation has produced a stable conceptual baseline. The next project activity is requirements engineering unless a later approved artifact explicitly changes the lifecycle state.
 
+The Ideation → Requirements phase gate (`ai-toolkit/02-governance/12-phase-gate-checklist.md`, Gate 1→2) was reviewed against all seven mandatory exit criteria — problem statement, stakeholders, constraints, risks, success criteria, alternative solution paths, and absence of unresolved ambiguity — and found satisfied. The project owner granted explicit approval to advance to the Requirements phase as of that review (2026-09-07). Requirements engineering is the current active lifecycle phase.
+
 The following remain intentionally undecided until later lifecycle phases:
 
 - Programming language.
