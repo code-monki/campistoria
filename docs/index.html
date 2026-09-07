@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hybrid Systems Discipline</title>
+    <meta
+      name="description"
+      content="A practical discipline for building hybrid human+AI systems: operating rules, governance guardrails, executive framing, and ready-to-use templates.">
+
+    <style>
+      :root {
+        --fg: #111;
+        --muted: #555;
+        --border: #ddd;
+        --bg: #fff;
+        --card: #fafafa;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --fg: #eee;
+          --muted: #bbb;
+          --border: #333;
+          --bg: #0b0b0b;
+          --card: #111;
+        }
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font:
+          16px/1.55 system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 48px 20px;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+
+      .logo-container {
+        background: #ffffff;
+        padding: 10px 14px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .logo {
+        height: 64px;
+        width: auto;
+        display: block;
+      }
+
+      .logo-container {
+        background: #ffffff;
+        padding: 10px 14px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 1px solid var(--border);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+      }
+
+      @media (prefers-color-scheme: light) {
+        .logo-container {
+          border: 1px solid #d0d0d0;
+        }
+      }
+
+      .title-block h1 {
+        font-size: 2.1rem;
+        margin: 0 0 6px;
+        letter-spacing: -0.02em;
+      }
+
+      .lede {
+        margin: 0;
+        color: var(--muted);
+        max-width: 78ch;
+      }
+
+      @media (max-width: 640px) {
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .logo {
+          height: 48px;
+        }
+      }
+
+      /* Tag row */
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+        margin-bottom: 18px;
+      }
+
+      .pill {
+        display: inline-block;
+        padding: 6px 10px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      /* Layout */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 14px;
+        margin: 18px 0 26px;
+      }
+
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 14px 14px 12px;
+        background: var(--card);
+      }
+
+      .card h2 {
+        font-size: 1.05rem;
+        margin: 0 0 6px;
+      }
+
+      .card p {
+        margin: 0 0 10px;
+        color: var(--muted);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      li {
+        margin: 6px 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(127, 127, 127, 0.45);
+      }
+
+      a:hover {
+        border-bottom-color: rgba(127, 127, 127, 0.9);
+      }
+
+      code {
+        background: rgba(127, 127, 127, 0.12);
+        padding: 2px 6px;
+        border-radius: 8px;
+      }
+
+      footer {
+        margin-top: 28px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      /* Footer */
+
+      .site-footer {
+        margin-top: 40px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .footer-right a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(127, 127, 127, 0.45);
+      }
+
+      .footer-right a:hover {
+        border-bottom-color: rgba(127, 127, 127, 0.9);
+      }
+
+      .footer-separator {
+        margin: 0 8px;
+        opacity: 0.6;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="header">
+        <div class="logo-container">
+          <img
+            src="./assets/Senestone_Logo_Small.png"
+            alt="Senestone logo"
+            class="logo">
+        </div>
+
+        <div class="title-block">
+          <h1>Hybrid Systems Discipline</h1>
+          <p class="lede">
+            A practical discipline for building hybrid human+AI systems:
+            operating rules, governance guardrails, executive framing, and
+            ready-to-use templates.
+          </p>
+        </div>
+      </header>
+
+      <section class="row" aria-label="Topics">
+        <span class="pill">Foundations</span>
+        <span class="pill">Governance</span>
+        <span class="pill">Executive adoption</span>
+        <span class="pill">Templates</span>
+        <span class="pill">Platform configs</span>
+      </section>
+
+      <section class="grid" aria-label="Content">
+        <div class="card">
+          <h2>Start Here</h2>
+          <p>Core orientation and positioning.</p>
+          <ul>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline#readme"
+                >README</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/01-foundations/00-whitepaper.md"
+                >Whitepaper</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/03-executive/executive-adoption-overview.md"
+                >Executive Overview</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Foundations</h2>
+          <p>Operating rules and tactical playbooks.</p>
+          <ul>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/01-foundations/01-executive-positioning.md"
+                >Executive Positioning</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/01-foundations/02-ai-operating-rules.md"
+                >AI Operating Rules</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/01-foundations/03-debug-triage-playbook.md"
+                >Debug Triage Playbook</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/01-foundations/04-pilot-program-guide.md"
+                >Pilot Program Guide</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/01-foundations/05-toolkit-usage-model.md"
+                >Toolkit Usage Model</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Governance Guardrails</h2>
+          <p>Phase gates and system-level discipline.</p>
+          <ul>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/02-governance/guardrails-index.md"
+                >Guardrails Index</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/02-governance/00-lifecycle-bootstrap.md"
+                >Lifecycle Bootstrap</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/02-governance/12-phase-gate-checklist.md"
+                >Phase Gate Checklist</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/tree/main/02-governance"
+                >All Governance Docs</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Executive</h2>
+          <p>Adoption framing for leaders and stakeholders.</p>
+          <ul>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/03-executive/executive-adoption-overview.md"
+                >Executive Adoption Overview</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Templates</h2>
+          <p>Ready-to-copy project, system, and documentation templates.</p>
+          <ul>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/tree/main/04-templates/project"
+                >Project Templates</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/tree/main/04-templates/system"
+                >System Templates</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/tree/main/04-templates/documentation"
+                >Documentation Templates</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Platform Configurations</h2>
+          <p>Instruction sets for AI tooling.</p>
+          <ul>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/tree/main/05-platform-config"
+                >All Platform Config Files</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/05-platform-config/chatgpt-custom-instructions.md"
+                >ChatGPT Instructions</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/05-platform-config/enterprise-system-prompt.md"
+                >Enterprise System Prompt</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/05-platform-config/cursor-rules.md"
+                >Cursor Rules</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Repo</h2>
+          <p>Source, issues, and license.</p>
+          <ul>
+            <li>
+              <a href="https://github.com/senestone/hybrid-systems-discipline"
+                >Repository Home</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/issues"
+                >Issues</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/senestone/hybrid-systems-discipline/blob/main/LICENSE"
+                >License</a
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="footer-left">
+          © 2026 Senestone LLC. All rights reserved.
+        </div>
+
+        <div class="footer-right">
+          <a
+            href="https://github.com/senestone/hybrid-systems-discipline/blob/main/LICENSE"
+          >
+            License
+          </a>
+          <span class="footer-separator">•</span>
+          <a href="https://github.com/senestone/hybrid-systems-discipline">
+            GitHub Repository
+          </a>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>
