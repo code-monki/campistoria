@@ -356,7 +356,7 @@ No build tooling, dependency manager, or CI/CD platform is selected at this phas
 | Chosen patterns (Command, Memento, Event Sourcing) impose more implementation complexity than a small first release needs | Scope / delivery risk | Moderate | HLA-CORE, HLA-RESOLUTION, HLA-STATE |
 | Deployment-model deferral (Section 10) leads to a HLA-CONTRACT design that doesn't actually adapt cleanly to both embedded and hosted modes | Architectural | Low | HLA-CONTRACT |
 
-The four High-risk items concern structural boundaries that are easy to state and easy to erode under implementation pressure; they should be explicit acceptance criteria in Detailed Design and Test Planning, not just documented here.
+The High-risk items concern structural boundaries that are easy to state and easy to erode under implementation pressure; they should be explicit acceptance criteria in Detailed Design and Test Planning, not just documented here.
 
 ---
 
