@@ -218,7 +218,7 @@ The same scenario may produce many divergent campaigns. Running play mutates the
 
 The lifecycle is:
 
-[Diagram: Campaign Lifecycle](../assets/diagrams/campaign-lifecycle.html)
+![Campaign Lifecycle](../assets/diagrams/campaign-lifecycle.svg)
 
 Scenario/package upgrades for an existing campaign are potentially unsafe. Treat them as explicit migrations requiring validation and checkpoint/backup semantics.
 

@@ -88,7 +88,7 @@ Every structural decision in Sections 5–9 traces to one or more of the drivers
 
 ## 3.1 External Systems and Interfaces
 
-[Diagram: HLA System Context and Boundary](../assets/diagrams/hla-system-context.html)
+![HLA System Context and Boundary](../assets/diagrams/hla-system-context.svg)
 
 There are no external *systems* in scope — per `engine-srs.md` §13, cloud services, multiplayer infrastructure, and AI integration are deferred. The only external interfaces are the three actor types shown above, all interacting exclusively through HLA-CONTRACT (Section 6), whose validation of incoming Package content is detailed in HLA-VALIDATE.
 

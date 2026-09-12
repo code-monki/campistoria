@@ -103,7 +103,7 @@ The engine maintains campaign reality; packages provide game and world semantics
 
 At a high level:
 
-[Diagram: Campistoria Engine Conceptual Model](../assets/diagrams/engine-conceptual-model.html)
+![Campistoria Engine Conceptual Model](../assets/diagrams/engine-conceptual-model.svg)
 
 Packages define most vocabulary inside these generic structures. The engine knows the meta-model; packages define game and world semantics.
 
@@ -244,7 +244,7 @@ System Definition Packages are intended to be reusable shared foundations. A sce
 
 Package composition conceptually produces an Effective Campaign Definition:
 
-[Diagram: Package Composition Produces an Effective Campaign Definition](../assets/diagrams/package-composition.html)
+![Package Composition Produces an Effective Campaign Definition](../assets/diagrams/package-composition.svg)
 
 Package principles:
 
@@ -274,7 +274,7 @@ An unresolved wilderness hex, unanswered mystery, unknown NPC motive, or undefin
 
 Core distinction:
 
-[Diagram: Resolution and Presentation Boundary](../assets/diagrams/resolution-presentation-flow.html)
+![Resolution and Presentation Boundary](../assets/diagrams/resolution-presentation-flow.svg)
 
 This distinction supports solo play without turning the engine into a storyteller.
 
@@ -294,7 +294,7 @@ Maps, timelines, rosters, relationship graphs, journals, current-scene views, su
 
 Conceptually:
 
-[Diagram: Resolution and Presentation Boundary](../assets/diagrams/resolution-presentation-flow.html)
+![Resolution and Presentation Boundary](../assets/diagrams/resolution-presentation-flow.svg)
 
 This keeps rendering and UI technology outside the engine contract.
 

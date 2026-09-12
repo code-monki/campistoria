@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1120 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="package-composition-title package-composition-desc">
+      <title id="package-composition-title">Package Composition Produces an Effective Campaign Definition</title>
+      <desc id="package-composition-desc">Data-flow diagram showing engine meta-model and package inputs combining into a pinned Effective Campaign Definition.</desc>
+      <defs>
+        <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');</style>
+        <marker id="package-composition-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+        <marker id="package-composition-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
+        <marker id="package-composition-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+      </defs>
+      <rect width="100%" height="100%" fill="#f5f5f5"/>
+      <line x1="196" y1="160" x2="208" y2="160" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#package-composition-arrow)"/>
+      <rect x="180" y="140" width="44" height="12" rx="2" fill="#f5f5f5"/><text x="202" y="149" class="label" text-anchor="middle">PLUS</text>
+      <line x1="356" y1="160" x2="368" y2="160" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#package-composition-arrow)"/>
+      <rect x="340" y="140" width="44" height="12" rx="2" fill="#f5f5f5"/><text x="362" y="149" class="label" text-anchor="middle">PLUS</text>
+      <line x1="516" y1="160" x2="528" y2="160" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#package-composition-arrow)"/>
+      <rect x="500" y="140" width="44" height="12" rx="2" fill="#f5f5f5"/><text x="522" y="149" class="label" text-anchor="middle">PLUS</text>
+      <line x1="676" y1="160" x2="688" y2="160" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#package-composition-arrow)"/>
+      <rect x="660" y="140" width="44" height="12" rx="2" fill="#f5f5f5"/><text x="682" y="149" class="label" text-anchor="middle">PLUS</text>
+      <line x1="836" y1="160" x2="848" y2="160" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#package-composition-arrow-accent)"/>
+      <rect x="816" y="140" width="52" height="12" rx="2" fill="#f5f5f5"/><text x="842" y="149" class="label" text-anchor="middle">YIELDS</text>
+<rect x="68" y="124" width="128" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="68" y="124" width="128" height="72" rx="6" fill="#2d3142" fill-opacity=".05" stroke="#4f5d75" stroke-width="1"/>
+      <rect x="76" y="132" width="40" height="12" rx="2" fill="none" stroke="#4f5d75" stroke-opacity=".45" stroke-width=".8"/><text x="96" y="141" class="tag" text-anchor="middle">ENG</text>
+      <text x="132" y="164" class="node-name" text-anchor="middle">Engine</text>
+      <text x="132" y="178" class="sub" text-anchor="middle">meta-model</text>
+<rect x="228" y="124" width="128" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="228" y="124" width="128" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="236" y="132" width="40" height="12" rx="2" fill="none" stroke="#2d3142" stroke-opacity=".45" stroke-width=".8"/><text x="256" y="141" class="tag" text-anchor="middle">PKG</text>
+      <text x="292" y="164" class="node-name" text-anchor="middle">System Package</text>
+      <text x="292" y="178" class="sub" text-anchor="middle">mechanics</text>
+<rect x="388" y="124" width="128" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="388" y="124" width="128" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="396" y="132" width="40" height="12" rx="2" fill="none" stroke="#2d3142" stroke-opacity=".45" stroke-width=".8"/><text x="416" y="141" class="tag" text-anchor="middle">PKG</text>
+      <text x="452" y="164" class="node-name" text-anchor="middle">Setting Package</text>
+      <text x="452" y="178" class="sub" text-anchor="middle">world semantics</text>
+<rect x="548" y="124" width="128" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="548" y="124" width="128" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="556" y="132" width="40" height="12" rx="2" fill="none" stroke="#2d3142" stroke-opacity=".45" stroke-width=".8"/><text x="576" y="141" class="tag" text-anchor="middle">PKG</text>
+      <text x="612" y="164" class="node-name" text-anchor="middle">Scenario Package</text>
+      <text x="612" y="178" class="sub" text-anchor="middle">starting state</text>
+<rect x="708" y="124" width="128" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="708" y="124" width="128" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="716" y="132" width="40" height="12" rx="2" fill="none" stroke="#2d3142" stroke-opacity=".45" stroke-width=".8"/><text x="736" y="141" class="tag" text-anchor="middle">PKG</text>
+      <text x="772" y="164" class="node-name" text-anchor="middle">Overrides</text>
+      <text x="772" y="178" class="sub" text-anchor="middle">rules · oracles</text>
+<rect x="868" y="124" width="128" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="868" y="124" width="128" height="72" rx="6" fill="#eb6c36" fill-opacity=".08" stroke="#eb6c36" stroke-width="1"/>
+      <rect x="876" y="132" width="40" height="12" rx="2" fill="none" stroke="#eb6c36" stroke-opacity=".45" stroke-width=".8"/><text x="896" y="141" class="tag" text-anchor="middle">OUT</text>
+      <text x="932" y="164" class="node-name" text-anchor="middle">Effective Definition</text>
+      <text x="932" y="178" class="sub" text-anchor="middle">pinned composition</text>
+      <line x1="40" y1="264" x2="1060" y2="264" stroke="#2d3142" stroke-opacity=".12" stroke-width=".8"/>
+      <text x="40" y="288" class="legend">COMPOSITION IS EXPLICIT · collision is not composition · campaigns pin the effective definition</text>
+    </svg>
