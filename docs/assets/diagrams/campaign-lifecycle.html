@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campaign Lifecycle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@400&display=swap" rel="stylesheet">
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--paper:#f5f5f5;--ink:#2d3142;--muted:#4f5d75;--soft:#7a8399;--rule:rgba(45,49,66,.12);--accent:#eb6c36;--accent-tint:rgba(235,108,54,.08);--link:#2e5aa8;--sans:'Geist',system-ui,sans-serif;--serif:'Instrument Serif','Noto Serif KR','Noto Serif TC',serif;--mono:'Geist Mono',ui-monospace,monospace}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:3rem 2rem}.frame{max-width:1240px;width:100%}.eyebrow{font-family:var(--mono);font-size:.66rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}h1{font-family:var(--serif);font-size:clamp(1.5rem,2.4vw + .75rem,2rem);font-weight:400;line-height:1.15;color:var(--ink);margin-bottom:1.5rem}svg{width:100%;min-width:900px;display:block}.node-name{font-family:var(--sans);font-size:12px;font-weight:600;fill:var(--ink)}.sub{font-family:var(--mono);font-size:8px;fill:var(--muted)}.tag{font-family:var(--mono);font-size:8px;font-weight:500;letter-spacing:.14em;fill:var(--muted);text-transform:uppercase}.label{font-family:var(--mono);font-size:8px;letter-spacing:.06em;fill:var(--soft)}.legend{font-family:var(--mono);font-size:8px;letter-spacing:.12em;fill:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Process · Diagram Design</p>
+    <h1>Campaign Lifecycle</h1>
+    <svg viewBox="0 0 1240 304" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="campaign-lifecycle-title campaign-lifecycle-desc">
+      <title id="campaign-lifecycle-title">Campaign Lifecycle</title>
+      <desc id="campaign-lifecycle-desc">Process diagram showing packages validated into an Effective Campaign Definition, instantiated as a Campaign, then played, checkpointed, exported, resumed, or migrated.</desc>
+      <defs>
+        <marker id="campaign-lifecycle-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+        <marker id="campaign-lifecycle-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
+        <marker id="campaign-lifecycle-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+      </defs>
+      <rect width="100%" height="100%" fill="#f5f5f5"/>
+<line x1="180" y1="136" x2="184" y2="136" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#campaign-lifecycle-arrow)"/>
+<line x1="324" y1="136" x2="328" y2="136" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#campaign-lifecycle-arrow)"/>
+<line x1="468" y1="136" x2="472" y2="136" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#campaign-lifecycle-arrow)"/>
+<line x1="612" y1="136" x2="616" y2="136" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#campaign-lifecycle-arrow-accent)"/>
+<line x1="756" y1="136" x2="760" y2="136" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#campaign-lifecycle-arrow)"/>
+<line x1="900" y1="136" x2="904" y2="136" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#campaign-lifecycle-arrow)"/>
+<line x1="1044" y1="136" x2="1048" y2="136" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#campaign-lifecycle-arrow)"/>
+<rect x="60" y="100" width="120" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="60" y="100" width="120" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="68" y="108" width="40" height="12" rx="2" fill="transparent" stroke="#2d3142" stroke-opacity=".45" stroke-width=".8"/><text x="88" y="117" class="tag" text-anchor="middle">01</text>
+      <text x="120" y="140" class="node-name" text-anchor="middle">Packages</text>
+      <text x="120" y="154" class="sub" text-anchor="middle">definitions</text>
+<rect x="204" y="100" width="120" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="204" y="100" width="120" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="212" y="108" width="40" height="12" rx="2" fill="transparent" stroke="#2d3142" stroke-opacity=".45" stroke-width=".8"/><text x="232" y="117" class="tag" text-anchor="middle">02</text>
+      <text x="264" y="140" class="node-name" text-anchor="middle">Validate</text>
+      <text x="264" y="154" class="sub" text-anchor="middle">composition</text>
+<rect x="348" y="100" width="120" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="348" y="100" width="120" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="356" y="108" width="40" height="12" rx="2" fill="transparent" stroke="#2d3142" stroke-opacity=".45" stroke-width=".8"/><text x="376" y="117" class="tag" text-anchor="middle">03</text>
+      <text x="408" y="140" class="node-name" text-anchor="middle">Resolve</text>
+      <text x="408" y="154" class="sub" text-anchor="middle">dependencies</text>
+<rect x="492" y="100" width="120" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="492" y="100" width="120" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="500" y="108" width="40" height="12" rx="2" fill="transparent" stroke="#2d3142" stroke-opacity=".45" stroke-width=".8"/><text x="520" y="117" class="tag" text-anchor="middle">04</text>
+      <text x="552" y="140" class="node-name" text-anchor="middle">Effective Definition</text>
+      <text x="552" y="154" class="sub" text-anchor="middle">explicit overrides</text>
+<rect x="636" y="100" width="120" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="636" y="100" width="120" height="72" rx="6" fill="rgba(235,108,54,.08)" stroke="#eb6c36" stroke-width="1"/>
+      <rect x="644" y="108" width="40" height="12" rx="2" fill="transparent" stroke="#eb6c36" stroke-opacity=".45" stroke-width=".8"/><text x="664" y="117" class="tag" text-anchor="middle">05</text>
+      <text x="696" y="140" class="node-name" text-anchor="middle">Instantiate Campaign</text>
+      <text x="696" y="154" class="sub" text-anchor="middle">mutable identity</text>
+<rect x="780" y="100" width="120" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="780" y="100" width="120" height="72" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="788" y="108" width="40" height="12" rx="2" fill="transparent" stroke="#2d3142" stroke-opacity=".45" stroke-width=".8"/><text x="808" y="117" class="tag" text-anchor="middle">06</text>
+      <text x="840" y="140" class="node-name" text-anchor="middle">Play Loop</text>
+      <text x="840" y="154" class="sub" text-anchor="middle">resolve · observe</text>
+<rect x="924" y="100" width="120" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="924" y="100" width="120" height="72" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width="1"/>
+      <rect x="932" y="108" width="40" height="12" rx="2" fill="transparent" stroke="#4f5d75" stroke-opacity=".45" stroke-width=".8"/><text x="952" y="117" class="tag" text-anchor="middle">07</text>
+      <text x="984" y="140" class="node-name" text-anchor="middle">Checkpoint / Export</text>
+      <text x="984" y="154" class="sub" text-anchor="middle">portable state</text>
+<rect x="1068" y="100" width="120" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="1068" y="100" width="120" height="72" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width="1"/>
+      <rect x="1076" y="108" width="40" height="12" rx="2" fill="transparent" stroke="#4f5d75" stroke-opacity=".45" stroke-width=".8"/><text x="1096" y="117" class="tag" text-anchor="middle">08</text>
+      <text x="1128" y="140" class="node-name" text-anchor="middle">Resume / Migrate</text>
+      <text x="1128" y="154" class="sub" text-anchor="middle">explicit operation</text>
+      <line x1="40" y1="248" x2="1200" y2="248" stroke="rgba(45,49,66,.12)" stroke-width=".8"/>
+      <text x="40" y="272" class="legend">RULE · scenario/package upgrades for existing campaigns are explicit migrations</text>
+    </svg>
+  </div>
+</body>
+</html>

@@ -103,37 +103,7 @@ The engine maintains campaign reality; packages provide game and world semantics
 
 At a high level:
 
-```text
-Campaign
-|
-+-- Campaign Reality
-|   +-- Entities
-|   |   +-- Locations
-|   +-- Properties
-|   +-- Relationships
-|   +-- Facts
-|   +-- State
-|   +-- Environment / Conditions
-|   +-- Unresolved State
-|   +-- Events / History
-|
-+-- Campaign Time
-|
-+-- Observers
-|   +-- Observer Knowledge
-|       +-- Information Sources
-|
-+-- Resolution
-|   +-- Human Decisions
-|   +-- Oracles
-|   +-- Procedures
-|   +-- Rules
-|
-+-- Package Composition
-|
-+-- Projections / API
-    +-- Clients
-```
+[Diagram: Campistoria Engine Conceptual Model](../assets/diagrams/engine-conceptual-model.html)
 
 Packages define most vocabulary inside these generic structures. The engine knows the meta-model; packages define game and world semantics.
 
@@ -274,21 +244,7 @@ System Definition Packages are intended to be reusable shared foundations. A sce
 
 Package composition conceptually produces an Effective Campaign Definition:
 
-```text
-Engine
-  +
-System Definition Package
-  +
-Setting Package
-  +
-Scenario Package
-  +
-Optional Rule / Oracle / Procedure Packages
-  +
-User Overrides
-  =
-Effective Campaign Definition
-```
+[Diagram: Package Composition Produces an Effective Campaign Definition](../assets/diagrams/package-composition.html)
 
 Package principles:
 
@@ -318,16 +274,7 @@ An unresolved wilderness hex, unanswered mystery, unknown NPC motive, or undefin
 
 Core distinction:
 
-```text
-Oracle result
-    produces input
-
-Resolution
-    establishes campaign reality
-
-Observation
-    changes observer knowledge
-```
+[Diagram: Resolution and Presentation Boundary](../assets/diagrams/resolution-presentation-flow.html)
 
 This distinction supports solo play without turning the engine into a storyteller.
 
@@ -347,24 +294,7 @@ Maps, timelines, rosters, relationship graphs, journals, current-scene views, su
 
 Conceptually:
 
-```text
-Campaign Reality
-    +
-Observer Knowledge
-    +
-Context
-    +
-Time
-    |
-    v
-POV Resolution
-    |
-    v
-Presentation Model
-    |
-    v
-Client Renderer
-```
+[Diagram: Resolution and Presentation Boundary](../assets/diagrams/resolution-presentation-flow.html)
 
 This keeps rendering and UI technology outside the engine contract.
 

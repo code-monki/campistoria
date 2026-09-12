@@ -218,17 +218,7 @@ The same scenario may produce many divergent campaigns. Running play mutates the
 
 The lifecycle is:
 
-```text
-Packages
-    -> validate composition
-    -> resolve dependencies and capabilities
-    -> apply explicit extensions and overrides
-    -> Effective Campaign Definition
-    -> instantiate Campaign
-    -> play, resolve, observe, change
-    -> checkpoint/save/export
-    -> resume/diagnose/migrate only through explicit operations
-```
+[Diagram: Campaign Lifecycle](../assets/diagrams/campaign-lifecycle.html)
 
 Scenario/package upgrades for an existing campaign are potentially unsafe. Treat them as explicit migrations requiring validation and checkpoint/backup semantics.
 
