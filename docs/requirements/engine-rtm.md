@@ -7,7 +7,7 @@ Maintained By: CodeMonki
 Status: Approved Architecture Mapping
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
-Design Version Reference: Not yet created
+Design Version Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
 Test Plan Version Reference: Not yet created
 
 ---
@@ -33,14 +33,14 @@ Test Plan Version Reference: Not yet created
 - Test Plan aligned? **No.**
 - Advancement to next phase authorized? **Yes** — the Architecture→Detailed Design gate is cleared as of 2026-09-12.
 
-This RTM now records the approved Architecture-phase requirement-to-component mapping. Design, Implementation, Test, Packaging, and Orchestration columns remain unpopulated until those later phases produce approved artifacts.
+This RTM now records the approved Architecture-phase requirement-to-component mapping. A Detailed Design entry draft exists, but Design, Implementation, Test, Packaging, and Orchestration columns remain unpopulated until those later phases produce approved artifacts.
 
 ---
 
 <a id="2-core-traceability-matrix"></a>
 # 2. Core Traceability Matrix <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-The HLA Component ID column is populated from approved `engine-hla.md` v1.0. Design, Implementation, Test, Packaging, and Orchestration columns remain **N/A — phase not yet reached** and will be populated as those phases produce approved artifacts.
+The HLA Component ID column is populated from approved `engine-hla.md` v1.0. Design, Implementation, Test, Packaging, and Orchestration columns remain **N/A — pending approved artifact** and will be populated as those phases produce approved artifacts.
 
 | Req ID | Req Type | HLA Component ID | DD Artifact | Implementation Unit | Test Case ID | Packaging Ref | Orchestration Ref | Validation Status | Evidence Ref |
 |---|---|---|---|---|---|---|---|---|---|
