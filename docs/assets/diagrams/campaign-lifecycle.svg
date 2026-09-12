@@ -3,7 +3,14 @@
       <title id="campaign-lifecycle-title">Campaign Lifecycle</title>
       <desc id="campaign-lifecycle-desc">Process diagram showing packages validated into an Effective Campaign Definition, instantiated as a Campaign, then played, checkpointed, exported, resumed, or migrated.</desc>
       <defs>
-        <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');</style>
+        <style><![CDATA[
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+.node-name{font-family:'Geist',system-ui,sans-serif;font-size:12px;font-weight:600;fill:#2d3142}
+.sub{font-family:'Geist Mono',ui-monospace,monospace;font-size:8px;fill:#4f5d75}
+.tag{font-family:'Geist Mono',ui-monospace,monospace;font-size:8px;font-weight:500;letter-spacing:.14em;fill:#4f5d75;text-transform:uppercase}
+.label{font-family:'Geist Mono',ui-monospace,monospace;font-size:8px;letter-spacing:.06em;fill:#7a8399}
+.legend{font-family:'Geist Mono',ui-monospace,monospace;font-size:8px;letter-spacing:.12em;fill:#4f5d75}
+]]></style>
         <marker id="campaign-lifecycle-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
         <marker id="campaign-lifecycle-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
         <marker id="campaign-lifecycle-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
