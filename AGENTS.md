@@ -33,6 +33,16 @@ The next project activity is requirements engineering unless a later approved ar
 - `tests/`: test assets.
 - `tools/`: project tooling.
 
+## Diagram Export Validation
+
+When adding or updating exported SVG diagrams under `docs/assets/diagrams/`, agents MUST validate the SVG exports as strict XML before staging or committing them:
+
+```sh
+python3 tools/validate-svg-xml.py
+```
+
+This check is required because Markdown previewers and documentation hosts may show only a broken-image icon when an SVG contains XML errors such as duplicate attributes or unescaped ampersands, even if the source HTML diagram renders correctly.
+
 ## AI Artifact Integrity
 
 AI agents and tools are implementation aids and are NOT authors, co-authors, collaborators, contributors, publishers, or owners.
