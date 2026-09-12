@@ -1,12 +1,12 @@
 # High-Level Architecture (HLA)
 
 Project Name: Campistoria Engine
-Version: 0.1 (Initial Draft)
-Date (YYYY-MM-DD): 2026-09-09
+Version: 1.0 (Approved)
+Date (YYYY-MM-DD): 2026-09-12
 Author(s): CodeMonki
-Status: Draft
+Status: Approved
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
-RTM Version Reference: `docs/requirements/engine-rtm.md` (current)
+RTM Version Reference: `docs/requirements/engine-rtm.md` v1.0 (Architecture mappings updated)
 
 **Terminology note:** The Gang-of-Four *Observer* design pattern (publish/subscribe notification) is unrelated to this project's domain term *Observer* (a viewpoint holding Observer Knowledge, per `engine-srs.md` §3.2). This document does not use the GoF Observer pattern to model the domain Observer concept, and calls this out explicitly wherever the two could be confused.
 
@@ -363,7 +363,7 @@ The High-risk items concern structural boundaries that are easy to state and eas
 <a id="13-traceability-summary"></a>
 # 13. Traceability Summary <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-Reference: `docs/requirements/engine-rtm.md`. This HLA introduces the following Requirement-to-Component mapping, to be merged into the RTM's Core Traceability Matrix (RTM Section 2, "HLA Component ID" column) once this document is approved:
+Reference: `docs/requirements/engine-rtm.md`. This HLA introduces the following Requirement-to-Component mapping, now reflected in the RTM's Core Traceability Matrix (RTM Section 2, "HLA Component ID" column):
 
 | Requirement Group | HLA Component(s) |
 |---|---|
@@ -377,13 +377,14 @@ Reference: `docs/requirements/engine-rtm.md`. This HLA introduces the following 
 | FR-033, FR-034, FR-035, FR-036 | HLA-STATE |
 | FR-037, FR-038 | HLA-VALIDATE |
 | FR-039 | HLA-CONTRACT |
+| FR-041 | HLA-PACKAGE, HLA-STATE |
 | NFR-001–NFR-006 | See Section 8 (cross-cutting; no single owning component) |
 
 - All Architectural Components map to Requirement IDs? **Yes** (table above).
 - No orphan requirements? **Yes** — every FR/NFR in `engine-srs.md` appears in the table above or in Section 8.
 - No untraceable structural elements? **Yes** — every component in Section 6 states its Related Requirements.
 
-This table is a proposed RTM update, not yet applied to `engine-rtm.md`; it will be written in once this HLA is approved, consistent with how `engine-rtm.md` was updated only after `engine-srs.md`'s approval.
+This table has been applied to `engine-rtm.md` as part of Architecture approval.
 
 ---
 
@@ -403,7 +404,7 @@ This table is a proposed RTM update, not yet applied to `engine-rtm.md`; it will
 - Should mutation authority be modeled as role-based assignment of capability bundles, with HLA-CONTRACT enforcing explicit capabilities before forwarding mutating requests? Candidate privileged capabilities include retcon, package migration, checkpoint rollback, destructive import, permission management, and direct Campaign Reality mutation; exact role names and capability IDs belong in Detailed Design and may require Requirements review if multi-actor play is reopened.
 - Exact archival storage technology and format for HLA-PERSIST's cold tier — explicitly deferred per `engine-srs.md` §7.
 
-None of the above are high-impact enough to block Detailed Design from beginning on the components they don't touch (e.g., HLA-VALIDATE, HLA-QUERY), but the snapshot-cadence and Oracle Adapter questions should be resolved before HLA-CORE and HLA-RESOLUTION detailed design proceeds far.
+The remaining open questions are Detailed Design inputs rather than Architecture-phase blockers. They do not prevent advancement, provided they are carried forward into Detailed Design and normal RTM/change-control handling. Campistoria is being developed using a Spiral Development model, so later discovery of missed requirements, risk refinements, or needed phase rollback is expected to be handled explicitly rather than treated as an architecture-approval failure.
 
 ---
 
@@ -413,23 +414,23 @@ None of the above are high-impact enough to block Detailed Design from beginning
 - All mandatory sections completed? **Yes.**
 - Deterministic–probabilistic boundaries defined? **Yes** (Section 4).
 - NFR-driven structure demonstrated? **Yes** (Section 8).
-- RTM updated? **Partial** — mapping proposed in Section 13; not yet written into `engine-rtm.md` pending approval of this document (consistent with how the SRS's approval preceded its own RTM update).
-- Human approval granted? **No** — pending project owner review.
+- RTM updated? **Yes** — HLA component mappings have been written into `engine-rtm.md`.
+- Human approval granted? **Yes** — approved by the project owner (CodeMonki) on 2026-09-12.
 
-Per governance, this document remains in Architecture-phase Draft status until the RTM is updated and human approval is recorded.
+All Gate 3→4 criteria are satisfied. Advancement to Detailed Design is authorized as of this approval.
 
 ---
 
 <a id="approval"></a>
 # Approval <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-Approved By:
-Role:
-Date:
-Version Incremented: No
+Approved By: CodeMonki
+Role: Project Owner
+Date: 2026-09-12
+Version Incremented: Yes — v1.0
 
-Advancement to Detailed Design requires explicit authorization per lifecycle governance, and is not granted by this draft.
+Advancement to Detailed Design is authorized per lifecycle governance.
 
 ---
 
-End of High-Level Architecture (Draft v0.1)
+End of High-Level Architecture (Approved v1.0)
