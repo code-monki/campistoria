@@ -27,7 +27,9 @@ RTM Version Reference: `docs/requirements/engine-rtm.md` v1.0 (Architecture Mapp
 ---
 
 <a id="1-design-authority-declaration"></a>
-# 1. Design Authority Declaration <sup>[↩](#table-of-contents "Back to ToC")</sup>
+# 1. Design Authority Declaration
+
+<sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 - Architecture phase approved? **Yes** — `engine-hla.md` v1.0, approved by the project owner on 2026-09-12.
 - Architectural Component IDs stable? **Yes** — HLA-LIFECYCLE, HLA-CORE, HLA-RESOLUTION, HLA-OBSERVER, HLA-PACKAGE, HLA-QUERY, HLA-PERSIST, HLA-STATE, HLA-VALIDATE, and HLA-CONTRACT.
@@ -40,7 +42,9 @@ Detailed Design work is therefore permitted. Implementation remains prohibited d
 ---
 
 <a id="2-scope-of-this-design"></a>
-# 2. Scope of This Design <sup>[↩](#table-of-contents "Back to ToC")</sup>
+# 2. Scope of This Design
+
+<sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 This document starts the Detailed Design phase for the Campistoria Engine. It establishes phase authority, shared design constraints, component refinement order, and carried-forward design questions. It does not claim that component-level interface contracts are complete.
 
@@ -67,7 +71,9 @@ Architectural change requires rollback to Architecture phase and RTM change cont
 ---
 
 <a id="3-architectural-conformance"></a>
-# 3. Architectural Conformance <sup>[↩](#table-of-contents "Back to ToC")</sup>
+# 3. Architectural Conformance
+
+<sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 Detailed Design SHALL conform to `engine-hla.md` v1.0 and preserve the following structural constraints:
 
@@ -82,12 +88,14 @@ Detailed Design SHALL conform to `engine-hla.md` v1.0 and preserve the following
 - HLA-STATE manages Checkpoints, Undo, Recovery, and Retcon without rewriting historical Events.
 - Probabilistic outputs SHALL NOT self-authorize or mutate deterministic state without validation and Resolution.
 
-The project uses Spiral Development. New risks, missed requirements, or boundary conflicts discovered during Detailed Design are expected to be handled through explicit change control, including rollback to Requirements or Architecture when needed.
+The project uses the Spiral Development model. New risks, missed requirements, or boundary conflicts discovered during Detailed Design are expected to be handled through explicit change control, including rollback to Requirements or Architecture when needed.
 
 ---
 
 <a id="4-detailed-design-work-breakdown"></a>
-# 4. Detailed Design Work Breakdown <sup>[↩](#table-of-contents "Back to ToC")</sup>
+# 4. Detailed Design Work Breakdown
+
+<sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 The components below SHALL be refined into component-level Detailed Design sections before implementation planning. Priority reflects dependency order and risk, not delivery order.
 
@@ -109,7 +117,9 @@ Each component-level refinement SHALL define responsibilities, explicit interfac
 ---
 
 <a id="5-cross-component-design-rules"></a>
-# 5. Cross-Component Design Rules <sup>[↩](#table-of-contents "Back to ToC")</sup>
+# 5. Cross-Component Design Rules
+
+<sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 The following rules are mandatory acceptance criteria for component-level Detailed Design and later Test Planning:
 
@@ -119,7 +129,7 @@ The following rules are mandatory acceptance criteria for component-level Detail
 4. All Package content, imported Campaign data, and Oracle results SHALL pass HLA-VALIDATE before they can influence authoritative state.
 5. HLA-RESOLUTION is the exclusive Campaign Reality write path after Campaign instantiation.
 6. Campaign Reality, Observer Knowledge, Package definitions, Checkpoints, and exported artifacts SHALL have explicit ownership and lifecycle rules.
-7. Campaign Reality and Observer Knowledge SHALL remain independently reconstructable from their own event streams.
+7. Campaign Reality and Observer Knowledge SHALL remain independently reconstructible from their own event streams.
 8. Undo SHALL reverse an unwanted Resolution without becoming Campaign history; Retcon SHALL append provenance-preserving correction history rather than rewriting Events.
 9. Client synchronization SHALL distinguish initial state transfer from subsequent delta transfer; reconnecting clients MAY present a last-known revision or delta number so the engine can choose missing deltas or a fresh snapshot.
 10. Performance and scalability designs SHALL derive from NFR-001 and NFR-004, including provisional calibration values, rather than invented targets.
@@ -129,7 +139,9 @@ The following rules are mandatory acceptance criteria for component-level Detail
 ---
 
 <a id="6-carried-forward-design-questions"></a>
-# 6. Carried-Forward Design Questions <sup>[↩](#table-of-contents "Back to ToC")</sup>
+# 6. Carried-Forward Design Questions
+
+<sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 The following questions are Detailed Design inputs, not Architecture blockers:
 
@@ -145,7 +157,9 @@ The following questions are Detailed Design inputs, not Architecture blockers:
 ---
 
 <a id="7-traceability-plan"></a>
-# 7. Traceability Plan <sup>[↩](#table-of-contents "Back to ToC")</sup>
+# 7. Traceability Plan
+
+<sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 Traceability SHALL remain continuous from Requirement ID to HLA Component ID to Detailed Design section to later Test Case ID.
 
@@ -161,7 +175,9 @@ The RTM's DD Artifact column remains pending until component-level Detailed Desi
 ---
 
 <a id="8-initial-risk-assessment"></a>
-# 8. Initial Risk Assessment <sup>[↩](#table-of-contents "Back to ToC")</sup>
+# 8. Initial Risk Assessment
+
+<sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 The following HLA risks become explicit Detailed Design acceptance concerns:
 
@@ -181,7 +197,9 @@ The following HLA risks become explicit Detailed Design acceptance concerns:
 ---
 
 <a id="9-phase-gate-declaration"></a>
-# 9. Phase Gate Declaration <sup>[↩](#table-of-contents "Back to ToC")</sup>
+# 9. Phase Gate Declaration
+
+<sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 - Detailed Design phase entry authorized? **Yes.**
 - Component-level Detailed Design complete? **No.**
@@ -198,7 +216,9 @@ This artifact opens and governs Detailed Design. It is not sufficient to advance
 ---
 
 <a id="approval"></a>
-# Approval <sup>[↩](#table-of-contents "Back to ToC")</sup>
+# Approval
+
+<sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 Approved By:
 Role:
