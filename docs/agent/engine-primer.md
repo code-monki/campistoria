@@ -163,6 +163,8 @@ The engine determines what may be presented. The client determines how to displa
 
 Do not make rendering technology part of the engine concept.
 
+Campistoria is not a Virtual Tabletop (VTT). A VTT-like application may be a client of the engine, but table-surface concerns such as token manipulation UX, live table presence, chat, audio/video, visual scene composition, and client-side ergonomics belong outside the engine unless explicitly reopened through lifecycle change control.
+
 ## Authoring Boundary
 
 Authoring tools create packages. They are a separate project.
@@ -269,6 +271,7 @@ Do not pull these into immediate engine requirements unless the user explicitly 
 - generic rules inference or expert-system reasoning;
 - general-purpose worldbuilding platform;
 - rendering technology;
+- Virtual Tabletop product surface;
 - rich media creation/editing;
 - package marketplace or commercial ecosystem;
 - automatic package upgrades.

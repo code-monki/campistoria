@@ -68,6 +68,7 @@ This document starts the Detailed Design phase for the Campistoria Engine. It es
 - No system boundary, HLA dependency direction, or deterministic-probabilistic boundary is changed.
 - No implementation language, storage technology, UI framework, deployment platform, transport protocol, CI/CD platform, or package manager is selected.
 - No code, package layout, build script, runtime configuration, or implementation unit is authorized by this document.
+- No Virtual Tabletop product surface is introduced. The engine may support VTT-like clients, but map rendering UX, token manipulation UX, live table presence, chat, audio/video, visual scene composition, and client-side play-surface ergonomics remain outside engine scope unless introduced later through approved lifecycle change control.
 
 Architectural change requires rollback to Architecture phase and RTM change control.
 
@@ -139,6 +140,7 @@ The following rules are mandatory acceptance criteria for component-level Detail
 11. Security design SHALL include authentication boundary, authorization enforcement, input validation, diagnostic exposure, and audit boundaries.
 12. Component designs SHALL identify failure triggers, error propagation, retry/degradation posture, and recovery behavior before implementation starts.
 13. HLA components SHALL NOT become "God Components" that own unrelated mechanisms directly. Where a component has coordinator responsibility, component-level Detailed Design SHALL decompose it into explicit internal subcomponents, modules, or equivalent interfaces with clear ownership, while preserving the approved HLA boundary.
+14. Component designs SHALL preserve the distinction between the Campistoria Engine and a Virtual Tabletop. The engine owns authoritative campaign state, observer knowledge, validation, resolution, persistence, contracts, and Presentation Models; clients own the play-surface experience used to render and manipulate those outputs.
 
 ---
 

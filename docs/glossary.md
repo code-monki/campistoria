@@ -77,3 +77,4 @@ Definitions in approved phase artifacts remain authoritative for those approved 
 | Undo | Reversal of an accidental or unwanted operation. Undo does not rewrite campaign history and is distinct from Retcon. |
 | Unresolved State | Explicitly represented campaign information that has not yet been resolved. |
 | Validator Trace | Diagnostic validation detail that may be exposed only when authorized and requested at the appropriate diagnostic detail level. |
+| Virtual Tabletop / VTT | A play-surface application category centered on maps, tokens, live table interaction, chat, media, visual scene composition, and client-side play ergonomics. A VTT may consume Campistoria engine contracts, but the Campistoria Engine is not itself a VTT. |
