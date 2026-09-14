@@ -135,6 +135,7 @@ The following rules are mandatory acceptance criteria for component-level Detail
 10. Performance and scalability designs SHALL derive from NFR-001 and NFR-004, including provisional calibration values, rather than invented targets.
 11. Security design SHALL include authentication boundary, authorization enforcement, input validation, diagnostic exposure, and audit boundaries.
 12. Component designs SHALL identify failure triggers, error propagation, retry/degradation posture, and recovery behavior before implementation starts.
+13. HLA components SHALL NOT become "God Components" that own unrelated mechanisms directly. Where a component has coordinator responsibility, component-level Detailed Design SHALL decompose it into explicit internal subcomponents, modules, or equivalent interfaces with clear ownership, while preserving the approved HLA boundary.
 
 ---
 

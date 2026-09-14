@@ -63,6 +63,7 @@ This document refines HLA-CONTRACT only. It does not authorize implementation an
 - Public facade rules for first-party and third-party callers.
 - Request, response, session, authorization, diagnostic, and synchronization envelopes.
 - Capability-based authorization posture for mutating operations.
+- Actor/session/authority vocabulary that works for current single-player use without preventing future multi-user refinement.
 - Transport-neutral operation grouping across embedded, in-process service, and future network adapters.
 - Reconnect behavior using a caller-supplied last-known revision or delta number.
 
@@ -71,6 +72,7 @@ This document refines HLA-CONTRACT only. It does not authorize implementation an
 - Concrete programming language, API protocol, serialization format, schema language, authentication provider, persistence backend, or network transport.
 - Complete internal contracts for HLA-LIFECYCLE, HLA-RESOLUTION, HLA-OBSERVER, HLA-PACKAGE, HLA-QUERY, HLA-PERSIST, HLA-STATE, or HLA-VALIDATE.
 - Multi-user collaboration semantics beyond authorization and reconnect posture already needed to prevent privileged mutation.
+- Hosted account management, player invitation flows, concurrent-player conflict resolution, multiplayer latency requirements, and persistent user-management storage.
 
 ---
 
@@ -156,7 +158,7 @@ ContractResponse {
 
 **`operationId`** identifies one documented operation in the public operation catalog.
 
-**`callerContext`** identifies the actor, caller class, session, and declared role/capability grants available for the request. Caller class is descriptive only; it SHALL NOT grant privilege by itself.
+**`callerContext`** identifies the principal, actor, caller class, session, observer context, and declared role/capability grants available for the request. Caller class is descriptive only; it SHALL NOT grant privilege by itself.
 
 **`targetContext`** identifies the Campaign, Package, Observer, Projection, import/export artifact, Checkpoint, or Resolution target addressed by the operation.
 
@@ -200,22 +202,42 @@ HLA-CONTRACT uses **capability-based authorization as the enforcement primitive*
 
 Roles MAY exist as assignable bundles of capabilities, but authorization SHALL evaluate explicit capabilities. This preserves the project owner's RBAC concern without making hardcoded role names the enforcement mechanism. In this document:
 
+- **Principal** means the authority-bearing identity on whose behalf a request is made.
 - **Role** means a named bundle assigned to an actor or session for usability and administration.
+- **Actor** means the play or tool actor performing the operation within a Campaign context.
+- **Session** means a concrete invocation context for a principal/actor pairing.
 - **Capability** means a specific permission checked by HLA-CONTRACT before forwarding an operation.
+
+Single-player operation SHALL use this same authority vocabulary with default principal, actor, and session references. HLA-CONTRACT SHALL NOT model single-player as "no actor model." This avoids a later contract retrofit if hosted or multi-user play is reopened, while preserving the current single-player scope.
+
+HLA-CONTRACT defines the contract-level meaning of principal, actor, session, role bundle, and capability grant. In the current scope, authority assignments MAY be supplied by the embedding application or default solo-session setup. HLA-CONTRACT SHALL NOT require a hosted account store, multiplayer service, or persistent user-management subsystem.
+
+Capability granularity SHALL follow a justified-split rule: each added capability ID must earn its place by representing a materially different authority level, information exposure risk, mutation risk, recovery risk, or test assertion. HLA-CONTRACT SHALL NOT decompose capabilities merely to create a large permission matrix.
+
+This draft therefore deepens the taxonomy only around privileged knowledge, authoritative mutation, Package lifecycle, import, rollback, and Retcon operations.
 
 **Initial capability taxonomy:**
 
 | Capability ID | Meaning | Typical Operations |
 |---|---|---|
 | `campaign.create` | Create a Campaign from a Scenario | HLA-LIFECYCLE operations |
-| `campaign.query` | Query Campaign Reality or Presentation Models | HLA-QUERY operations |
-| `observer.record` | Record Observer Knowledge | HLA-OBSERVER recording operations |
-| `resolution.perform` | Resolve Unresolved State through ordinary Resolution | HLA-RESOLUTION operations |
+| `campaign.query.presentation` | Query caller-appropriate Presentation Models | Ordinary HLA-QUERY projection operations |
+| `campaign.query.reality` | Query authoritative Campaign Reality where allowed | Privileged HLA-QUERY operations |
+| `campaign.query.archive` | Query archived history outside the active working set | HLA-QUERY and HLA-PERSIST archival access |
+| `observer.record.self` | Record Observer Knowledge for the caller's own Observer context | Ordinary HLA-OBSERVER recording operations |
+| `observer.record.other` | Record Observer Knowledge for another Observer context | GM/tool-mediated HLA-OBSERVER recording operations |
+| `resolution.submit` | Submit an intended action or proposed Resolution input | Player/tool request into HLA-RESOLUTION |
+| `resolution.apply` | Apply an accepted Resolution to authoritative state | Ordinary GM/system Resolution operations |
+| `resolution.override` | Force or override normal Resolution flow under explicit authority | Exceptional HLA-RESOLUTION operations |
 | `oracle.invoke` | Invoke a Package-defined Oracle through the approved adapter path | HLA-RESOLUTION Oracle operations |
-| `package.register` | Register and compose Packages | HLA-PACKAGE operations |
+| `package.validate` | Validate Package content without registration | HLA-VALIDATE and HLA-PACKAGE validation operations |
+| `package.register` | Register and compose Packages | HLA-PACKAGE registration/composition operations |
+| `package.remove` | Remove Package registrations where dependency rules allow | HLA-PACKAGE removal operations |
 | `package.migrate` | Migrate a Campaign's pinned Package composition | HLA-PACKAGE and HLA-STATE operations |
 | `persistence.export` | Export Campaign or Package artifacts | HLA-PERSIST export operations |
-| `persistence.import` | Import Campaign or Package artifacts | HLA-PERSIST import operations |
+| `persistence.import.package` | Import Package artifacts | HLA-PERSIST import through HLA-VALIDATE |
+| `persistence.import.campaign` | Import Campaign artifacts without replacing existing authoritative state | HLA-PERSIST Campaign import operations |
+| `persistence.import.destructive` | Import or restore in a way that may replace existing authoritative state | High-risk HLA-PERSIST/HLA-STATE operations |
 | `checkpoint.create` | Create Checkpoints | HLA-STATE checkpoint operations |
 | `checkpoint.restore` | Restore from Checkpoints | HLA-STATE recovery operations |
 | `resolution.undo` | Undo an unwanted Resolution | HLA-STATE and HLA-RESOLUTION operations |
@@ -227,10 +249,10 @@ Roles MAY exist as assignable bundles of capabilities, but authorization SHALL e
 | Role Bundle | Default Capabilities | Notes |
 |---|---|---|
 | `campaignOwner` | All capabilities for the owned Campaign, including `authority.manage` | Administrative default; exact ownership semantics remain deployment-neutral. |
-| `gameMaster` | `campaign.query`, `observer.record`, `resolution.perform`, `oracle.invoke`, `checkpoint.create`, `resolution.undo`, `reality.retcon`, Package migration if granted | Models high-trust play authority without making GM a hardcoded authorization primitive. |
-| `player` | `campaign.query`, `observer.record`, limited `resolution.perform` where granted | Supports player actions that mutate state through ordinary authorized operations. |
-| `authoringTool` | `package.register`, validation/import/export capabilities as granted | Same public contracts as any other tool. |
-| `viewer` | `campaign.query` only | Read-only role bundle. |
+| `gameMaster` | `campaign.query.presentation`, `campaign.query.reality`, `campaign.query.archive`, `observer.record.other`, `resolution.apply`, `resolution.override`, `oracle.invoke`, `checkpoint.create`, `resolution.undo`, `reality.retcon`, Package migration if granted | Models high-trust play authority without making GM a hardcoded authorization primitive. |
+| `player` | `campaign.query.presentation`, `observer.record.self`, `resolution.submit` where granted | Supports player actions that mutate state only through ordinary authorized submission paths. |
+| `authoringTool` | `package.validate`, `package.register`, `package.remove`, import/export capabilities as granted | Same public contracts as any other tool. |
+| `viewer` | `campaign.query.presentation` only | Read-only role bundle. |
 
 The role bundle list is provisional. Component-level design may refine names and capability granularity, but SHALL NOT replace capability checks with role-name checks.
 
@@ -246,11 +268,11 @@ The public catalog groups operations by owning HLA component. Exact method names
 | Operation Group | Owning Component | Example Conceptual Operations | Mutating? | Required Capability Posture |
 |---|---|---|---|---|
 | Campaign Lifecycle | HLA-LIFECYCLE | `createCampaign`, `getCampaignSeed` | Mixed | `campaign.create` for creation; query capability for reads |
-| Resolution | HLA-RESOLUTION | `resolve`, `invokeOracle` | Yes | `resolution.perform`, `oracle.invoke` as applicable |
-| Observer Knowledge | HLA-OBSERVER | `recordObservation`, `knowledgeOf` | Mixed | `observer.record` for writes; `campaign.query` for reads |
-| Package | HLA-PACKAGE | `registerPackage`, `compose`, `migrate`, `removePackage` | Mixed | `package.register`, `package.migrate` |
-| Query | HLA-QUERY | `query`, `getPresentationModel`, `getDelta` | No authoritative mutation | `campaign.query` |
-| Persistence | HLA-PERSIST | `export`, `import`, `resolveArchived` | Mixed | `persistence.export`, `persistence.import`, `campaign.query` |
+| Resolution | HLA-RESOLUTION | `submitResolution`, `applyResolution`, `overrideResolution`, `invokeOracle` | Yes | `resolution.submit`, `resolution.apply`, `resolution.override`, `oracle.invoke` as applicable |
+| Observer Knowledge | HLA-OBSERVER | `recordObservation`, `knowledgeOf` | Mixed | `observer.record.self` or `observer.record.other` for writes; query capability for reads |
+| Package | HLA-PACKAGE | `validatePackage`, `registerPackage`, `compose`, `migrate`, `removePackage` | Mixed | `package.validate`, `package.register`, `package.remove`, `package.migrate` |
+| Query | HLA-QUERY | `query`, `getPresentationModel`, `getDelta`, `queryReality`, `queryArchived` | No authoritative mutation | `campaign.query.presentation`, `campaign.query.reality`, or `campaign.query.archive` |
+| Persistence | HLA-PERSIST | `export`, `importPackage`, `importCampaign`, `destructiveImport`, `resolveArchived` | Mixed | `persistence.export`, `persistence.import.package`, `persistence.import.campaign`, `persistence.import.destructive`, `campaign.query.archive` |
 | State | HLA-STATE | `checkpoint`, `restore`, `undo`, `recover`, `retcon` | Yes | `checkpoint.create`, `checkpoint.restore`, `resolution.undo`, `reality.retcon` |
 | Validation | HLA-VALIDATE | `validate` | No authoritative mutation | Depends on validation subject and caller context |
 | Authority | HLA-CONTRACT | `describeOperations`, `describeCapabilities`, `assignCapabilityBundle` | Mixed | none for descriptions; `authority.manage` for assignment |
@@ -270,11 +292,19 @@ HLA-CONTRACT SHALL support the following synchronization posture:
 - A caller with prior state MAY send a last-known revision or delta number.
 - The engine decides whether to return missing deltas, a compacted delta, or a fresh full representation.
 - The contract is transport-neutral and does not require a network connection, subscription channel, or server push model.
+- Synchronization SHALL use separate revision streams for Campaign Reality, Observer Knowledge, and Presentation Models rather than one global Campaign delta.
+- Principal, actor, and observer context SHALL travel with synchronization requests so future multi-user refinement can manage caller-specific deltas without changing the request shape.
+- `deltaNumber`, where used, is a stream-scoped marker and SHALL NOT be interpreted as a single global Campaign counter.
+- HLA-CONTRACT owns synchronization envelope semantics and response-mode vocabulary; it SHALL NOT materialize caller-visible full state, deltas, compacted deltas, or Presentation Models.
+- HLA-QUERY owns caller-visible synchronization materialization as the responsible HLA component, but its Detailed Design SHALL decompose POV Resolution, Presentation Model materialization, revision mapping, archive bridging, and delta materialization into explicit internal modules or equivalent interfaces.
 
 Conceptual request field:
 
 ```text
 SynchronizationContext {
+  principalRef?
+  actorRef?
+  observerRef?
   campaignRevision?
   observerRevision?
   presentationRevision?
@@ -325,6 +355,9 @@ HLA-CONTRACT owns no authoritative domain data. It defines transient envelope st
 - `TargetContext`
 - `SynchronizationContext`
 - `SynchronizationState`
+- `PrincipalRef`
+- `ActorRef`
+- `SessionRef`
 - `CapabilityGrant`
 - `DiagnosticEnvelope`
 
@@ -430,10 +463,12 @@ This draft is sufficient to start review of HLA-CONTRACT design direction. It is
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-- Should the initial capability taxonomy be treated as sufficient for v1 Detailed Design, or should capability IDs be decomposed further by target type before approval?
-- Does role/capability assignment belong inside the engine contract long-term, or should HLA-CONTRACT only consume capability grants from an embedding application until hosted/multi-user scope is reopened?
-- Should synchronization use a single global Campaign delta number or separate revision streams for Campaign Reality, Observer Knowledge, and Presentation Models?
-- Which HLA-QUERY operations own full state versus delta materialization when a reconnecting client asks for missing changes?
+**Resolved during review:**
+
+- Capability taxonomy depth — resolved as sufficient for the current HLA-CONTRACT draft. No additional split is currently justified; future component designs may add capabilities only under the justified-split rule.
+- Role/capability assignment posture — HLA-CONTRACT defines principal, actor, session, role bundle, and capability vocabulary now. Current single-player operation may use default solo authority assignments supplied by the embedding application, but the contract shape SHALL NOT assume "no actor model." Hosted accounts, multiplayer infrastructure, and persistent user management remain out of current scope.
+- Synchronization stream shape — resolved as separate revision streams for Campaign Reality, Observer Knowledge, and Presentation Models. `deltaNumber` may be retained only as a stream-scoped marker, not as a single global Campaign counter.
+- Synchronization materialization ownership — HLA-CONTRACT owns envelope semantics and response-mode vocabulary only. HLA-QUERY owns caller-visible full-state and delta materialization as a component responsibility, and HLA-QUERY Detailed Design shall decompose POV Resolution, Presentation Model materialization, revision mapping, archive bridging, and delta materialization internally rather than treating HLA-QUERY as a monolith or God Component.
 
 ---
 
