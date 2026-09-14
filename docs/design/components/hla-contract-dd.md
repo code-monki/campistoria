@@ -230,6 +230,7 @@ This draft therefore deepens the taxonomy only around privileged knowledge, auth
 | `resolution.apply` | Apply an accepted Resolution to authoritative state | Ordinary GM/system Resolution operations |
 | `resolution.override` | Force or override normal Resolution flow under explicit authority | Exceptional HLA-RESOLUTION operations |
 | `oracle.invoke` | Invoke a Package-defined Oracle through the approved adapter path | HLA-RESOLUTION Oracle operations |
+| `provenance.query` | Query Resolution provenance and Oracle invocation diagnostic records | HLA-RESOLUTION provenance/diagnostic read operations |
 | `package.validate` | Validate Package content without registration | HLA-VALIDATE and HLA-PACKAGE validation operations |
 | `package.register` | Register and compose Packages | HLA-PACKAGE registration/composition operations |
 | `package.remove` | Remove Package registrations where dependency rules allow | HLA-PACKAGE removal operations |
@@ -249,7 +250,7 @@ This draft therefore deepens the taxonomy only around privileged knowledge, auth
 | Role Bundle | Default Capabilities | Notes |
 |---|---|---|
 | `campaignOwner` | All capabilities for the owned Campaign, including `authority.manage` | Administrative default; exact ownership semantics remain deployment-neutral. |
-| `gameMaster` | `campaign.query.presentation`, `campaign.query.reality`, `campaign.query.archive`, `observer.record.other`, `resolution.apply`, `resolution.override`, `oracle.invoke`, `checkpoint.create`, `resolution.undo`, `reality.retcon`, Package migration if granted | Models high-trust play authority without making GM a hardcoded authorization primitive. |
+| `gameMaster` | `campaign.query.presentation`, `campaign.query.reality`, `campaign.query.archive`, `observer.record.other`, `resolution.apply`, `resolution.override`, `oracle.invoke`, `provenance.query`, `checkpoint.create`, `resolution.undo`, `reality.retcon`, Package migration if granted | Models high-trust play authority without making GM a hardcoded authorization primitive. |
 | `player` | `campaign.query.presentation`, `observer.record.self`, `resolution.submit` where granted | Supports player actions that mutate state only through ordinary authorized submission paths. |
 | `authoringTool` | `package.validate`, `package.register`, `package.remove`, import/export capabilities as granted | Same public contracts as any other tool. |
 | `viewer` | `campaign.query.presentation` only | Read-only role bundle. |
@@ -269,6 +270,7 @@ The public catalog groups operations by owning HLA component. Exact method names
 |---|---|---|---|---|
 | Campaign Lifecycle | HLA-LIFECYCLE | `createCampaign`, `getCampaignSeed` | Mixed | `campaign.create` for creation; query capability for reads |
 | Resolution | HLA-RESOLUTION | `submitResolution`, `applyResolution`, `overrideResolution`, `invokeOracle` | Yes | `resolution.submit`, `resolution.apply`, `resolution.override`, `oracle.invoke` as applicable |
+| Resolution Provenance | HLA-RESOLUTION | `getResolutionProvenance`, `getOracleInvocation`, `listOracleInvocations` | No authoritative mutation | `provenance.query` |
 | Observer Knowledge | HLA-OBSERVER | `recordObservation`, `knowledgeOf` | Mixed | `observer.record.self` or `observer.record.other` for writes; query capability for reads |
 | Package | HLA-PACKAGE | `validatePackage`, `registerPackage`, `compose`, `migrate`, `removePackage` | Mixed | `package.validate`, `package.register`, `package.remove`, `package.migrate` |
 | Query | HLA-QUERY | `query`, `getPresentationModel`, `getDelta`, `queryReality`, `queryArchived` | No authoritative mutation | `campaign.query.presentation`, `campaign.query.reality`, or `campaign.query.archive` |
