@@ -108,7 +108,7 @@ The components below SHALL be refined into component-level Detailed Design secti
 | 5 | HLA-OBSERVER | FR-015 through FR-018, NFR-003, NFR-004, NFR-006 | Observer Knowledge event model, information-source provenance, isolation from Campaign Reality, POV query support. |
 | 6 | HLA-PACKAGE | FR-019 through FR-026, FR-041, NFR-005 | Package registry, version pinning, composition rules, dependency removal, migration contract, conflict diagnostics. |
 | 7 | HLA-STATE | FR-033 through FR-036, FR-041, NFR-003 | Checkpoint schema, snapshot cadence configuration, recovery orchestration, undo inverse-command semantics, retcon provenance. |
-| 8 | HLA-PERSIST | FR-031, FR-032, FR-042, FR-043, NFR-004 | Storage abstraction, archival boundary, import/export representation, asset portability, active-window retrieval behavior. |
+| 8 | HLA-PERSIST | FR-031, FR-032, FR-042, FR-043, NFR-004 | Storage abstraction, archival boundary, import/export representation, asset portability, active-window retrieval behavior. Draft: `docs/design/components/hla-persist-dd.md`. |
 | 9 | HLA-QUERY | FR-027 through FR-030 | Query contract, POV resolution, Projection strategy selection, Presentation Model lifecycle, reconnect delta/snapshot behavior. |
 | 10 | HLA-LIFECYCLE | FR-001, FR-002, FR-003, FR-040, FR-044 | Scenario-to-Campaign instantiation, Campaign identity, seed assignment, immutable Scenario reference, branching/divergence semantics. |
 
@@ -167,7 +167,7 @@ Traceability SHALL remain continuous from Requirement ID to HLA Component ID to 
 | Traceability Item | Current Status | Next Action |
 |---|---|---|
 | Requirement to HLA Component | Complete in `engine-rtm.md` v1.0 | Preserve unchanged unless change control reopens Architecture. |
-| HLA Component to Detailed Design | Started by this document; HLA-CONTRACT, HLA-VALIDATE, and HLA-RESOLUTION component drafts created | Populate component-level DD sections/artifacts for all ten HLA components. |
+| HLA Component to Detailed Design | Started by this document; HLA-CONTRACT, HLA-VALIDATE, HLA-RESOLUTION, and HLA-PERSIST component drafts created | Populate component-level DD sections/artifacts for all ten HLA components. |
 | Detailed Design to Test Case | Not yet created | Assign test IDs during Test Planning after component DD approval. |
 | Detailed Design to Implementation Unit | Not yet created | Populate only after implementation planning begins. |
 
