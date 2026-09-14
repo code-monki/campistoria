@@ -80,7 +80,7 @@ Preserve these unless the user explicitly reopens them:
 
 ## Normalized Terms
 
-Use this vocabulary consistently:
+Use this vocabulary consistently. For full working definitions and newer design-stage terminology, see `docs/glossary.md`.
 
 - Campaign: persistent instance of play.
 - Campaign Reality: authoritative representation of what has been established as true in the campaign.

@@ -9,6 +9,7 @@ Status: Draft
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
 Parent Design Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
+Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
 
@@ -200,13 +201,9 @@ ContractResponse {
 
 HLA-CONTRACT uses **capability-based authorization as the enforcement primitive**.
 
-Roles MAY exist as assignable bundles of capabilities, but authorization SHALL evaluate explicit capabilities. This preserves the project owner's RBAC concern without making hardcoded role names the enforcement mechanism. In this document:
+Roles MAY exist as assignable bundles of capabilities, but authorization SHALL evaluate explicit capabilities. This preserves the project owner's RBAC concern without making hardcoded role names the enforcement mechanism.
 
-- **Principal** means the authority-bearing identity on whose behalf a request is made.
-- **Role** means a named bundle assigned to an actor or session for usability and administration.
-- **Actor** means the play or tool actor performing the operation within a Campaign context.
-- **Session** means a concrete invocation context for a principal/actor pairing.
-- **Capability** means a specific permission checked by HLA-CONTRACT before forwarding an operation.
+Principal, role, actor, session, capability, RBAC, and CBAC terminology SHALL align with `docs/glossary.md`. HLA-CONTRACT defines the contract-level use of those terms for authorization checks, request routing, and future multi-user refinement.
 
 Single-player operation SHALL use this same authority vocabulary with default principal, actor, and session references. HLA-CONTRACT SHALL NOT model single-player as "no actor model." This avoids a later contract retrofit if hosted or multi-user play is reopened, while preserving the current single-player scope.
 

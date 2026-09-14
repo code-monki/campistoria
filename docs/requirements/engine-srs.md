@@ -8,7 +8,7 @@ Status: Approved
 Project Primer Version Reference: `docs/agent/engine-primer.md` (current, as approved during Ideation)
 RTM Scaffold Version: 0.1 (`docs/requirements/engine-rtm.md`, created alongside this SRS)
 
-**Terminology note:** This project does not use a separate "Project Primer" artifact in the toolkit's generic sense. `docs/agent/engine-primer.md` and `docs/concept/engine-ideation.md` jointly serve that role and are treated as equivalent for the purposes of this declaration.
+**Terminology note:** This project does not use a separate "Project Primer" artifact in the toolkit's generic sense. `docs/agent/engine-primer.md` and `docs/concept/engine-ideation.md` jointly serve that role and are treated as equivalent for the purposes of this declaration. Consolidated working terminology is maintained in `docs/glossary.md`; this SRS remains authoritative for approved requirement meanings unless changed through lifecycle change control.
 
 ---
 
@@ -105,7 +105,7 @@ No solution structure is described here; see Section 4 for required capabilities
 
 ## 3.2 Definitions and Terminology
 
-The following terms are normative for this document and carry the meanings defined in `docs/concept/engine-ideation.md`, "Vocabulary." They are restated here for traceability convenience; the ideation document is authoritative if any divergence is found.
+The following terms are normative for this document and carry the meanings defined in `docs/concept/engine-ideation.md`, "Vocabulary." They are restated here for traceability convenience; the ideation document is authoritative if any divergence is found. `docs/glossary.md` consolidates terminology for current and future artifacts but does not retroactively change approved SRS meanings.
 
 | Term | Meaning |
 |---|---|

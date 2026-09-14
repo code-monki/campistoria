@@ -109,6 +109,8 @@ Packages define most vocabulary inside these generic structures. The engine know
 
 ## Vocabulary
 
+This section records the original Ideation vocabulary. The consolidated working terminology reference is `docs/glossary.md`; if future glossary changes would alter an approved concept, requirement, or architecture meaning, lifecycle change control is required.
+
 **Campaign**  
 A persistent, mutable instance of play with durable identity, campaign reality, history, package composition, observer knowledge, unresolved state, and user-owned data.
 

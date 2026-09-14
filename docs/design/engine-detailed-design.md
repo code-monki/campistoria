@@ -8,6 +8,7 @@ Status: Draft
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
 RTM Version Reference: `docs/requirements/engine-rtm.md` v1.0 (Architecture Mapped)
+Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
 
@@ -38,6 +39,8 @@ RTM Version Reference: `docs/requirements/engine-rtm.md` v1.0 (Architecture Mapp
 - Advancement to Detailed Design authorized? **Yes** — `engine-hla.md` §15 authorizes Architecture to Detailed Design advancement.
 
 Detailed Design work is therefore permitted. Implementation remains prohibited during this phase.
+
+Terminology used by this document and component-level Detailed Design artifacts should align with `docs/glossary.md`. Approved Requirements and Architecture definitions remain authoritative for their approved phase artifacts unless changed through explicit lifecycle change control.
 
 ---
 
@@ -104,7 +107,7 @@ The components below SHALL be refined into component-level Detailed Design secti
 | 1 | HLA-CONTRACT | FR-039; cross-cutting NFR-001, NFR-005 | Public operation catalog, embedded/hosted adapter neutrality, actor/session identity, capability enforcement, error exposure, request/response conventions. Draft: `docs/design/components/hla-contract-dd.md`. |
 | 2 | HLA-VALIDATE | FR-037, FR-038, NFR-002 | Validation subject taxonomy, validator chain ordering, diagnostic schema, import/Package/Oracle validation contracts, XML/SVG-style structural validation posture where applicable. Draft: `docs/design/components/hla-validate-dd.md`. |
 | 3 | HLA-RESOLUTION | FR-012, FR-013, FR-014, NFR-006 | Resolution Command model, Oracle Adapter contract, acceptance/rejection criteria, deterministic fallback, undo relationship, provenance records. Draft: `docs/design/components/hla-resolution-dd.md`. |
-| 4 | HLA-CORE | FR-004 through FR-011, NFR-003, NFR-004, NFR-006 | Campaign Reality event model, state fold rules, Fact/Relationship/Time invariants, atomic append semantics, history reconstruction. |
+| 4 | HLA-CORE | FR-004 through FR-011, NFR-003, NFR-004, NFR-006 | Campaign Reality event model, state fold rules, Fact/Relationship/Time invariants, atomic append semantics, history reconstruction. Draft: `docs/design/components/hla-core-dd.md`. |
 | 5 | HLA-OBSERVER | FR-015 through FR-018, NFR-003, NFR-004, NFR-006 | Observer Knowledge event model, information-source provenance, isolation from Campaign Reality, POV query support. |
 | 6 | HLA-PACKAGE | FR-019 through FR-026, FR-041, NFR-005 | Package registry, version pinning, composition rules, dependency removal, migration contract, conflict diagnostics. |
 | 7 | HLA-STATE | FR-033 through FR-036, FR-041, NFR-003 | Checkpoint schema, snapshot cadence configuration, recovery orchestration, undo inverse-command semantics, retcon provenance. |

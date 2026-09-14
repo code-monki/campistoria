@@ -9,6 +9,7 @@ Status: Draft
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
 Parent Design Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
+Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
 

@@ -7,6 +7,7 @@ Author(s): CodeMonki
 Status: Approved
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
 RTM Version Reference: `docs/requirements/engine-rtm.md` v1.0 (Architecture mappings updated)
+Working Glossary Reference: `docs/glossary.md` v0.1
 
 **Terminology note:** The Gang-of-Four *Observer* design pattern (publish/subscribe notification) is unrelated to this project's domain term *Observer* (a viewpoint holding Observer Knowledge, per `engine-srs.md` §3.2). This document does not use the GoF Observer pattern to model the domain Observer concept, and calls this out explicitly wherever the two could be confused.
 
