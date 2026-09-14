@@ -110,7 +110,7 @@ The components below SHALL be refined into component-level Detailed Design secti
 | 4 | HLA-CORE | FR-004 through FR-011, NFR-003, NFR-004, NFR-006 | Campaign Reality event model, state fold rules, Fact/Relationship/Time invariants, atomic append semantics, history reconstruction. Draft: `docs/design/components/hla-core-dd.md`. |
 | 5 | HLA-OBSERVER | FR-015 through FR-018, NFR-003, NFR-004, NFR-006 | Observer Knowledge event model, information-source provenance, isolation from Campaign Reality, POV query support. |
 | 6 | HLA-PACKAGE | FR-019 through FR-026, FR-041, NFR-005 | Package registry, version pinning, composition rules, dependency removal, migration contract, conflict diagnostics. Draft: `docs/design/components/hla-package-dd.md`. |
-| 7 | HLA-STATE | FR-033 through FR-036, FR-041, NFR-003 | Checkpoint schema, snapshot cadence configuration, recovery orchestration, undo inverse-command semantics, retcon provenance. |
+| 7 | HLA-STATE | FR-033 through FR-036, FR-041, NFR-003 | Checkpoint schema, snapshot cadence configuration, recovery orchestration, undo inverse-command semantics, retcon provenance. Draft: `docs/design/components/hla-state-dd.md`. |
 | 8 | HLA-PERSIST | FR-031, FR-032, FR-042, FR-043, NFR-004 | Storage abstraction, archival boundary, import/export representation, asset portability, active-window retrieval behavior. Draft: `docs/design/components/hla-persist-dd.md`. |
 | 9 | HLA-QUERY | FR-027 through FR-030 | Query contract, POV resolution, Projection strategy selection, Presentation Model lifecycle, reconnect delta/snapshot behavior. |
 | 10 | HLA-LIFECYCLE | FR-001, FR-002, FR-003, FR-040, FR-044 | Scenario-to-Campaign instantiation, Campaign identity, seed assignment, immutable Scenario reference, branching/divergence semantics. |
@@ -197,6 +197,7 @@ The following HLA risks become explicit Detailed Design acceptance concerns:
 | Archival tier design is deferred too long | HLA-PERSIST SHALL refine the active-window/archival contract before implementation planning. |
 | Pattern complexity exceeds first-release needs | Component DD SHALL keep internal structures minimal while preserving required boundaries. |
 | Deployment deferral produces incompatible contracts | HLA-CONTRACT SHALL keep adapter assumptions transport-neutral unless Requirements or Architecture are reopened. |
+| Future multiplayer event concurrency is underestimated | Multiplayer remains deferred, but if reopened, HLA-CONTRACT, HLA-CORE, HLA-STATE, and HLA-QUERY SHALL revisit actor-scoped event causality, ordering, conflict detection, authorization, synchronization, and recovery semantics for multiple players mutating Campaign Reality through concurrent or near-concurrent actions. |
 
 ---
 
