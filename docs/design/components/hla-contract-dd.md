@@ -55,6 +55,8 @@ This document refines HLA-CONTRACT only. It does not authorize implementation an
 
 **Component being refined:** HLA-CONTRACT — Public Contract Facade.
 
+**Component purpose:** HLA-CONTRACT is the engine's public boundary. It gives first-party clients, third-party clients, authoring tools, and integrations one documented operation surface while keeping authorization, request/response conventions, diagnostics, and synchronization envelopes consistent across all callers.
+
 **Primary requirement:** FR-039.
 
 **Cross-cutting NFRs:** NFR-001 and NFR-005 directly; NFR-002 and NFR-006 indirectly because contract routing controls validation and provenance entry.

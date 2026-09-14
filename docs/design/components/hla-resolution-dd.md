@@ -55,6 +55,8 @@ This document refines HLA-RESOLUTION only. It does not authorize implementation 
 
 **Component being refined:** HLA-RESOLUTION — Unresolved State, Resolution, and the Oracle Boundary.
 
+**Component purpose:** HLA-RESOLUTION turns unresolved or uncertain campaign information into authoritative Campaign Reality changes through controlled, provenance-bearing Resolution Commands. It is the deterministic/probabilistic boundary where human decisions, Procedures, Rules, and validated Oracle results can become state changes without letting probabilistic output mutate reality directly.
+
 **Primary requirements:** FR-012, FR-013, FR-014.
 
 **Related requirements/NFRs:** FR-034, FR-037, NFR-006.

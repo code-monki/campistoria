@@ -57,6 +57,8 @@ This document refines HLA-CORE only. It does not authorize implementation and do
 
 **Component being refined:** HLA-CORE — Campaign Reality & History.
 
+**Component purpose:** HLA-CORE owns authoritative Campaign Reality and its reconstructible Event history. It preserves stable identities, temporal state, facts, relationships, properties, and Campaign Time while exposing append, fold, and history primitives to internal components without owning resolution, observation, package semantics, persistence, or presentation.
+
 **Primary requirements:** FR-004, FR-005, FR-006, FR-007, FR-008, FR-009, FR-010, FR-011.
 
 **Related NFRs:** NFR-003, NFR-004, NFR-006.
@@ -552,9 +554,7 @@ Future Test Planning SHALL include HLA-CORE coverage for:
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-The following questions remain deferred for component-level refinement and cross-component consistency:
-
-1. Package-defined type metadata retention — the exact amount of package-defined type metadata HLA-CORE must retain with Events cannot be resolved until HLA-PACKAGE defines package schema, package composition pins, migration behavior, and package removal semantics. HLA-CORE SHALL preserve package-defined semantic references in Events in a form sufficient to keep history reconstructible, but the final metadata shape is owned by the HLA-PACKAGE Detailed Design and any related migration/export rules.
+No HLA-CORE-owned open questions remain at this draft level. Remaining package-schema, migration, and semantic-reference details are tracked in `docs/design/components/hla-package-dd.md`.
 
 Resolved during Detailed Design review:
 
@@ -562,6 +562,7 @@ Resolved during Detailed Design review:
 - Undo/Retcon write path — HLA-STATE SHALL NOT receive an independent ordinary write contract into HLA-CORE for Undo or Retcon. Undo and Retcon mutations SHALL flow through HLA-CONTRACT authorization, HLA-STATE eligibility/policy evaluation, HLA-RESOLUTION mutation normalization and provenance-bearing command application, and then HLA-CORE append. This preserves HLA-RESOLUTION as the exclusive post-instantiation Campaign Reality write path while ensuring Undo/Retcon intent is authorized rather than self-authorizing. HLA-STATE owns Undo/Retcon intent, eligibility, policy, checkpoint context, and recovery context; HLA-RESOLUTION owns how accepted state-management intent becomes an authoritative Campaign Reality mutation. Technical Recovery that restores valid engine state without representing a semantic Campaign Reality mutation remains deferred to HLA-STATE Detailed Design.
 - Snapshot boundary ownership — HLA-CORE SHALL define only snapshot boundary invariants, not the final snapshot/checkpoint payload shape. A Core snapshot boundary SHALL identify the Campaign, committed Event boundary, Campaign Time boundary, and Core schema/model version; any snapshot payload using that boundary SHALL be derived from committed Events; HLA-CORE SHALL be able to resume folding from a valid snapshot boundary plus subsequent Events; and HLA-CORE SHALL reject restoration when the snapshot boundary does not match the Campaign/Event stream it claims to summarize. HLA-STATE owns checkpoint/snapshot payload shape, checkpoint cadence, restore orchestration, Recovery semantics, and lifecycle policy. HLA-PERSIST owns durable representation of snapshot/checkpoint artifacts. Serialization, compression, archival layout, and validation extensions remain outside HLA-CORE.
 - Derived index posture — HLA-CORE SHALL require the minimum derived indexes needed for v1 semantic behavior and ordinary internal reads: object identity lookup; Campaign Time/Event ordering lookup; current State/Property lookup; Relationship participant lookup; and Fact/provenance lookup. These indexes are derived from Events or snapshot-plus-Events and SHALL NOT become authoritative state. Specialized temporal interval indexes, asset reverse-reference indexes, advanced graph/path/topology indexes, full-text/search indexes, package-specific optimized indexes, and other measured-performance indexes are deferred candidates. They should be captured for implementation and test-planning consideration, but added only when development evidence, workload profiling, or package needs justify them.
+- Package-defined type metadata retention — HLA-CORE Events SHALL retain stable `PackageSemanticRef` values when package-defined types, schemas, or contracts give meaning to Event payloads. HLA-PACKAGE owns interpretation of those references against the Campaign's composition pin and Effective Campaign Definition. HLA-CORE SHALL NOT duplicate full Package definitions into every Event by default.
 
 ---
 

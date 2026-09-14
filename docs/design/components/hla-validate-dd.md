@@ -55,6 +55,8 @@ This document refines HLA-VALIDATE only. It does not authorize implementation an
 
 **Component being refined:** HLA-VALIDATE — Validation & Diagnostics.
 
+**Component purpose:** HLA-VALIDATE is the engine's trust-boundary validation component. It evaluates Packages, imports, Oracle results, migration plans, and other admitted subjects before they can influence authoritative state, and returns structured diagnostics without owning the state being protected.
+
 **Primary requirements:** FR-037 and FR-038.
 
 **Primary NFR:** NFR-002.

@@ -51,7 +51,9 @@ Definitions in approved phase artifacts remain authoritative for those approved 
 | Observer Knowledge | What an Observer knows, believes, suspects, remembers, has been told, has mapped, has inferred, or has misunderstood. |
 | Oracle | A defined process that produces uncertain or randomized output. An Oracle result does not inherently change Campaign Reality. |
 | Package | A versioned, identifiable unit contributing definitions, behavior, content, rules, procedures, or assets to a Campaign. |
+| Package Artifact | The structured representation of one Package version, including identity, metadata, dependencies, definitions, contracts, assets, validation declarations, compatibility declarations, and migration declarations. |
 | Package Composition Pin | A recorded reference to the exact effective package composition used by a Campaign. |
+| Package Semantic Reference | A stable reference from Campaign Reality or related engine data to package-defined meaning, such as an entity type, relationship type, property type, rule, Oracle, Procedure, schema, asset, or scenario element. |
 | Presentation Model | Engine-produced information a client may render for a given observer, context, time, and projection. It is derived, not authoritative. |
 | Principal | The authenticated or otherwise identified security subject represented at the contract boundary. In single-player use this may be a default local principal. |
 | Procedure | A package-defined sequence used during play. Procedures may consult Rules and Oracles and may produce Events, State changes, or unresolved/resolved campaign information. |

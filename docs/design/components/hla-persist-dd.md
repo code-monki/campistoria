@@ -57,6 +57,8 @@ This document refines HLA-PERSIST only. It does not authorize implementation, se
 
 **Component being refined:** HLA-PERSIST — Persistence & Portability.
 
+**Component purpose:** HLA-PERSIST provides durable backing, import/export, archival retrieval, and asset portability for data owned by other HLA components. It keeps campaign data portable and recoverable without becoming a second source of truth for Campaign Reality, Observer Knowledge, Package definitions, or Checkpoints.
+
 **Primary requirements:** FR-031, FR-032, FR-042, FR-043.
 
 **Related NFRs:** NFR-003, NFR-004, NFR-005.
