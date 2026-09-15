@@ -221,8 +221,8 @@ This draft therefore deepens the taxonomy only around privileged knowledge, auth
 |---|---|---|
 | `campaign.create` | Create a Campaign from a Scenario | HLA-LIFECYCLE operations |
 | `campaign.query.presentation` | Query caller-appropriate Presentation Models | Ordinary HLA-QUERY projection operations |
-| `campaign.query.reality` | Query authoritative Campaign Reality where allowed | Privileged HLA-QUERY operations |
 | `campaign.query.archive` | Query archived history outside the active working set | HLA-QUERY and HLA-PERSIST archival access |
+| `tooling.inspect.campaign` | Query authority-filtered campaign inspection views for authoring, GM-facing, diagnostic, validation, or test tooling | Privileged HLA-QUERY inspection operations |
 | `observer.record.self` | Record Observer Knowledge for the caller's own Observer context | Ordinary HLA-OBSERVER recording operations |
 | `observer.record.other` | Record Observer Knowledge for another Observer context | GM/tool-mediated HLA-OBSERVER recording operations |
 | `resolution.submit` | Submit an intended action or proposed Resolution input | Player/tool request into HLA-RESOLUTION |
@@ -249,9 +249,9 @@ This draft therefore deepens the taxonomy only around privileged knowledge, auth
 | Role Bundle | Default Capabilities | Notes |
 |---|---|---|
 | `campaignOwner` | All capabilities for the owned Campaign, including `authority.manage` | Administrative default; exact ownership semantics remain deployment-neutral. |
-| `gameMaster` | `campaign.query.presentation`, `campaign.query.reality`, `campaign.query.archive`, `observer.record.other`, `resolution.apply`, `resolution.override`, `oracle.invoke`, `provenance.query`, `checkpoint.create`, `resolution.undo`, `reality.retcon`, Package migration if granted | Models high-trust play authority without making GM a hardcoded authorization primitive. |
+| `gameMaster` | `campaign.query.presentation`, `campaign.query.archive`, `tooling.inspect.campaign`, `observer.record.other`, `resolution.apply`, `resolution.override`, `oracle.invoke`, `provenance.query`, `checkpoint.create`, `resolution.undo`, `reality.retcon`, Package migration if granted | Models high-trust play authority without making GM a hardcoded authorization primitive. |
 | `player` | `campaign.query.presentation`, `observer.record.self`, `resolution.submit` where granted | Supports player actions that mutate state only through ordinary authorized submission paths. |
-| `authoringTool` | `package.validate`, `package.register`, `package.remove`, import/export capabilities as granted | Same public contracts as any other tool. |
+| `authoringTool` | `package.validate`, `package.register`, `package.remove`, `tooling.inspect.campaign` where granted, import/export capabilities as granted | Same public contracts as any other tool. |
 | `viewer` | `campaign.query.presentation` only | Read-only role bundle. |
 
 The role bundle list is provisional. Component-level design may refine names and capability granularity, but SHALL NOT replace capability checks with role-name checks.
@@ -272,7 +272,7 @@ The public catalog groups operations by owning HLA component. Exact method names
 | Resolution Provenance | HLA-RESOLUTION | `getResolutionProvenance`, `getOracleInvocation`, `listOracleInvocations` | No authoritative mutation | `provenance.query` |
 | Observer Knowledge | HLA-OBSERVER | `recordObservation`, `knowledgeOf` | Mixed | `observer.record.self` or `observer.record.other` for writes; query capability for reads |
 | Package | HLA-PACKAGE | `validatePackage`, `registerPackage`, `compose`, `migrate`, `removePackage` | Mixed | `package.validate`, `package.register`, `package.remove`, `package.migrate` |
-| Query | HLA-QUERY | `query`, `getPresentationModel`, `getDelta`, `queryReality`, `queryArchived` | No authoritative mutation | `campaign.query.presentation`, `campaign.query.reality`, or `campaign.query.archive` |
+| Query | HLA-QUERY | `query`, `getPresentationModel`, `getDelta`, `queryInspectionView`, `queryArchived` | No authoritative mutation | `campaign.query.presentation`, `tooling.inspect.campaign`, or `campaign.query.archive` |
 | Persistence | HLA-PERSIST | `export`, `importPackage`, `importCampaign`, `destructiveImport`, `resolveArchived` | Mixed | `persistence.export`, `persistence.import.package`, `persistence.import.campaign`, `persistence.import.destructive`, `campaign.query.archive` |
 | State | HLA-STATE | `checkpoint`, `restore`, `undo`, `recover`, `retcon` | Yes | `checkpoint.create`, `checkpoint.restore`, `resolution.undo`, `reality.retcon` |
 | Validation | HLA-VALIDATE | `validate` | No authoritative mutation | Depends on validation subject and caller context |

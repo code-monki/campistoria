@@ -113,7 +113,7 @@ The components below SHALL be refined into component-level Detailed Design secti
 | 6 | HLA-PACKAGE | FR-019 through FR-026, FR-041, NFR-005 | Package registry, version pinning, composition rules, dependency removal, migration contract, conflict diagnostics. Draft: `docs/design/components/hla-package-dd.md`. |
 | 7 | HLA-STATE | FR-033 through FR-036, FR-041, NFR-003 | Checkpoint schema, snapshot cadence configuration, recovery orchestration, undo inverse-command semantics, retcon provenance. Draft: `docs/design/components/hla-state-dd.md`. |
 | 8 | HLA-PERSIST | FR-031, FR-032, FR-042, FR-043, NFR-004 | Storage abstraction, archival boundary, import/export representation, asset portability, active-window retrieval behavior. Draft: `docs/design/components/hla-persist-dd.md`. |
-| 9 | HLA-QUERY | FR-027 through FR-030 | Query contract, POV resolution, Projection strategy selection, Presentation Model lifecycle, reconnect delta/snapshot behavior. |
+| 9 | HLA-QUERY | FR-027 through FR-030 | Query contract, POV resolution, Projection strategy selection, Presentation Model lifecycle, reconnect delta/snapshot behavior. Draft: `docs/design/components/hla-query-dd.md`. |
 | 10 | HLA-LIFECYCLE | FR-001, FR-002, FR-003, FR-040, FR-044 | Scenario-to-Campaign instantiation, Campaign identity, seed assignment, immutable Scenario reference, branching/divergence semantics. |
 
 Each component-level refinement SHALL define responsibilities, explicit interface contracts, data structures, validation rules, error semantics, preconditions, postconditions, side effects, determinism expectations, failure behavior, NFR derivation, and test alignment.
