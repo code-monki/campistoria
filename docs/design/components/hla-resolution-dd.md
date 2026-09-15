@@ -5,7 +5,7 @@ Component ID: HLA-RESOLUTION
 Version: 0.1 (Component Draft)
 Date (YYYY-MM-DD): 2026-09-13
 Author(s): CodeMonki
-Status: Draft
+Status: Approved
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
 Parent Design Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
@@ -512,7 +512,7 @@ Test IDs are intentionally not assigned until the Test Planning phase.
 | FR-037 | Oracle result validation handoff to HLA-VALIDATE before use as Resolution input. |
 | NFR-006 | Resolution provenance records and Event reference posture. |
 
-This draft is sufficient to start review of HLA-RESOLUTION design direction. It is not yet sufficient to mark FR-012 through FR-014 fully designed in the RTM.
+This design is sufficient to approve the HLA-RESOLUTION component-design baseline for continued Detailed Design work and later planning.
 
 ---
 
@@ -537,16 +537,10 @@ None.
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-- Component-level responsibilities defined? **Yes, draft.**
-- Internal decomposition defined? **Yes, draft.**
-- Public interface model defined? **Yes, conceptual draft.**
-- Oracle Adapter contract defined? **Yes, draft.**
-- Deterministic/probabilistic boundary refined? **Yes, draft.**
-- Data ownership defined? **Yes.**
-- Failure semantics defined? **Yes, draft.**
-- NFR derivation defined? **Yes, draft.**
-- Test alignment defined? **Yes, draft without Test IDs.**
-- Open questions remaining? **No.**
-- Ready for implementation? **No.**
+HLA-RESOLUTION Detailed Design is **approved at the component-design level**.
 
-End of HLA-RESOLUTION Detailed Design draft.
+This approval does not authorize implementation by itself. It approves the HLA-RESOLUTION Detailed Design baseline for continued Detailed Design work and later planning.
+
+This design establishes Unresolved State handling, Resolution Command shape, Oracle Adapter boundary, explicit human/GM acceptance posture for Oracle-derived Resolution, reference-based Undo descriptor production, rejected Oracle invocation retention, provenance records, and the deterministic/probabilistic mutation boundary. No HLA-RESOLUTION-owned open questions remain at this draft level.
+
+Implementation, testing, package-format SRD work, future automation policy, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.

@@ -5,7 +5,7 @@ Component ID: HLA-CONTRACT
 Version: 0.1 (Component Draft)
 Date (YYYY-MM-DD): 2026-09-13
 Author(s): CodeMonki
-Status: Draft
+Status: Approved
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
 Parent Design Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
@@ -455,7 +455,7 @@ HLA-CONTRACT imposes only these future packaging constraints:
 | NFR-002 | Authorization gate and HLA-VALIDATE routing posture captured. |
 | NFR-006 | Provenance metadata forwarding posture captured for mutating operations. |
 
-This draft is sufficient to start review of HLA-CONTRACT design direction. It is not yet sufficient to mark FR-039 fully designed in the RTM.
+This design is sufficient to approve the HLA-CONTRACT component-design baseline for continued Detailed Design work and later planning.
 
 ---
 
@@ -478,14 +478,10 @@ This draft is sufficient to start review of HLA-CONTRACT design direction. It is
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-- Component-level responsibilities defined? **Yes, draft.**
-- Public interface model defined? **Yes, conceptual draft.**
-- Authorization model defined? **Yes, draft capability-based model.**
-- Data ownership defined? **Yes.**
-- Failure semantics defined? **Yes, draft.**
-- NFR derivation defined? **Yes, draft.**
-- Test alignment defined? **Yes, draft without Test IDs.**
-- Open questions remaining? **Yes.**
-- Ready for implementation? **No.**
+HLA-CONTRACT Detailed Design is **approved at the component-design level**.
 
-End of HLA-CONTRACT Detailed Design draft.
+This approval does not authorize implementation by itself. It approves the HLA-CONTRACT Detailed Design baseline for continued Detailed Design work and later planning.
+
+This design establishes the public contract facade, operation grouping, capability-based authorization posture, role-bundle vocabulary, request/response envelope, synchronization envelope semantics, diagnostic posture, and cross-component routing responsibilities. No HLA-CONTRACT-owned open questions remain at this draft level.
+
+Implementation, testing, future multiplayer rescoping, hosted identity/account design, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.

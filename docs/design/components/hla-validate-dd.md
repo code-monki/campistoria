@@ -5,7 +5,7 @@ Component ID: HLA-VALIDATE
 Version: 0.1 (Component Draft)
 Date (YYYY-MM-DD): 2026-09-13
 Author(s): CodeMonki
-Status: Draft
+Status: Approved
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
 Parent Design Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
@@ -451,7 +451,7 @@ Test IDs are intentionally not assigned until the Test Planning phase.
 | NFR-005 | Chain of Responsibility and validator descriptors support separable validation logic. |
 | NFR-006 | Diagnostics can support provenance and after-the-fact explanation when attached by owning components. |
 
-This draft is sufficient to start review of HLA-VALIDATE design direction. It is not yet sufficient to mark FR-037 or FR-038 fully designed in the RTM.
+This design is sufficient to approve the HLA-VALIDATE component-design baseline for continued Detailed Design work and later planning.
 
 ---
 
@@ -474,16 +474,10 @@ This draft is sufficient to start review of HLA-VALIDATE design direction. It is
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-- Component-level responsibilities defined? **Yes, draft.**
-- Public interface model defined? **Yes, conceptual draft.**
-- Validation subject taxonomy defined? **Yes, draft.**
-- Validator chain model defined? **Yes, draft.**
-- Diagnostic model defined? **Yes, draft.**
-- Data ownership defined? **Yes.**
-- Failure semantics defined? **Yes, draft.**
-- NFR derivation defined? **Yes, draft.**
-- Test alignment defined? **Yes, draft without Test IDs.**
-- Open questions remaining? **Yes.**
-- Ready for implementation? **No.**
+HLA-VALIDATE Detailed Design is **approved at the component-design level**.
 
-End of HLA-VALIDATE Detailed Design draft.
+This approval does not authorize implementation by itself. It approves the HLA-VALIDATE Detailed Design baseline for continued Detailed Design work and later planning.
+
+This design establishes validation subject taxonomy, validator chain behavior, diagnostic shape, trust-boundary admission posture, package/import/oracle validation boundaries, trace exposure policy, and hostile-input failure posture. No HLA-VALIDATE-owned open questions remain at this draft level.
+
+Implementation, testing, package-format SRD work, sandboxed-validator reconsideration, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.

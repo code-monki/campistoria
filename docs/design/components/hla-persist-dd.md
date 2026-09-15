@@ -5,7 +5,7 @@ Component ID: HLA-PERSIST
 Version: 0.1 (Component Draft)
 Date (YYYY-MM-DD): 2026-09-13
 Author(s): CodeMonki
-Status: Draft
+Status: Approved
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
 Parent Design Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
@@ -473,7 +473,7 @@ Test IDs are intentionally not assigned until the Test Planning phase.
 | FR-043 | Active-window/archival split and `resolveArchived` retrieval contract. |
 | NFR-004 | Active working set separated from archived segments while preserving on-demand retrieval. |
 
-This draft is sufficient to start review of HLA-PERSIST design direction. It is not yet sufficient to mark FR-031, FR-032, FR-042, or FR-043 fully designed in the RTM.
+This design is sufficient to approve the HLA-PERSIST component-design baseline for continued Detailed Design work and later planning.
 
 ---
 
@@ -499,16 +499,10 @@ None.
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-- Component-level responsibilities defined? **Yes, draft.**
-- Internal decomposition defined? **Yes, draft.**
-- Public interface model defined? **Yes, conceptual draft.**
-- Asset portability boundary defined? **Yes, draft.**
-- Active-window/archival boundary defined? **Yes, draft.**
-- Data ownership defined? **Yes.**
-- Failure semantics defined? **Yes, draft.**
-- NFR derivation defined? **Yes, draft.**
-- Test alignment defined? **Yes, draft without Test IDs.**
-- Open questions remaining? **No.**
-- Ready for implementation? **No.**
+HLA-PERSIST Detailed Design is **approved at the component-design level**.
 
-End of HLA-PERSIST Detailed Design draft.
+This approval does not authorize implementation by itself. It approves the HLA-PERSIST Detailed Design baseline for continued Detailed Design work and later planning.
+
+This design establishes persistence and portability boundaries, storage-technology selection criteria, durable backing responsibilities, import/export posture, asset portability guarantees, integrity metadata posture, active-window and archival retrieval behavior, and HLA-VALIDATE admission handoff. No HLA-PERSIST-owned open questions remain at this draft level.
+
+Implementation, testing, package-format SRD work, storage technology selection, archival tuning, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.

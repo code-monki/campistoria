@@ -5,7 +5,7 @@ Component ID: HLA-CORE
 Version: 0.1 (Component Draft)
 Date (YYYY-MM-DD): 2026-09-14
 Author(s): CodeMonki
-Status: Draft
+Status: Approved
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
 Parent Design Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
@@ -571,6 +571,10 @@ Resolved during Detailed Design review:
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-HLA-CORE Detailed Design is **not yet approved for implementation**.
+HLA-CORE Detailed Design is **approved at the component-design level**.
 
-This draft establishes Campaign Reality ownership, Event Sourcing semantics, append/fold behavior, asset-reference boundaries, and cross-component interfaces. Advancement requires review of the open questions above, especially the HLA-STATE interaction model for Undo, Retcon, Recovery, and snapshot payloads.
+This approval does not authorize implementation by itself. It approves the HLA-CORE Detailed Design baseline for continued Detailed Design work and later planning.
+
+This design establishes Campaign Reality ownership, Event Sourcing semantics, append/fold behavior, Event catalog granularity posture, Undo/Retcon routing through HLA-STATE and HLA-RESOLUTION, snapshot boundary ownership, derived index posture, package semantic reference retention, asset-reference boundaries, and cross-component interfaces. No HLA-CORE-owned open questions remain at this draft level.
+
+Implementation, testing, package-format SRD work, future multiplayer rescoping, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.
