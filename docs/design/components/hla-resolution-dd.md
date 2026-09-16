@@ -368,7 +368,7 @@ The Adapter SHALL:
 - Normalize Oracle output into `OracleResult`.
 - Preserve invocation metadata for provenance.
 - Pass any Package-defined opaque payload through without interpreting game semantics beyond the declared contract.
-- Provide the per-Campaign seed reference where the Oracle definition elects to use deterministic seeded behavior.
+- Provide an invocation-specific random context where the Oracle definition elects to use deterministic seeded behavior. The context is derived from the Campaign seed and invocation-specific data rather than by reusing the raw Campaign seed as the sole PRNG seed for every invocation.
 - Submit the result to HLA-VALIDATE before it may be used as Resolution input.
 - Treat validation as eligibility only; validation does not imply acceptance into Campaign Reality.
 - Retain Oracle invocation records, including rejected results, as non-authoritative HLA-RESOLUTION provenance/diagnostic records.
