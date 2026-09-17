@@ -2,13 +2,13 @@
 
 Project Name: Campistoria Engine
 Component ID: HLA-PERSIST
-Version: 0.1 (Component Draft)
+Version: 1.0 (Component Baseline)
 Date (YYYY-MM-DD): 2026-09-13
 Author(s): CodeMonki
 Status: Approved
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
-Parent Design Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
+Parent Design Reference: `docs/design/engine-detailed-design.md` v1.0 (Approved)
 Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
@@ -43,7 +43,7 @@ Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 - Architecture phase approved? **Yes** — `engine-hla.md` v1.0, approved 2026-09-12.
 - Architectural Component ID stable? **Yes** — HLA-PERSIST.
-- Parent Detailed Design phase opened? **Yes** — `engine-detailed-design.md` v0.1.
+- Parent Detailed Design phase opened? **Yes** — [Engine Detailed Design](../engine-detailed-design.md) v1.0 candidate.
 - Advancement to implementation authorized? **No.**
 
 This document refines HLA-PERSIST only. It does not authorize implementation, select storage technology, or introduce a new architectural component.
@@ -180,7 +180,7 @@ Future persistence technology choices SHALL:
 - Hide storage-specific locators and mechanics behind HLA-PERSIST-owned metadata.
 - Allow export, archive, compression, indexing, and storage adapters to evolve without redefining HLA-CORE, HLA-OBSERVER, HLA-PACKAGE, HLA-STATE, HLA-QUERY, or HLA-CONTRACT.
 
-Future trade studies MAY compare concrete databases, file formats, object stores, compression approaches, indexes, and deployment models against these criteria. Such trade studies are implementation-planning inputs, not decisions made by this draft.
+Future trade studies MAY compare concrete databases, file formats, object stores, compression approaches, indexes, and deployment models against these criteria. Such trade studies are implementation-planning inputs, not decisions made by this design.
 
 ---
 
@@ -465,7 +465,7 @@ Test IDs are intentionally not assigned until the Test Planning phase.
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-| Requirement | Coverage in This Draft |
+| Requirement | Coverage in This Design |
 |---|---|
 | FR-031 | Durable backing for Campaign Reality, Observer Knowledge, Package composition, history, and snapshots. |
 | FR-032 | Implementation-neutral export/import envelope and strict import admission. |
@@ -490,7 +490,7 @@ None.
 - Archive and asset integrity posture — HLA-PERSIST must maintain enough integrity metadata to detect missing, mismatched, truncated, or corrupted archived segments and asset payloads before returning them as valid. Exact fields are deferred until HLA-CORE, HLA-OBSERVER, and export artifact schemas are refined, but the eventual schema must include stable identity, ownership/scope, representation version, and a content-integrity check or equivalent verification mechanism.
 - Package-sourced asset verification — Campaign export SHALL verify that Package-sourced assets referenced by Campaign Reality or Observer Knowledge are independently portable or obtainable through the registered Package composition pins. Pins identify expected dependencies but are not proof of availability. If verification fails, Campaign export fails with diagnostics. Duplicating Package-sourced assets into Campaign export is deferred unless later requirements explicitly authorize that policy.
 - Minimum `AssetRef` metadata — HLA-CORE and HLA-OBSERVER carry semantic reference metadata only: stable asset identity, origin, owner scope, optional type hint, portability class, and provenance reference. Storage locators, byte layout, export packaging paths, content digests, and retrieval mechanics remain HLA-PERSIST-owned metadata and SHALL NOT leak into authoritative state.
-- Technology selection posture — HLA-PERSIST discusses selection criteria and adapter boundaries for databases, file formats, object stores, compression, indexing, cloud services, and deployment models, but does not select concrete technologies in this draft.
+- Technology selection posture — HLA-PERSIST discusses selection criteria and adapter boundaries for databases, file formats, object stores, compression, indexing, cloud services, and deployment models, but does not select concrete technologies in this design.
 
 ---
 
@@ -503,6 +503,6 @@ HLA-PERSIST Detailed Design is **approved at the component-design level**.
 
 This approval does not authorize implementation by itself. It approves the HLA-PERSIST Detailed Design baseline for continued Detailed Design work and later planning.
 
-This design establishes persistence and portability boundaries, storage-technology selection criteria, durable backing responsibilities, import/export posture, asset portability guarantees, integrity metadata posture, active-window and archival retrieval behavior, and HLA-VALIDATE admission handoff. No HLA-PERSIST-owned open questions remain at this draft level.
+This design establishes persistence and portability boundaries, storage-technology selection criteria, durable backing responsibilities, import/export posture, asset portability guarantees, integrity metadata posture, active-window and archival retrieval behavior, and HLA-VALIDATE admission handoff. No HLA-PERSIST-owned open questions remain at this design level.
 
 Implementation, testing, package-format SRD work, storage technology selection, archival tuning, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.

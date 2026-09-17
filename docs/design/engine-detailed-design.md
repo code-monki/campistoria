@@ -1,13 +1,13 @@
 # Campistoria Engine Detailed Design
 
 Project Name: Campistoria Engine
-Version: 0.1 (Detailed Design Entry Draft)
-Date (YYYY-MM-DD): 2026-09-12
+Version: 1.0 (Detailed Design Baseline)
+Date (YYYY-MM-DD): 2026-09-17
 Author(s): CodeMonki
-Status: Draft
+Status: Approved
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
-RTM Version Reference: `docs/requirements/engine-rtm.md` v1.0 (Architecture Mapped)
+RTM Version Reference: `docs/requirements/engine-rtm.md` v1.1 (Detailed Design Mapped, Approved)
 Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
@@ -49,7 +49,7 @@ Terminology used by this document and component-level Detailed Design artifacts 
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-This document starts the Detailed Design phase for the Campistoria Engine. It establishes phase authority, shared design constraints, component refinement order, and carried-forward design questions. It does not claim that component-level interface contracts are complete.
+This document records the Detailed Design baseline candidate for the Campistoria Engine. It establishes phase authority, shared design constraints, approved component-level refinements, and the remaining boundaries deferred to later lifecycle phases. It does not authorize implementation.
 
 **Architectural Component IDs in scope:** all ten approved HLA components: HLA-LIFECYCLE, HLA-CORE, HLA-RESOLUTION, HLA-OBSERVER, HLA-PACKAGE, HLA-QUERY, HLA-PERSIST, HLA-STATE, HLA-VALIDATE, and HLA-CONTRACT.
 
@@ -57,10 +57,10 @@ This document starts the Detailed Design phase for the Campistoria Engine. It es
 
 **Document boundaries:**
 
-- Refines approved HLA structure into a controlled Detailed Design work plan.
+- Refines approved HLA structure into approved component-level Detailed Design artifacts.
 - Captures design-wide invariants that every component-level design SHALL preserve.
-- Identifies the first design questions that must be settled before implementation planning.
-- Defers complete method signatures, schemas, error catalogs, state machines, and test IDs to component-level Detailed Design sections or follow-on artifacts.
+- Records that component-owned Detailed Design questions have been resolved or intentionally deferred within the approved component artifacts.
+- Defers complete implementation method signatures, concrete schemas, final error catalogs, state machines where not yet justified, and test IDs to follow-on artifacts and Test Planning.
 
 **Explicit exclusions:**
 
@@ -105,18 +105,18 @@ The components below SHALL be refined into component-level Detailed Design secti
 
 | Priority | Component | Requirement IDs | Design Focus |
 |---|---|---|---|
-| 1 | HLA-CONTRACT | FR-039; cross-cutting NFR-001, NFR-005 | Public operation catalog, embedded/hosted adapter neutrality, actor/session identity, capability enforcement, error exposure, request/response conventions. Draft: `docs/design/components/hla-contract-dd.md`. |
-| 2 | HLA-VALIDATE | FR-037, FR-038, NFR-002 | Validation subject taxonomy, validator chain ordering, diagnostic schema, import/Package/Oracle validation contracts, XML/SVG-style structural validation posture where applicable. Draft: `docs/design/components/hla-validate-dd.md`. |
-| 3 | HLA-RESOLUTION | FR-012, FR-013, FR-014, NFR-006 | Resolution Command model, Oracle Adapter contract, acceptance/rejection criteria, deterministic fallback, undo relationship, provenance records. Draft: `docs/design/components/hla-resolution-dd.md`. |
-| 4 | HLA-CORE | FR-004 through FR-011, NFR-003, NFR-004, NFR-006 | Campaign Reality event model, state fold rules, Fact/Relationship/Time invariants, atomic append semantics, history reconstruction. Draft: `docs/design/components/hla-core-dd.md`. |
-| 5 | HLA-OBSERVER | FR-015 through FR-018, NFR-003, NFR-004, NFR-006 | Observer Knowledge event model, information-source provenance, isolation from Campaign Reality, POV query support. Draft: `docs/design/components/hla-observer-dd.md`. |
-| 6 | HLA-PACKAGE | FR-019 through FR-026, FR-041, NFR-005 | Package registry, version pinning, composition rules, dependency removal, migration contract, conflict diagnostics. Draft: `docs/design/components/hla-package-dd.md`. |
-| 7 | HLA-STATE | FR-033 through FR-036, FR-041, NFR-003 | Checkpoint schema, snapshot cadence configuration, recovery orchestration, undo inverse-command semantics, retcon provenance. Draft: `docs/design/components/hla-state-dd.md`. |
-| 8 | HLA-PERSIST | FR-031, FR-032, FR-042, FR-043, NFR-004 | Storage abstraction, archival boundary, import/export representation, asset portability, active-window retrieval behavior. Draft: `docs/design/components/hla-persist-dd.md`. |
-| 9 | HLA-QUERY | FR-027 through FR-030 | Query contract, POV resolution, Projection strategy selection, Presentation Model lifecycle, reconnect delta/snapshot behavior. Draft: `docs/design/components/hla-query-dd.md`. |
-| 10 | HLA-LIFECYCLE | FR-001, FR-002, FR-003, FR-040, FR-044 | Scenario-to-Campaign instantiation, Campaign identity, seed assignment, immutable Scenario reference, branching/divergence semantics. Draft: `docs/design/components/hla-lifecycle-dd.md`. |
+| 1 | HLA-CONTRACT | FR-039; cross-cutting NFR-001, NFR-005 | Public operation catalog, embedded/hosted adapter neutrality, actor/session identity, capability enforcement, error exposure, request/response conventions. Approved: `docs/design/components/hla-contract-dd.md`. |
+| 2 | HLA-VALIDATE | FR-037, FR-038, NFR-002 | Validation subject taxonomy, validator chain ordering, diagnostic schema, import/Package/Oracle validation contracts, XML/SVG-style structural validation posture where applicable. Approved: `docs/design/components/hla-validate-dd.md`. |
+| 3 | HLA-RESOLUTION | FR-012, FR-013, FR-014, NFR-006 | Resolution Command model, Oracle Adapter contract, acceptance/rejection criteria, deterministic fallback, undo relationship, provenance records. Approved: `docs/design/components/hla-resolution-dd.md`. |
+| 4 | HLA-CORE | FR-004 through FR-011, NFR-003, NFR-004, NFR-006 | Campaign Reality event model, state fold rules, Fact/Relationship/Time invariants, atomic append semantics, history reconstruction. Approved: `docs/design/components/hla-core-dd.md`. |
+| 5 | HLA-OBSERVER | FR-015 through FR-018, NFR-003, NFR-004, NFR-006 | Observer Knowledge event model, information-source provenance, isolation from Campaign Reality, POV query support. Approved: `docs/design/components/hla-observer-dd.md`. |
+| 6 | HLA-PACKAGE | FR-019 through FR-026, FR-041, NFR-005 | Package registry, version pinning, composition rules, dependency removal, migration contract, conflict diagnostics. Approved: `docs/design/components/hla-package-dd.md`. |
+| 7 | HLA-STATE | FR-033 through FR-036, FR-041, NFR-003 | Checkpoint schema, snapshot cadence configuration, recovery orchestration, undo inverse-command semantics, retcon provenance. Approved: `docs/design/components/hla-state-dd.md`. |
+| 8 | HLA-PERSIST | FR-031, FR-032, FR-042, FR-043, NFR-004 | Storage abstraction, archival boundary, import/export representation, asset portability, active-window retrieval behavior. Approved: `docs/design/components/hla-persist-dd.md`. |
+| 9 | HLA-QUERY | FR-027 through FR-030 | Query contract, POV resolution, Projection strategy selection, Presentation Model lifecycle, reconnect delta/snapshot behavior. Approved: `docs/design/components/hla-query-dd.md`. |
+| 10 | HLA-LIFECYCLE | FR-001, FR-002, FR-003, FR-040, FR-044 | Scenario-to-Campaign instantiation, Campaign identity, seed assignment, immutable Scenario reference, branching/divergence semantics. Approved: `docs/design/components/hla-lifecycle-dd.md`. |
 
-Each component-level refinement SHALL define responsibilities, explicit interface contracts, data structures, validation rules, error semantics, preconditions, postconditions, side effects, determinism expectations, failure behavior, NFR derivation, and test alignment.
+Each component-level refinement defines responsibilities, explicit interface contracts, data structures, validation rules, error semantics, preconditions, postconditions, side effects, determinism expectations, failure behavior, NFR derivation, and test alignment at the level appropriate for Detailed Design. Concrete implementation signatures, executable schemas, and test IDs remain follow-on lifecycle artifacts.
 
 ---
 
@@ -149,16 +149,16 @@ The following rules are mandatory acceptance criteria for component-level Detail
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-The following questions are Detailed Design inputs, not Architecture blockers:
+The following questions were Detailed Design inputs, not Architecture blockers. Their component-level disposition is now recorded below:
 
-| Question | Origin | Expected Resolution Point |
+| Question | Origin | Disposition |
 |---|---|---|
-| Does Package composition require a declarative composition language, or is structured data sufficient? | `engine-hla.md` §14 | HLA-PACKAGE Detailed Design |
-| Should HLA-CONTRACT's embedded-vs-hosted adapter be decided now or left open through component design? | `engine-hla.md` §14 | HLA-CONTRACT Detailed Design |
-| What exact client synchronization contract supports initial snapshot, delta transfer, and reconnect by last-known revision/delta number? | Project owner discussion, `engine-hla.md` §14 | HLA-CONTRACT and HLA-QUERY Detailed Design |
-| What role and capability taxonomy is required for mutating operations, especially GM/campaign-owner operations? | Project owner discussion, `engine-hla.md` §14 | HLA-CONTRACT, HLA-RESOLUTION, HLA-STATE Detailed Design |
-| What exact archival storage representation supports active-window scaling and implementation-neutral export? | `engine-hla.md` §14 | HLA-PERSIST Detailed Design |
-| Are any newly discovered multi-actor collaboration requirements outside the current approved SRS? | Spiral Development risk | Requirements review if needed |
+| Does Package composition require a declarative composition language, or is structured data sufficient? | `engine-hla.md` §14 | Resolved/deferred in HLA-PACKAGE: structured package artifacts and explicit composition are required; concrete package artifact syntax is deferred to package-format SRD or implementation planning. |
+| Should HLA-CONTRACT's embedded-vs-hosted adapter be decided now or left open through component design? | `engine-hla.md` §14 | Resolved in HLA-CONTRACT: contract remains transport-neutral and preserves a local/in-process path; hosted/multiplayer infrastructure remains deferred. |
+| What exact client synchronization contract supports initial snapshot, delta transfer, and reconnect by last-known revision/delta number? | Project owner discussion, `engine-hla.md` §14 | Resolved across HLA-CONTRACT and HLA-QUERY: separate revision streams; HLA-CONTRACT owns envelope semantics; HLA-QUERY owns caller-visible materialization. |
+| What role and capability taxonomy is required for mutating operations, especially GM/campaign-owner operations? | Project owner discussion, `engine-hla.md` §14 | Resolved in HLA-CONTRACT with capability-based authorization, provisional role bundles, and justified-split capability granularity. |
+| What exact archival storage representation supports active-window scaling and implementation-neutral export? | `engine-hla.md` §14 | Resolved/deferred in HLA-PERSIST: active-window/archive boundary, retrieval contract, integrity metadata, and export guarantees are defined; concrete storage/archive technology remains deferred. |
+| Are any newly discovered multi-actor collaboration requirements outside the current approved SRS? | Spiral Development risk | No new v1 requirements introduced. Multiplayer remains deferred; component docs identify rescoping impacts if reopened. |
 
 ---
 
@@ -172,11 +172,11 @@ Traceability SHALL remain continuous from Requirement ID to HLA Component ID to 
 | Traceability Item | Current Status | Next Action |
 |---|---|---|
 | Requirement to HLA Component | Complete in `engine-rtm.md` v1.0 | Preserve unchanged unless change control reopens Architecture. |
-| HLA Component to Detailed Design | Started by this document; HLA-CONTRACT, HLA-VALIDATE, HLA-RESOLUTION, and HLA-PERSIST component drafts created | Populate component-level DD sections/artifacts for all ten HLA components. |
+| HLA Component to Detailed Design | Complete for all ten approved HLA components | Preserve links and update only through change control. |
 | Detailed Design to Test Case | Not yet created | Assign test IDs during Test Planning after component DD approval. |
 | Detailed Design to Implementation Unit | Not yet created | Populate only after implementation planning begins. |
 
-The RTM's DD Artifact column remains pending until component-level Detailed Design sections are approved. This avoids overstating traceability from a phase-entry document.
+The RTM's DD Artifact column is ready to map each Requirement/NFR to the approved component-level Detailed Design artifact. Test Case IDs remain pending until Test Planning.
 
 ---
 
@@ -209,16 +209,16 @@ The following HLA risks become explicit Detailed Design acceptance concerns:
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 - Detailed Design phase entry authorized? **Yes.**
-- Component-level Detailed Design complete? **No.**
-- Interface contracts complete? **No.**
-- Data schemas complete? **No.**
-- Failure semantics complete? **No.**
-- NFR derivation complete? **No.**
-- Test alignment complete? **No.**
-- RTM DD Artifact mappings approved? **No.**
+- Component-level Detailed Design complete? **Yes.**
+- Interface contracts complete? **Yes, at Detailed Design level.**
+- Data schemas complete? **Yes, conceptual Detailed Design structures defined; executable schemas deferred where explicitly stated.**
+- Failure semantics complete? **Yes, at component level.**
+- NFR derivation complete? **Yes, at component level.**
+- Test alignment complete? **Yes, component-level test planning signals defined; Test Case IDs deferred to Test Planning.**
+- RTM DD Artifact mappings approved? **Yes — `engine-rtm.md` v1.1 approved with this baseline.**
 - Implementation authorized? **No.**
 
-This artifact opens and governs Detailed Design. It is not sufficient to advance to Implementation.
+This baseline closes component-level Detailed Design. The concurrently approved RTM v1.1 completes Traceability Consolidation and authorizes Test Planning, not Implementation.
 
 ---
 
@@ -227,11 +227,11 @@ This artifact opens and governs Detailed Design. It is not sufficient to advance
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-Approved By:
-Role:
-Date:
-Version Incremented:
+Approved By: CodeMonki
+Role: Project Owner
+Date: 2026-09-17
+Version Incremented: Yes — v1.0
 
 ---
 
-End of Detailed Design Entry Draft.
+End of Detailed Design Baseline.

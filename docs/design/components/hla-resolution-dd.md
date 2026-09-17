@@ -2,13 +2,13 @@
 
 Project Name: Campistoria Engine
 Component ID: HLA-RESOLUTION
-Version: 0.1 (Component Draft)
+Version: 1.0 (Component Baseline)
 Date (YYYY-MM-DD): 2026-09-13
 Author(s): CodeMonki
 Status: Approved
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
-Parent Design Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
+Parent Design Reference: `docs/design/engine-detailed-design.md` v1.0 (Approved)
 Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
@@ -41,7 +41,7 @@ Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 - Architecture phase approved? **Yes** — `engine-hla.md` v1.0, approved 2026-09-12.
 - Architectural Component ID stable? **Yes** — HLA-RESOLUTION.
-- Parent Detailed Design phase opened? **Yes** — `engine-detailed-design.md` v0.1.
+- Parent Detailed Design phase opened? **Yes** — [Engine Detailed Design](../engine-detailed-design.md) v1.0 candidate.
 - Advancement to implementation authorized? **No.**
 
 This document refines HLA-RESOLUTION only. It does not authorize implementation and does not introduce a new architectural component.
@@ -504,7 +504,7 @@ Test IDs are intentionally not assigned until the Test Planning phase.
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-| Requirement | Coverage in This Draft |
+| Requirement | Coverage in This Design |
 |---|---|
 | FR-012 | Unresolved State marker model and `declareUnresolved` contract. |
 | FR-013 | Resolution Command model, source/provenance handling, successful application flow. |
@@ -541,6 +541,6 @@ HLA-RESOLUTION Detailed Design is **approved at the component-design level**.
 
 This approval does not authorize implementation by itself. It approves the HLA-RESOLUTION Detailed Design baseline for continued Detailed Design work and later planning.
 
-This design establishes Unresolved State handling, Resolution Command shape, Oracle Adapter boundary, explicit human/GM acceptance posture for Oracle-derived Resolution, reference-based Undo descriptor production, rejected Oracle invocation retention, provenance records, and the deterministic/probabilistic mutation boundary. No HLA-RESOLUTION-owned open questions remain at this draft level.
+This design establishes Unresolved State handling, Resolution Command shape, Oracle Adapter boundary, explicit human/GM acceptance posture for Oracle-derived Resolution, reference-based Undo descriptor production, rejected Oracle invocation retention, provenance records, and the deterministic/probabilistic mutation boundary. No HLA-RESOLUTION-owned open questions remain at this design level.
 
 Implementation, testing, package-format SRD work, future automation policy, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.

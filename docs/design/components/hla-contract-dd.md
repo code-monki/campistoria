@@ -2,13 +2,13 @@
 
 Project Name: Campistoria Engine
 Component ID: HLA-CONTRACT
-Version: 0.1 (Component Draft)
+Version: 1.0 (Component Baseline)
 Date (YYYY-MM-DD): 2026-09-13
 Author(s): CodeMonki
 Status: Approved
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
-Parent Design Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
+Parent Design Reference: `docs/design/engine-detailed-design.md` v1.0 (Approved)
 Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
@@ -41,7 +41,7 @@ Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 - Architecture phase approved? **Yes** — `engine-hla.md` v1.0, approved 2026-09-12.
 - Architectural Component ID stable? **Yes** — HLA-CONTRACT.
-- Parent Detailed Design phase opened? **Yes** — `engine-detailed-design.md` v0.1.
+- Parent Detailed Design phase opened? **Yes** — [Engine Detailed Design](../engine-detailed-design.md) v1.0 candidate.
 - Advancement to implementation authorized? **No.**
 
 This document refines HLA-CONTRACT only. It does not authorize implementation and does not introduce a new architectural component.
@@ -213,7 +213,7 @@ HLA-CONTRACT defines the contract-level meaning of principal, actor, session, ro
 
 Capability granularity SHALL follow a justified-split rule: each added capability ID must earn its place by representing a materially different authority level, information exposure risk, mutation risk, recovery risk, or test assertion. HLA-CONTRACT SHALL NOT decompose capabilities merely to create a large permission matrix.
 
-This draft therefore deepens the taxonomy only around privileged knowledge, authoritative mutation, Package lifecycle, import, rollback, and Retcon operations.
+This design therefore deepens the taxonomy only around privileged knowledge, authoritative mutation, Package lifecycle, import, rollback, and Retcon operations.
 
 **Initial capability taxonomy:**
 
@@ -447,7 +447,7 @@ HLA-CONTRACT imposes only these future packaging constraints:
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-| Requirement | Coverage in This Draft |
+| Requirement | Coverage in This Design |
 |---|---|
 | FR-039 | Same public operation catalog, no first-party shortcut, public operation groups, identical capability surface. |
 | NFR-001 | In-process facade path preserved; transport overhead excluded from component contract. |
@@ -466,7 +466,7 @@ This design is sufficient to approve the HLA-CONTRACT component-design baseline 
 
 **Resolved during review:**
 
-- Capability taxonomy depth — resolved as sufficient for the current HLA-CONTRACT draft. No additional split is currently justified; future component designs may add capabilities only under the justified-split rule.
+- Capability taxonomy depth — resolved as sufficient for the current HLA-CONTRACT baseline. No additional split is currently justified; future component designs may add capabilities only under the justified-split rule.
 - Role/capability assignment posture — HLA-CONTRACT defines principal, actor, session, role bundle, and capability vocabulary now. Current single-player operation may use default solo authority assignments supplied by the embedding application, but the contract shape SHALL NOT assume "no actor model." Hosted accounts, multiplayer infrastructure, and persistent user management remain out of current scope.
 - Synchronization stream shape — resolved as separate revision streams for Campaign Reality, Observer Knowledge, and Presentation Models. `deltaNumber` may be retained only as a stream-scoped marker, not as a single global Campaign counter.
 - Synchronization materialization ownership — HLA-CONTRACT owns envelope semantics and response-mode vocabulary only. HLA-QUERY owns caller-visible full-state and delta materialization as a component responsibility, and HLA-QUERY Detailed Design shall decompose POV Resolution, Presentation Model materialization, revision mapping, archive bridging, and delta materialization internally rather than treating HLA-QUERY as a monolith or God Component.
@@ -482,6 +482,6 @@ HLA-CONTRACT Detailed Design is **approved at the component-design level**.
 
 This approval does not authorize implementation by itself. It approves the HLA-CONTRACT Detailed Design baseline for continued Detailed Design work and later planning.
 
-This design establishes the public contract facade, operation grouping, capability-based authorization posture, role-bundle vocabulary, request/response envelope, synchronization envelope semantics, diagnostic posture, and cross-component routing responsibilities. No HLA-CONTRACT-owned open questions remain at this draft level.
+This design establishes the public contract facade, operation grouping, capability-based authorization posture, role-bundle vocabulary, request/response envelope, synchronization envelope semantics, diagnostic posture, and cross-component routing responsibilities. No HLA-CONTRACT-owned open questions remain at this design level.
 
 Implementation, testing, future multiplayer rescoping, hosted identity/account design, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.

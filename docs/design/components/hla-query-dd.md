@@ -2,13 +2,13 @@
 
 Project Name: Campistoria Engine
 Component ID: HLA-QUERY
-Version: 0.1 (Component Draft)
+Version: 1.0 (Component Baseline)
 Date (YYYY-MM-DD): 2026-09-14
 Author(s): CodeMonki
 Status: Approved
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
-Parent Design Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
+Parent Design Reference: `docs/design/engine-detailed-design.md` v1.0 (Approved)
 Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
@@ -44,7 +44,7 @@ Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 - Architecture phase approved? **Yes** — `engine-hla.md` v1.0, approved 2026-09-12.
 - Architectural Component ID stable? **Yes** — HLA-QUERY.
-- Parent Detailed Design phase opened? **Yes** — `engine-detailed-design.md` v0.1.
+- Parent Detailed Design phase opened? **Yes** — [Engine Detailed Design](../engine-detailed-design.md) v1.0 candidate.
 - Advancement to implementation authorized? **No.**
 
 This document refines HLA-QUERY only. It does not authorize implementation, introduce a new architectural component, or introduce a Virtual Tabletop product surface.
@@ -613,7 +613,7 @@ Future Test Planning SHALL cover at least:
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-No HLA-QUERY-owned open questions remain at this draft level.
+No HLA-QUERY-owned open questions remain at this design level.
 
 Resolved during Detailed Design review:
 
@@ -634,6 +634,6 @@ HLA-QUERY Detailed Design is **approved at the component-design level**.
 
 This approval does not authorize implementation by itself. It approves the HLA-QUERY Detailed Design baseline for continued Detailed Design work and later planning.
 
-This design establishes the HLA-QUERY component boundary, internal decomposition, query context model, POV Resolution responsibilities, Presentation Model lifecycle, projection strategy model, synchronization materialization posture, archive bridging, asset presentation boundary, and failure semantics. No HLA-QUERY-owned open questions remain at this draft level.
+This design establishes the HLA-QUERY component boundary, internal decomposition, query context model, POV Resolution responsibilities, Presentation Model lifecycle, projection strategy model, synchronization materialization posture, archive bridging, asset presentation boundary, and failure semantics. No HLA-QUERY-owned open questions remain at this design level.
 
 Implementation, testing, future multiplayer rescoping, authoring-tool refinement, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.

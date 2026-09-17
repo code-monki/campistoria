@@ -2,13 +2,13 @@
 
 Project Name: Campistoria Engine
 Component ID: HLA-LIFECYCLE
-Version: 0.1 (Component Draft)
+Version: 1.0 (Component Baseline)
 Date (YYYY-MM-DD): 2026-09-15
 Author(s): CodeMonki
 Status: Approved
 Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
 Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
-Parent Design Reference: `docs/design/engine-detailed-design.md` v0.1 (Draft)
+Parent Design Reference: `docs/design/engine-detailed-design.md` v1.0 (Approved)
 Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
@@ -44,7 +44,7 @@ Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 - Architecture phase approved? **Yes** — `engine-hla.md` v1.0, approved 2026-09-12.
 - Architectural Component ID stable? **Yes** — HLA-LIFECYCLE.
-- Parent Detailed Design phase opened? **Yes** — `engine-detailed-design.md` v0.1.
+- Parent Detailed Design phase opened? **Yes** — [Engine Detailed Design](../engine-detailed-design.md) v1.0 candidate.
 - Advancement to implementation authorized? **No.**
 
 This document refines HLA-LIFECYCLE only. It does not authorize implementation, introduce a new architectural component, select an identity-generation algorithm, or select a random-number generation algorithm.
@@ -498,7 +498,7 @@ Future Test Planning SHALL cover at least:
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-No HLA-LIFECYCLE-owned open questions remain at this draft level.
+No HLA-LIFECYCLE-owned open questions remain at this design level.
 
 Resolved during Detailed Design review:
 
@@ -518,6 +518,6 @@ HLA-LIFECYCLE Detailed Design is **approved at the component-design level**.
 
 This approval does not authorize implementation by itself. It approves the HLA-LIFECYCLE Detailed Design baseline for continued Detailed Design work and later planning.
 
-This design establishes the HLA-LIFECYCLE component boundary, Campaign creation model, Campaign identity model, Campaign seed model, Scenario immutability boundary, independent divergence model, package/migration boundary, creation provenance posture, interface contracts, and failure semantics. No HLA-LIFECYCLE-owned open questions remain at this draft level.
+This design establishes the HLA-LIFECYCLE component boundary, Campaign creation model, Campaign identity model, Campaign seed model, Scenario immutability boundary, independent divergence model, package/migration boundary, creation provenance posture, interface contracts, and failure semantics. No HLA-LIFECYCLE-owned open questions remain at this design level.
 
 Implementation, testing, future clone/fork/branch rescoping, package-format SRD work, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.
