@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:bee31293344848cc192d53e93a7d7c75065ce7589aadefd0ae365653a0b6d7c4",
+  "claims": [
+    {
+      "id": "claim_bae9d1a032b44e48b2f0bd2e513bc948",
+      "statement": "docs/glossary.md consolidates Campistoria terminology across Ideation, Requirements, Architecture, and Detailed Design artifacts; definitions in approved phase artifacts remain authoritative for those artifacts and the glossary must not retroactively change approved requirements/architecture without explicit change control.",
+      "evidence": [
+        {
+          "resource": "repo://docs/glossary.md#L13-L15",
+          "version": "repo-lines-v1:sha256:86117fe91e8af2161779a494bd2564335a8d6b10b1dd50ef1ca4ad0449c6ba4f:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTI5MDQ5YzE4NDg1MGYwMmMzMjY5OGRiNWRiZGE1NmU3MDczODFlMmVhOTlmZTFlYWQ5MTRjMDk1ZmQ4NjJhNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDk2M2Y1ZWQ3MjQ5YjY1ZTdlNGNmMDZiMzNkZDMwYzU5ODZlNTcxZDNiNjgzYzYyZWUyZGM4ZjE5ODRmNmJlMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODJmZjEyMDkyZWI0NzU4ZDZiYjk3Y2RlYzBmNGRiYzlmNTZjNTBkNjc2NDNhY2I0ZTc4NzZlNmZhZWI0MjhhNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAxZjJlYzE3NTkzYzEwNTRlYjQ2MzY3ZDg0NTNlZjI0YTE3M2NlOTZiNzExN2Q5MWY5YTY4ZDQ0ZmVmOGIwMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5cf721a86ed04057b3a991c1d23a1a6e",
+      "statement": "A Campaign Authority Binding is the durable Campaign-scoped association between a locally recognized Principal and its capability bundle/explicit capabilities; imported foreign bindings may be retained as provenance but never become active local grants.",
+      "evidence": [
+        {
+          "resource": "repo://docs/glossary.md#L28-L28",
+          "version": "repo-lines-v1:sha256:b2dbf4e731f3741a82f3ae65193d92a0138a061743830e4bc9712447e4ecea5d:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjJkYmY0ZTczMWYzNzQxYTgyZjNhZTY1MTkzZDkyYTAxMzhhMDYxNzQzODMwZTRiYzk3MTI0NDdlNGVjZWE1ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjJkYmY0ZTczMWYzNzQxYTgyZjNhZTY1MTkzZDkyYTAxMzhhMDYxNzQzODMwZTRiYzk3MTI0NDdlNGVjZWE1ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGE1NGQ4MjU0MTQ3YzZkODA3ODYzNjA1ZjJhNDAyZGI4ZmQ2YzNjMTYwNWQyMDQzYmQ1ZjkxNzI2OGM4MTI5ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGQzOWYyNDc3MjljMTM5ODRlYzRjMTExNTc2NzRlNmJmOWY0ZmE0ZTdiOTEwYjA3NDg4NTlhZjQwYjllOWI3YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d96a0223332b48d28a8c9ea2744c89e1",
+      "statement": "Capability-Based Access Control (CBAC) authorizes based on explicit capabilities required by an operation rather than hardcoded role names, and in this project Role-Based Access Control (RBAC) roles assign capability bundles but checks still resolve through CBAC.",
+      "evidence": [
+        {
+          "resource": "repo://docs/glossary.md#L34-L34",
+          "version": "repo-lines-v1:sha256:c6cf1873fbfbac508b06ea079a32ec6c3b4cd9ebb5f12c540e040fa849cc9914:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzZjZjE4NzNmYmZiYWM1MDhiMDZlYTA3OWEzMmVjNmMzYjRjZDllYmI1ZjEyYzU0MGUwNDBmYTg0OWNjOTkxNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzZjZjE4NzNmYmZiYWM1MDhiMDZlYTA3OWEzMmVjNmMzYjRjZDllYmI1ZjEyYzU0MGUwNDBmYTg0OWNjOTkxNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDIyYTczMGRjYjkzODM3ZmQ1NmVkNDdlZTVhMTZkZDFiNDBlOWVmOGY3ZDQzZGVlYTUyMTVkZDFiMmMwOWQ5OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGY3NWU3M2I2N2IwNjgzYWIzMzY4M2ExZDlmNDRhZDQ4ZmI5ZmQwYjQ0MWE5NTY3NTUzZDY5MzVlOTVmNmVkZiJ9"
+        },
+        {
+          "resource": "repo://docs/glossary.md#L72-L72",
+          "version": "repo-lines-v1:sha256:79e954f19de780ab4489101acda0319d1f0e3ce0df7db1962703e13b133e4ff0:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzllOTU0ZjE5ZGU3ODBhYjQ0ODkxMDFhY2RhMDMxOWQxZjBlM2NlMGRmN2RiMTk2MjcwM2UxM2IxMzNlNGZmMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzllOTU0ZjE5ZGU3ODBhYjQ0ODkxMDFhY2RhMDMxOWQxZjBlM2NlMGRmN2RiMTk2MjcwM2UxM2IxMzNlNGZmMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTNhYTk1YTBmYTlhYWQ2NGM5MjVlNDkwZDU4ZDhkOTExZTBhMzg0MGJiNDZjZDk2NmRiNGNkZTY2NGE3NDc1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2M1YTlmZjk5YjZmYjk1YTEyMTliNTc3N2M3OGI4NGIyNDhlYTJlNjM5NzEzMjJiMTc3MDMyYjdhY2E5OTQyZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_dd1d9c271ac84444abbb193766d2ffe7",
+      "statement": "Undo does not rewrite campaign history and is distinct from Retcon, which appends provenance-preserving correction history rather than rewriting prior Events.",
+      "evidence": [
+        {
+          "resource": "repo://docs/glossary.md#L71-L71",
+          "version": "repo-lines-v1:sha256:2e540c08081b75a2c7cdb8ede6cbff492298f959344072fe1878c697d65a6bb2:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmU1NDBjMDgwODFiNzVhMmM3Y2RiOGVkZTZjYmZmNDkyMjk4Zjk1OTM0NDA3MmZlMTg3OGM2OTdkNjVhNmJiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmU1NDBjMDgwODFiNzVhMmM3Y2RiOGVkZTZjYmZmNDkyMjk4Zjk1OTM0NDA3MmZlMTg3OGM2OTdkNjVhNmJiMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmU2ZWVlYjlmOGM0ZGE2MTVkMzZmN2JkY2M4ODkyOTVhZDFmNzM1MGYxYzAyNTZjZjE3ZTUwNWI2OWQ5ZTAwOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTQ2MTE1OTk4ZTc4M2RmYjU0MTlkMzUyZTMzMjMwNDIzNDlkZmJmMjEzZjAyZmRhZDg0YThiZmM4MzJmMDM1OSJ9"
+        },
+        {
+          "resource": "repo://docs/glossary.md#L80-L80",
+          "version": "repo-lines-v1:sha256:5ecc21fd3a3e9bbe466848caab655875157d3d290ced0bc6a83b70542c3ce819:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWVjYzIxZmQzYTNlOWJiZTQ2Njg0OGNhYWI2NTU4NzUxNTdkM2QyOTBjZWQwYmM2YTgzYjcwNTQyYzNjZTgxOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWVjYzIxZmQzYTNlOWJiZTQ2Njg0OGNhYWI2NTU4NzUxNTdkM2QyOTBjZWQwYmM2YTgzYjcwNTQyYzNjZTgxOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWNjZTNlZGY2OTVkNmRkYmJhODRmZTA3ZjNkYWEwY2E5ZDgwNWZhYzE2NGFmZTA3YTQ0OTdkODc4OWIyNjkxOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjIyMzM4ZDhjOWE1NzJhNjM0YzM4MzY2MTFhMmI5YjMzOGVjY2IxNmY5NzZhMTYzOTRhOTQ4NDU0NGY1ZGRlYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3e93124ee3b9464680e6111f54ef2707",
+      "statement": "A Virtual Tabletop (VTT) is a play-surface application category that may consume Campistoria engine contracts, but the Campistoria Engine is explicitly not itself a VTT.",
+      "evidence": [
+        {
+          "resource": "repo://docs/glossary.md#L83-L83",
+          "version": "repo-lines-v1:sha256:b657cf7cc671b546d112d317edcaf429e91cdbdb66212bd73ae9814a7e76bf30:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjY1N2NmN2NjNjcxYjU0NmQxMTJkMzE3ZWRjYWY0MjllOTFjZGJkYjY2MjEyYmQ3M2FlOTgxNGE3ZTc2YmYzMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjY1N2NmN2NjNjcxYjU0NmQxMTJkMzE3ZWRjYWY0MjllOTFjZGJkYjY2MjEyYmQ3M2FlOTgxNGE3ZTc2YmYzMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmNlYTkzYmI2ZWFkYmE1NzFkMzMzMGUyMDE1MDRkNWE3MjE3N2Q1MDExYmU4N2QxZmE4MGMxOGY0NDRhZmViMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.2",
+    "at": "2026-09-17T22:44:59.369Z"
+  }
+}

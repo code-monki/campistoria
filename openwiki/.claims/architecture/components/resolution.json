@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:919837f5724c4b9e3cdac4dc2bf48b821c704ceb040a3f63616f7cee3772e0db",
+  "claims": [
+    {
+      "id": "claim_cc3fe0f83e7544688b9f5bb253c60cf1",
+      "statement": "HLA-RESOLUTION uses Command for Resolution actions (satisfying auditable, sourced, undoable semantics per FR-034/NFR-006, with Strategy rejected as not carrying that undo semantics) plus a single engine-owned generic Adapter for Oracle normalization; per-Package bespoke Oracle Adapters were rejected on 2026-09-09 in favor of one shared contract.",
+      "evidence": [
+        {
+          "resource": "repo://docs/architecture/engine-hla.md#L188-L189",
+          "version": "repo-lines-v1:sha256:d5b94e9dd8581005cd3b7c3bffbb0ad2b1289ed90afa046a3ee463b9bb1eb334:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWI3Y2I3NzZiYjQyY2I2ZjVlYzg2NTRjNTQyNDZhNjIyNTYwNzJiYjM4ZWJjMzdhY2Q2MTAwYzAxNDEzODRkNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODIyY2I1ZDU2NzQyYjVmYzNiM2MyMmEyYTEyYzg2ZjdkZWNlODA4Y2Y5YzJlMDNhZGExYWY2YzFlZjk2ZGU2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGM1ZWJjNjBkYWFhYjI5ZTc3NGQ2NDgyOWJkMzk5ZDE1NWJjZTMwMjU2NjBkMTcwYmMwOTk2OWYyMGRjNGZmOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzk2Mzg4YjJjYzg4MmJjYjkyYzI1MTY5NWMyMGZmODQyNGQ1MWFkODI4ZWRmZmQ4ZGFkNmM3ZGIxNDM3N2UxNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b719e0b0db9348a7b19da3cd892bc7f5",
+      "statement": "HLA-RESOLUTION is internally decomposed into seven modules (UnresolvedStateRegistry, ResolutionCommandFactory, ResolutionSourceNormalizer, OracleAdapter, OracleResultAcceptor, ResolutionApplier, UndoDescriptorBuilder) each with defined persistent authority.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-resolution-dd.md#L149-L155",
+          "version": "repo-lines-v1:sha256:5ab4944c16e0b3e242e07be4caada29b61cb1b3614538e80a5c86bd586412519:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWIyNDUzNWZmMTNiMzI0Y2U4YTgxOWM4ZWE0NzVmMzRkMTRhM2YxMjg4NGQxZGZmYTliNDU5NDc4MWE4ODlhNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2Q0MzNhZDI0ZGUyZWY4ZTQ1NTUzMDA3M2I1ZmNlM2JmYWE1Njc5NjJlMGI4OWMwMWYwMmIxNjM2OTkzOTk0NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDg2Y2ExZmZmYzMxZGY2YjRjZmQxZTJlZjQ1NmNkMDRlNDEyMzc5ODEyOGQ0YWQ4MjcxNWI2ZDhiNGYyMTFlOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjFhYWE5ZjczZTY4ZGI2ZDkzZDAwZTg0NGMyMzJiZGNhZGFkYmYyNjM4ODA4MWE2ZWEyNmViMWFjMTQ3ZjM3MiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_62b93f762b67478baea5e88ef6661ca6",
+      "statement": "HLA-RESOLUTION is the only component that writes resolved Campaign Reality changes to HLA-CORE after Campaign instantiation; any path that lets probabilistic output bypass Adapter -> Validate -> Resolution Command -> HLA-CORE is a deterministic/probabilistic boundary failure.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-resolution-dd.md#L92-L100",
+          "version": "repo-lines-v1:sha256:719ca305cf93d0521c495f0da7832e521049fb5e1f5b57ec31f6c9eeb30a0afd:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmI2MWY2MmNiNWZmY2MwNGM5NGI2YzA1ZDY5YTY5ZDNhYjE1ZmMxYjRiMWNlYzQxN2NhYWE1NTQ4NDAxNGY4MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWVlMDUzOTkwZTNlOGY3NDg0N2RlY2UzYzg4ZDFmYTA4ZDU3NGEyMDFhMjg5NzBhNDE3YzY2NTE4NWVhYzcwMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTcyOWM2MzFhYmE4MjA5NzNmMjM0YmM2ZWFlYzY2YWZjZTI3YjI3NzNjYjZhOWZlZGNmZTY3M2EzY2I5YWM2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAxZjJlYzE3NTkzYzEwNTRlYjQ2MzY3ZDg0NTNlZjI0YTE3M2NlOTZiNzExN2Q5MWY5YTY4ZDQ0ZmVmOGIwMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b4ecf65212f64e178f7f4b517e000e4e",
+      "statement": "For every applied Resolution Command, HLA-RESOLUTION produces a reference-based UndoDescriptor but never executes Undo itself; declareUnresolved is internal-only and not exposed as a public HLA-CONTRACT operation.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-resolution-dd.md#L209-L226",
+          "version": "repo-lines-v1:sha256:687bdfe60d965d4f5992e8da3ff4c0e4767b094faf414b0774f8e5036e18cfb9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkNzRmZTY1NmY3MjQ0ZWEzMDFkNjFjZjc2M2Y2YTBmNTc4OTdlZjc0MTgxOGJlNGE5OGY3OWQ5NTAzYmIwNjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YzA2YzU2MWQ1YzMyNzM0MzY4NTI2OGE0NmIzMzkxZjM5OThlZWU4OTBkMmJlNTFmMGQyMWNjNGE1M2FlNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4MDkxOGFjNjQzMDcwNDAzMDA0MzI3OGFiYjE2NzAwMWM2ODM0M2ZjNWEzYWRmN2Y4MmI2MTY5NTI5Yjg0YWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU3NTE5MWI2MmMxOGQyNWEyMzcyZDAyNGI2MmEzZjJjZDA5ZjNiOGFjZGQ2YjMzZmYzNDM2YTgxZGQ3NWJhNzcifQ"
+        },
+        {
+          "resource": "repo://docs/design/components/hla-resolution-dd.md#L263-L263",
+          "version": "repo-lines-v1:sha256:35f07299f8796d0a41c271dd0acae187ca5b149da8d739b05e353236984f2127:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzVmMDcyOTlmODc5NmQwYTQxYzI3MWRkMGFjYWUxODdjYTViMTQ5ZGE4ZDczOWIwNWUzNTMyMzY5ODRmMjEyNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzVmMDcyOTlmODc5NmQwYTQxYzI3MWRkMGFjYWUxODdjYTViMTQ5ZGE4ZDczOWIwNWUzNTMyMzY5ODRmMjEyNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWJlOThhMzRjZDdlNzgxMjVmY2U4ZDJjMWIyZjVhMDdhOTdhZjc0YjE1Mjk3YmE1ZTdhNDIzZTk0MjhiZTUzYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWY1OGZhNDgwOGIyZjUyNjVhZDBkMDFlYmI5YzMzZjkzODBiYzY3M2M0OTFjYThlYmExZTNlMjk3ZDgyYWEyZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6c8b9e5daf30479aa12c7468e8040b85",
+      "statement": "The Oracle Adapter provides an invocation-specific random context derived from the Campaign seed plus invocation data rather than reusing the raw seed, and validation of an Oracle result is eligibility only, not acceptance into Campaign Reality.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-resolution-dd.md#L371-L373",
+          "version": "repo-lines-v1:sha256:a26ec815dd2a707d27e59fa856ead551ce0424e36b4c4407d3d8a8d91e4895e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDU1ZDA3ZTkxNDRiNTkwNjdkMzNlM2Y0N2Q2OWFmMmRhYWJhOTEzZWQ2M2EzYjFhMjRlNWIyMjEzNzMzNDAxZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTE3MzdkMWEzYTg1MzZiZmQ2ZTU3MDFhZjFjZTI0MGQwZmIyYjcxMDJiZGIwY2ExZDY3NGFhMTk0ZDgyM2M4NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjlmMWU5ZmU3ZmVjMmFhZTcwYTNkNmMxNzkwOTlhOWMyMDViYmVjZDkwMTMxNjcxNWM0OGM3ZDkxMWMyMjA0MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTdkYWYzYTg2OTJkNWEzZDJkN2Q3ZjYwZmYzYzU5OTYwMWQ0YmYxYTU5ZGVmOTk4NThkZTFkZTA3MmRiNTQ0YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_81ad679f5edb4271ac6e607a19b0bf4a",
+      "statement": "A validated Oracle result becomes eligible Resolution input only; explicit human/GM acceptance is required before a Resolution Command can reference it, and Campaign Reality still requires a built and applied Resolution Command to actually change.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-resolution-dd.md#L407-L409",
+          "version": "repo-lines-v1:sha256:8ea9efdfba28dff0bc2afbae616f626942c9b313e2cc36d93b4f72c96be4e41a:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTk3ZGUyMDc1NDhhOWJlMDNmMTdlMDJlM2E4YjhmNjlhMTRhNTRmMTg2NGQyN2FiNDNlNzM2NDUwNWVjODA5YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTZkMTQ4MTU5NDZhNGFiNWMzMzMzNGNlNmQ4Zjg1MjQ4YTNjM2JlNDAyOTdjOTIzOTEyZTQ2YTFiN2YzNTMxYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzk5ZjdhMTZjYjViMGViZWM3YTY3NmEwNjQ1Yjg3YTA5YjA3MzYwYWY2MzVlNDI1ZDg5OTk0Mzg0NTNmYWQ4NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZThhYTQwYTM3ZDdjYmQzZjlmYTgyZTcyOTQ1YmQ2MTFkZTRlMWE0MjUzNWFlZTZlZDRkODkyYjdhMzkzYTliZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5429149d85d047bb91d10e677cf8e1e2",
+      "statement": "Oracle invocation failure or Oracle result validation failure both produce a leftUnresolved outcome with no fallback value; HLA-RESOLUTION never guesses, synthesizes, or defaults an answer.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-resolution-dd.md#L127-L127",
+          "version": "repo-lines-v1:sha256:087732b1e2cb63655e23770857ad572a0553df5fc4a3c08a3895f23a619b3dd0:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDg3NzMyYjFlMmNiNjM2NTVlMjM3NzA4NTdhZDU3MmEwNTUzZGY1ZmM0YTNjMDhhMzg5NWYyM2E2MTliM2RkMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDg3NzMyYjFlMmNiNjM2NTVlMjM3NzA4NTdhZDU3MmEwNTUzZGY1ZmM0YTNjMDhhMzg5NWYyM2E2MTliM2RkMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTYxN2NkZmY3MWYwNjZiMTg2MmFmZjIyMTJkZWU4YTU3YTNiY2M4OGM5ZTZkNTA1Yzc4MzNjODljNTM5NmNiMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTNjYmUwNTRhMDIzMjVhZWJiN2E4NDk0Yzc4MjM3NjNjNGExMmYwOTM1MGJlZDA5ZjAxOTNiYzZkNzE4ZDdiNyJ9"
+        },
+        {
+          "resource": "repo://docs/design/components/hla-resolution-dd.md#L453-L454",
+          "version": "repo-lines-v1:sha256:05500bf796a747d06dbe9d9d6127251fa620e06656aff5e349cc474e319b9463:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjY5YmZjOWNiZjhmNmU3MjhhMTY5NTM0MjE1MWRiZTM2NjdhYjJhNjJjMjQyN2I0YWNhZmExYzBlMmU0YzgyYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODBhMGI1YzU4NjE3ZWM0ZDQ0MGFhMTRhOTdlN2ZkYzFiM2UxMmIxZjI1Y2E0MzFlMjdlZjA4NGMwMDNkZGZiZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjY2MzM0YTk1NjczNzQ2Mzk0ZWI3YmRhMWQwMjhiZjU2MTE1NWE4MzIxNTNkMmM4M2EyMjA4YTVmOTAyYzM2MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDY2ZDlmMzM5MmY2N2U1MGNiYWU3ZWRmMzZiYjRmZDI0NGFmNzYxMjYyMjYzYTJiMDJlYTAzNThjNjMxN2Q5YyJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.2",
+    "at": "2026-09-17T22:44:59.369Z"
+  }
+}

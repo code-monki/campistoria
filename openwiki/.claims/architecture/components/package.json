@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:236c2d08d356691f5f9d6981789e85d6ce9c86f028f050e005ca34889a61f23d",
+  "claims": [
+    {
+      "id": "claim_b98873afff0d48b0b99be978b837db09",
+      "statement": "HLA-PACKAGE combines Microkernel (subsystem level, since Packages are plugins against a fixed core contract) with Builder (composition-process level, for multi-step assembly of the Effective Campaign Definition); Prototype was rejected because there is no existing ECD to clone from scratch, and a plain conflict-resolution Strategy was rejected because FR-021 requires conflicts to fail loudly rather than silently pick a winner.",
+      "evidence": [
+        {
+          "resource": "repo://docs/architecture/engine-hla.md#L209-L211",
+          "version": "repo-lines-v1:sha256:8cfd8d94767d3f0b152c04e56a7f0d0e63ee77b01ff7d2de3048e3086146b4ff:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjZhNTY5MDY1YjY4MWU1NGE4ZjBjYTUxZGYyN2JhMjg1NTUyM2QwNDljN2IzOWFlYTc3ODJlYjgyOWM4YzZiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTFiMGUwZDRmMDc0NjQ2Zjc1OWFiNzFmZTlhZGY3ZTdkZjFkNGFjNGU1MWM1ZWM3MWJjOTIwNDJlMDEzN2U1OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTRlODg2Mjk1Yjc0ZWI4YzRiZWNiMjRmNDI0ODE1YWNlMGM3YWNiNWFkYTk4OTg1MTBlMWNhNTA3MTVhZDhhZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjkxMjE3OTUwMWIwNzdkMzM1N2I1MmQzMzdlOGZmMjQ1MzM3ZjIwZWQ0N2JlMzY3OWYwZWY1OGVkN2M0MTM2NCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6ba588f8296443a492263ff2cd42059c",
+      "statement": "HLA-PACKAGE is internally decomposed into nine units (PackageRegistry, DependencyResolver, CompositionBuilder, ConflictDetector, PinManager, MigrationPlanner, RemovalGuard, SemanticReferenceCatalog, PackageContractProvider) each with an explicit boundary.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-package-dd.md#L151-L161",
+          "version": "repo-lines-v1:sha256:92ee5f14336014b02e88a71220760e69369559058d30fdb6c8ffb3e98940a4b9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5OTg3NDJiMDY5NzViOTRiYzA2ODRiMjIzNWFmNzQzNTRhMGE4Mzk5YmI1ZGYxNTU2YzI2YzA4MjM1ZjU1YWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxZDkzM2Y5NjU5NDFlNjAxYzY3NTkwZWU1MzVkYmFkYjQ5NGZlM2JjMzllZjc4MmM4MmMyN2Q5MWQxMmEwZWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MjMwNGZlNjNlMWRhNjc0ZDYyODY5OTdlMWU0YWJmZjM4NGZjMWYxMTAxOTZjMTdlYThkMTUyMjEwMTU0MjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE3YWVmMmJhY2YxYzA1YjcwNTU0MGM0YWViOGQ5NDg2NmJlY2YwOGRjYjFkNGM3MmUwMWE4Y2Q1NjkyNTVmNzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8d4baf458e36400fbd5e1bddc6f3ef1c",
+      "statement": "Composition follows a fixed nine-step order ending in submission to HLA-VALIDATE; Extension (adds/specializes without replacing) and Override (deliberately replaces, must name its target) are distinct and HLA-PACKAGE never infers an override from name collision, load order, priority, or match order.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-package-dd.md#L238-L255",
+          "version": "repo-lines-v1:sha256:0d8e4365189fb0c834f2ec76455c873bb34393d5f6bfad3af81bda7c974a5404:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5ZTVlNmVkMTk3NDRiZGM3N2M2OTExYTI3OTQ3OTZjYmQzNTUwN2RjZTZjMjIyYjM2ZTdkZTQ5OTUwNjMxMjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxMDZjZDAzNjY2Yzg3ZDViNGJjNzY1MzgxOTM0ZTQ2MzI4YjE5ZWRkNjNiZTlkZTA0YjZmNjhlZjgwODg2MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5NGViNmUxOGQwNGNlNmE3ODAxZjA0NTdhMTUzZDg4NjYxMTI4MjUyZjQzZmQ0OWJkMzIzMzliMzdhOTc3MjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMWYyZWMxNzU5M2MxMDU0ZWI0NjM2N2Q4NDUzZWYyNGExNzNjZTk2YjcxMTdkOTFmOWE2OGQ0NGZlZjhiMDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bc6c2c0c458947c28e3278142528f183",
+      "statement": "The Effective Campaign Definition never becomes Campaign Reality by itself, never mutates a running Campaign outside the lifecycle/migration flow, and never hides unresolved composition conflicts; a CompositionPin records the exact package set and composition context so new Package version registrations never silently affect an existing Campaign's pin.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-package-dd.md#L287-L301",
+          "version": "repo-lines-v1:sha256:c40974e50ebec6a17b00bf06a56d8d1a13bbd626d7deaf1b93db8462f668c49e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ1ZmM0OWQxNzM4NjAyOTUxZWZiNjA2ZTk0NzUxY2IwMmE5NGQ0N2FiMDQ4MjY0M2Y3NTZiM2NhNDExYzAyYWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4MDkxOGFjNjQzMDcwNDAzMDA0MzI3OGFiYjE2NzAwMWM2ODM0M2ZjNWEzYWRmN2Y4MmI2MTY5NTI5Yjg0YWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2MWZhZDMwZjdjYzkzOTEwYmY1ZTViZDc1YTRmOThlNzhmNzkwNjYwODNhYmFmMjMxNGZmZmY2N2NiZDg5NDAifQ"
+        },
+        {
+          "resource": "repo://docs/design/components/hla-package-dd.md#L342-L363",
+          "version": "repo-lines-v1:sha256:795572f2f76d1bb00e6e4e4df70a78eb496f85f8f39b65ad4153e7d5b3e52b8e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyYzc5NzFjNjBlMGZmY2Q2OGJhMjA4NjBhYjA1NzE3NWRjMDNlYWQ4MTM2OTllY2YzMGU3MmQxZGI3Y2FlYTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4ODQ3Yzc3ZWM5NzE1MDY4MzM0ODczYTc1NGJhMWQyN2VlNTE4MTU2YzBmZGQ2ZmUxYTc5MjE1Mjk0ODg1MTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViODZiY2ZkNzM2ZDRhNGQ5ZTA0ZWQ2ODE0ZTU0OWExYzAyMmY3NmE3YTYxMjg1MTlhODM0MDk1MGUxOWE0NzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUxMDA3YmVkNjY2MWU5NWFiOGRmYzBkZjBiODdkMmE5YWUxMTQ0MGY3ZTRmOTQ0OTIwNmE4MzAyMTNjOTljN2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_97666c2b57914adb93923b68fc065145",
+      "statement": "HLA-CORE Events retain stable PackageSemanticRef values rather than full Package definitions; HLA-PACKAGE owns interpreting those references against a Campaign's pinned Effective Campaign Definition, and forced Package removal may degrade semantic interpretation but never corrupts HLA-CORE Event history.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-package-dd.md#L309-L365",
+          "version": "repo-lines-v1:sha256:d9710de354a699af65c1bf9525268aae547d4ebbe783c791da82742f98891657:eyJzZWxlY3RlZExpbmVDb3VudCI6NTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmY2MxMWVhYzUyY2M3ZWMwZTYxZGZjNDI0MzFiZmNkZWNhM2UxYTI1YjljYTEyYmYxYzU3NDNlZDNjMjYxMGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhYzNlMzg4MmUzZmI5MGJlMmVkNjk5NjhjZjkyZDUxNjhiNmYxZTliZTQ2ZTI3ZjQ4NDVmMjZmOTkzMzBlMWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViN2FlMTUzZjk5NDNlOGRmNWI3ZjMwZTJmOGNiMzJmMGVkODUwZjY4ZWQ4MmM5Y2Q0YjY4NGY2OTUzZGU4MDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMWYyZWMxNzU5M2MxMDU0ZWI0NjM2N2Q4NDUzZWYyNGExNzNjZTk2YjcxMTdkOTFmOWE2OGQ0NGZlZjhiMDEifQ"
+        },
+        {
+          "resource": "repo://docs/design/components/hla-package-dd.md#L407-L407",
+          "version": "repo-lines-v1:sha256:f91e79c2d8b8e74b2aee836d6d520410798dc67529b6fcf7d80ed7dbdcdf31c1:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjkxZTc5YzJkOGI4ZTc0YjJhZWU4MzZkNmQ1MjA0MTA3OThkYzY3NTI5YjZmY2Y3ZDgwZWQ3ZGJkY2RmMzFjMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjkxZTc5YzJkOGI4ZTc0YjJhZWU4MzZkNmQ1MjA0MTA3OThkYzY3NTI5YjZmY2Y3ZDgwZWQ3ZGJkY2RmMzFjMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGU2NWEwYWNhOWQ1ZGYzZDhlMGI0OWU1NDZlOTA2MzgxMDczNzYwNWQ3ODAxNmRhMjAxNGFkNDlkNjg2ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAxZjJlYzE3NTkzYzEwNTRlYjQ2MzY3ZDg0NTNlZjI0YTE3M2NlOTZiNzExN2Q5MWY5YTY4ZDQ0ZmVmOGIwMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b4a32ba49d16401086f11620e01e98bb",
+      "statement": "Package migration is explicit and atomic: a MigrationPlan is submitted to HLA-VALIDATE and either applies atomically or leaves the previous composition pin fully intact with no mixed composition state; HLA-PACKAGE owns migration planning only and never appends Campaign Reality Events directly.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-package-dd.md#L390-L400",
+          "version": "repo-lines-v1:sha256:0266fc69d5704634071243c2bda64c5fc25b55206549c52d10c56c059460e276:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyMzE2YzVjZWE2ZDUwNTc2MTMyMmM1ODFiOGQ2MTUxMTI3MGQzMGZkMTNjNWIxZWM3ZjliOWI0NTdkYTg5N2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkN2QwMDE0NTNmOGFmYTQ0OWRkNDU4ZDRmZTRlOGI5ZDYyNWY2M2E1YTgwNzNmY2E1YWI4MjIzNjcyMWRlMzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4MDkxOGFjNjQzMDcwNDAzMDA0MzI3OGFiYjE2NzAwMWM2ODM0M2ZjNWEzYWRmN2Y4MmI2MTY5NTI5Yjg0YWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiYTMzODMxYWZkMWUwZjVlZmUyYTY3NTRhNGNlMjE5NjgwNzUzNGUwYzQ4ZjJhOTRkN2QzZGE1OTIzNDhkMjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9dcaf045ca7d47f9bcebc09d19c1bf1b",
+      "statement": "Package removal is dependency-aware: a referenced Package version is not removed by default while any Campaign or archive references it, and forced removal requires explicit HLA-CONTRACT-authorized acknowledgement and never deletes HLA-CORE Event history.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-package-dd.md#L402-L407",
+          "version": "repo-lines-v1:sha256:e8deb7758dcac4d3fd1345987eaa2731139e26352ade847c004253f8e07e4d93:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTlmZTMxMTY0OTlmNmMwNWNmMDMzMzg5YTJkNzA4NTY4NmQ3OGEwM2YwYzExMTgxNThmZGVkOWU1ZjM3YmZjMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjkxZTc5YzJkOGI4ZTc0YjJhZWU4MzZkNmQ1MjA0MTA3OThkYzY3NTI5YjZmY2Y3ZDgwZWQ3ZGJkY2RmMzFjMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzZmZmIxMzVhMmEyZTQwOTE2ZGM0ODUwYWY5OTlkOWY3ZTk0Y2ZkYzA0ZWNkODAyMDJhMzgwNmQ2Njg2YTY0MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAxZjJlYzE3NTkzYzEwNTRlYjQ2MzY3ZDg0NTNlZjI0YTE3M2NlOTZiNzExN2Q5MWY5YTY4ZDQ0ZmVmOGIwMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7527c867f2404cf6826bc2c698260d8c",
+      "statement": "HLA-PACKAGE invokes HLA-VALIDATE for package artifacts before registration, composed Effective Campaign Definitions before instantiation/migration use, and migration plans before application; package-contributed validators remain declarative contracts and HLA-PACKAGE never executes package-supplied validator code.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-package-dd.md#L441-L461",
+          "version": "repo-lines-v1:sha256:a90f2ddd7356b6913c3ea380b526487e4bee97cfbddfbcbfe56f86fd7f1e7328:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY0OWZlZGRkZjUxNTU3NzBlMGZjM2Q2MjRhMWVhNDBmZjQ3MjMwZTE1ZTVlNzNmNzViOTJkNjY0ZTNmMWYxZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0ZWQxOTg3NTQyZDI5NzdlNzNjYzI1Yzc3NTliMTdjOWI5Y2U0MGQ3ZDE5NjM4MWM3M2MxOWI5YjJkNjFjM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViN2FlMTUzZjk5NDNlOGRmNWI3ZjMwZTJmOGNiMzJmMGVkODUwZjY4ZWQ4MmM5Y2Q0YjY4NGY2OTUzZGU4MDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMWYyZWMxNzU5M2MxMDU0ZWI0NjM2N2Q4NDUzZWYyNGExNzNjZTk2YjcxMTdkOTFmOWE2OGQ0NGZlZjhiMDEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.2",
+    "at": "2026-09-17T22:44:59.369Z"
+  }
+}

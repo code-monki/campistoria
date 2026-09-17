@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:0ecdc5ad16ee99817ebeb8f67a53441e05d47f6007bdcc9dbdf2a3fff396a01a",
+  "claims": [
+    {
+      "id": "claim_007f490e86bd47209b41d857e5ab38fc",
+      "statement": "The repository's engine/, clients/reference/, specifications/campaign/, specifications/package/, packages/samples/, and tests/ directories are currently empty and not tracked by Git, reserved for future lifecycle phases per README's repository-structure section.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L120-L141",
+          "version": "repo-lines-v1:sha256:26f3a52908a1d2b1590b8e73a4be17e5d2e80a413775cf40e629ff93b2ef810b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRmYjI5MGQ5ZmRmYjdmMjRiZTI5ZTM3Mjg3OGZmYWRiNDQyNDljM2QxYzM4MTM1MTU1M2VjNDNlMmJhZjViZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YzA2YzU2MWQ1YzMyNzM0MzY4NTI2OGE0NmIzMzkxZjM5OThlZWU4OTBkMmJlNTFmMGQyMWNjNGE1M2FlNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVmMzBlOTcyZjE3MzNjYTFiNDYyMmI4YTBmNTAzZGQ0MzBkOTUzN2ZjZWY2OTJjNjBjNjBhYjllMzJmNDlhYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc2MTQyNWM1M2MxZDMwYTc1OTFjN2ZiMjIwNGMyZjUyMGEzNmJjOTFjOGMxNWI3ODI4NThmMDhhNmNiMDkzNWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_951001211feb4cbc905d1bee67c6362f",
+      "statement": "AGENTS.md requires running tools/validate-svg-xml.py to validate exported SVG diagrams under docs/assets/diagrams/ as strict XML before staging or committing, because Markdown previewers can show a broken-image icon for XML errors even when the source HTML diagram renders correctly.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md#L36-L44",
+          "version": "repo-lines-v1:sha256:a23078026416f9c33c5896230f7ca06ec3c01a577b3bd726b41056607bac812c:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDRhMzlmYTBkMThiYjA4MTcxNWExMmZkODg5NTViZTkwMWM2NDlhMGVhNDU1NDQ1MWY1OTZmZmUxMWIxZWVhZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2UyMWE0OGVjZjZlNGEyYjg5ZmNkY2EzZGYxMzc3ZThlODk1MDBjNmUxMDU2ZmRjNmVjOWU4MzE5ZDFhZDhiYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmExN2ZkYjIxYTNkOTMwMjZhMmUyODFmMDBiM2ZiOTc0OGFiMTU1NTFjNjlmYzI3MzYyZGQzYWZiMDQzNmMzMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDJhNzFkMWViZDZiYzJlZTE3MjFiNmU5MzMxZTc0YTc2NTk1MzU1NWZhZTI5MWJlYjBkOGE4ODY3NDg5NTkyOSJ9"
+        },
+        {
+          "resource": "repo://tools/validate-svg-xml.py#L1-L41",
+          "version": "repo-lines-v1:sha256:2d584c7ed72bda8c985cb272bd78a1fac9841c1d6394852ba59a31a2247931e9:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ2ODJjYmRiNGM4YjA3NTE4YmY0ODZjNTg5OTBmYzM5MTc4M2FhMjBhOTE2YmZiMjdhZDIxMWViMWQ1YzM2NDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiNjRlOTIwMDBhMTljYTM4NTkzYTRlNmEwYmFjNzcwOTZkMWU5ODY5NDlhM2I2MjgyNmI3Y2VhNGY3M2Q5ZTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1ff214595a434f5783dfa89656562502",
+      "statement": "tools/validate-svg-xml.py defaults to validating docs/assets/diagrams/*.svg via xml.etree.ElementTree, printing OK or FAIL per file and returning a non-zero exit code if any file fails to parse.",
+      "evidence": [
+        {
+          "resource": "repo://tools/validate-svg-xml.py#L11-L37",
+          "version": "repo-lines-v1:sha256:995de4243ca2fc9a18d59fe7005ba38315b9ea4524cccc99e9aa64fcbc821951:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyYmIyZWQwMTAwOGY4NTU4Zjg3YWVlMjIyZWMxYTA4MmJlOTk4OTI5NTk5ZWVjZWY0NjM0NDdlMmRkNThlMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4ZmVjMGE3MmZiOGU0M2JmOTc1N2YwZjRiNWVlMDIwY2QwNDA0MDc1ZDVhZDI3YmEzZmQ2Y2FjNjQ2YTg5ZTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ1ODNjOWE3YjUyODNjZDllOTk3MzVjMDVmZGYyMTc1MzY2ZjA5MmJiYjBmMDI1MWI2MjNjZjEyZjA5MWI1YWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_46c97721dd494d04913df8eb811e4315",
+      "statement": "The repository's .mcp.json configures a single MCP server named openwiki, launched as 'openwiki mcp --host claude'.",
+      "evidence": [
+        {
+          "resource": "repo://.mcp.json#L1-L12",
+          "version": "repo-lines-v1:sha256:1217fe8aff83c5e31c83d562c6e21d66cc6745e870d49c737cf8a32df7c39ef3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.2",
+    "at": "2026-09-17T22:44:59.369Z"
+  }
+}

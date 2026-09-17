@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:df5b85b4e0a55b294573fa3bd8460d5e25ebf75b57ff85ac50180b3c5c50bae4",
+  "claims": [
+    {
+      "id": "claim_20d5e13cab2744668738c080c588e9fb",
+      "statement": "HLA-PERSIST applies the Adapter pattern layered over the Event Sourcing store in HLA-CORE/HLA-OBSERVER rather than a separate persistence-specific data model, because a second representation purely for persistence would reintroduce the drift risk Event Sourcing was chosen to avoid.",
+      "evidence": [
+        {
+          "resource": "repo://docs/architecture/engine-hla.md#L231-L233",
+          "version": "repo-lines-v1:sha256:6dc1d1b9639ac46f13c32fc4342d82c8b0a66aafc4ba609f4fa84922a19c1831:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU1OTE0NzM5MDg4YjlmYzRhYWMyOGQ0MDZhODRkMTMwYzZjNjk0NmFhODNjMTkwOTE5NzgxYzU3ZDdkZDRmNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWIyNThkZWFlMjNkZTk2ZGQwMDU4ZDljZmMyNzU1YmM1ZTQ3YzQzNmFkYTdhNmY2ZGIwMzlmMTY2OGZjZThjOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmVjNGMyOGY2ZWE1MjM2ZThhMmU0OTQwNDI0NjU0YjQ3ZDhjYmFjMzFiN2EyYWEzMWI2ZjdjNGI4NmIwY2I4MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTIyMjY1NTJjYzFjZGRmNzg3M2ZlZWUxMGY3OGJlMjIyY2M4MzQ3MmY4NzU1MTVjMjMxYmMyNTUyMzQzNWIxYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3efc057f2da44d06b1488fc40a44e89c",
+      "statement": "HLA-PERSIST is internally decomposed into nine modules (PersistenceCoordinator, EventStreamStoreAdapter, SnapshotStoreAdapter, AuthorityBindingStoreAdapter, ExportAssembler, ImportReader, AssetPortabilityManager, ArchiveIndex, ArchiveRetriever) each with a defined persistent authority.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-persist-dd.md#L150-L158",
+          "version": "repo-lines-v1:sha256:524fd6556685696a3037b41e0359dcde122dcf6c6ec15c6811e352e14d45595e:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjQ5MmU0OTlhMDlhMTdhMGRmMjliZTk1NGE3YzYyNDM2M2Q5YWRhYzI5N2NhNzBjZDIxODBhMDI5ODcyODEwZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFhNDYxYTJmM2EzYTM4NDllYTM5NzY5ZjNlNDI1N2I1N2RlYTI0ZGFhNWJiNjFiYTE2NGM3ODhjZjAyMGEyZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDg2Y2ExZmZmYzMxZGY2YjRjZmQxZTJlZjQ1NmNkMDRlNDEyMzc5ODEyOGQ0YWQ4MjcxNWI2ZDhiNGYyMTFlOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjAzYThhOTNmMzcwNWVmOGM2ODZlNmEwODQ5NTNkMTE3NzliYTNmMzkwOGRiNjY3ZWFhNjE3NDIyMjZlNDYwZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1d305a141bf74df086a9379c77ba72bf",
+      "statement": "HLA-PERSIST never becomes authoritative for the data classes it stores; the authoritative owner remains HLA-CORE, HLA-OBSERVER, HLA-PACKAGE, HLA-CONTRACT, or HLA-STATE respectively, and Presentation Models are never persisted as authoritative state at all.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-persist-dd.md#L197-L206",
+          "version": "repo-lines-v1:sha256:2fe9fff68b3de25f4796199dcb6542930059fedc6b5f4a13d3a6a436245cc646:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzM2NhYjFlNWVmOTIwMjhiZDBkMTkzYTM3MTlhNWZiMTEzYmJjOGRhZmMzMjRjMTE5NTZjOTM4OWMyZWQxNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2NjVkOTA3ZmI1NjAwYzA2ODg0ZDQ3NTI1ZDRiNGE1ZTYxMWI0ODhmYjAyZWUxZjliYThjYTllMDM3MjBlNDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFjYzY2NWM5MTFhM2UwNmJmZDQxMzE1MjY4MTRiMTI4NDEyODJlOTYyMzQ2YjhhMzZkZjAzYTY5MWZmYzBiMGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg0ZGUxZDM4NWQ3Mzk2MGM2ZTc0OTcwYTYzNWYwMGMzZDI5ZTliM2I4MzQ2YjIyMzU2NTM1ZWNiNjJkOWUxNDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cecc5ab8336840c7b97ff9f5e41b1b50",
+      "statement": "Campaign import treats artifacts as untrusted input: HLA-VALIDATE must return a strict accept before admission, acceptWithWarnings/reject/indeterminate never admit import data, partial import is prohibited, and a foreign Principal or capability grant in an export never becomes active local authority without HLA-CONTRACT's explicit rebinding step.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-persist-dd.md#L317-L328",
+          "version": "repo-lines-v1:sha256:d0e64dc56755726901a08e65696cd3b497749491f3335f56b744ffe002a76209:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhZTQ5YmQ1OGI3MzAxMzhjMDQxOTY3ZjFmZTkxMzQ4ZmIyOWQ4ODdlY2I4ODY3NTRlM2UxNzRlMWNiMWY5NzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmNGRiYzFiMzRjYzliOGY4MTg2OTJmOTc1MDUzZTEyZWNiMTIwYzBkM2M0MjYxOGUyZWNjMjkxMjBjOWViZjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3MzUyOWMyODJlZjdkZDFmM2Q5YjllMzA3YjQ3MWYzNDJlMjIxYzYwZjhiNDZkNzA3NzcwZTVkYWY1ZGMxNzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMWYyZWMxNzU5M2MxMDU0ZWI0NjM2N2Q4NDUzZWYyNGExNzNjZTk2YjcxMTdkOTFmOWE2OGQ0NGZlZjhiMDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6670a1b7b3d84901b79f1419f5939536",
+      "statement": "Decision DEC-001 underlies the import rebinding rule: exported source-binding identifiers are retained only as non-authoritative provenance, and HLA-PERSIST never decides whether an import request is authorized.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-persist-dd.md#L323-L324",
+          "version": "repo-lines-v1:sha256:949a113021651651d330ea0c7aa6cb7d28be6d35eca04ef3ee4bf4a422c0044e:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODk2ZWQ0ZGRmNzhjZmY1YjUwY2NjNTgwYzBjZjM3NDRjYTU0OGRkMDRhYjU1OGNmNjhjZTU0OTVlNzM3MGUzMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzFjNjc3MGM5MWNmZDRlMDAyMmU0NDc2NGE0MjdmMzlhNGZkODBkYjYzMGE4NTBiMmU3ZmY2M2ZmZDc3ZDk2MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTE4ZGRiNjNlMjE2YTNkZjQ1NWU1MDQzMDQwOTRmNzVkZWFlYjIzYjM0NWI3ZDIwOGMyNmJkZGRhZGZkODQ0NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2Y0Njk5YmNiNGJmZTIxZTU0YjVhNWI3MmEwMjBjYjQwZDNmMjM5NjdkY2RlZjFlYjRjMWQ2YjI2YjQ5YWI1MCJ9"
+        },
+        {
+          "resource": "repo://docs/project/decision-log.md#L13-L21",
+          "version": "repo-lines-v1:sha256:a26221c345bace1dbf769c58e1c41edd136bee6d8e6175dd6883932c49665df2:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2I0MzkwNjQ4YzkxMWViMDRlOGIzYmIwYTgwNWRjNjcxNjZmMmJlZmJjM2I0ZWYyNTY1ZGRkNGM4Y2U5MmVlNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGM2MWNiMmNkNmMwZDIzNWMwZTQwODhjNjM2YzVmMTVlZjg0ZjkzMjhlMDhmODk3YTE2OWNjNzViMjIyNjNiNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDdjYTMwZmFiYWQ5Mzk0NGNlMDNiYjRhMTI2OWY2ZDIwOGM2ZWNlYTI3ZTIxZmRjODBlNmU5YmNhMmVkOWU0OCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_806f9a163d7e41d48947ff9a745cb18e",
+      "statement": "Campaign export fails if any campaignLocal asset referenced by Campaign Reality or Observer Knowledge cannot be included or otherwise guaranteed portable; a degraded export is not a valid Campaign export under FR-032/FR-042 even if a diagnostic packaging audit is produced.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-persist-dd.md#L256-L256",
+          "version": "repo-lines-v1:sha256:c0c8c230ce577de7285fd75a2e82d46ef702544f3d76cba50eaaa98ddc597f5a:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzBjOGMyMzBjZTU3N2RlNzI4NWZkNzVhMmU4MmQ0NmVmNzAyNTQ0ZjNkNzZjYmE1MGVhYWE5OGRkYzU5N2Y1YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzBjOGMyMzBjZTU3N2RlNzI4NWZkNzVhMmU4MmQ0NmVmNzAyNTQ0ZjNkNzZjYmE1MGVhYWE5OGRkYzU5N2Y1YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2ExMGI0ZWE2MDhmZWZiZThiZjlmMTViYTM5YWQwMjM3ZGRjZjM3N2M2Yjc2ODhiODU0ODVhNzgzMjMwZTVhNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzExMGJkZTExOWFhNjJkNTNjNDE4NjU5ZmNhZDg1MWY5MGUyMTQ4ZDIxMzM3ZjVjYTA3OTYyYzFmY2FhMGM0MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_06910624819c4021a6913609003e632d",
+      "statement": "Package-sourced assets are not duplicated into every Campaign export when the Package is independently exportable, but composition pins alone are not treated as proof of asset availability; HLA-PERSIST verifies portability during export and fails with diagnostics if verification fails.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-persist-dd.md#L248-L249",
+          "version": "repo-lines-v1:sha256:0b17c75429f694917e17425ad3149f3b871037c105d18870eb8111f9756f69b2:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmIwOTJkODVkZTA1NTVlN2EzMjEyNmE3NWNlZmZhZmZiZWQ2YTcyYmNiOWQwYzdkZWFjMDk2YjNiYzYzYjhiOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjkyMmIzNGRhZmQ1M2IyMmI2YzlmMzhmYmIyMGVjMTk5OGU4NGUzYzlhNWRlYzkxZDA3MDI0NWQ3NmUxYjI2NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWYwY2YyNWFkN2M2OTgyYTc4MGE1Y2YyYTMyNTk0ODIwMTY4MzRhOTg5MWI3NDk4ZmNlMzNiNDUzNWNjYTk5ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjhhOThkMjhkZDg4MjFkMTRmMDA4MjRiNGU0NTAzNTI0MWM5NTNiYTFmODdhZjAyYjU2OTdiNTYwZGJiMDRjOCJ9"
+        },
+        {
+          "resource": "repo://docs/design/components/hla-persist-dd.md#L258-L258",
+          "version": "repo-lines-v1:sha256:e2ac98993078bd049de9498cf0b2748dfc0df0229621a082be79f8566b0cf1e0:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTJhYzk4OTkzMDc4YmQwNDlkZTk0OThjZjBiMjc0OGRmYzBkZjAyMjk2MjFhMDgyYmU3OWY4NTY2YjBjZjFlMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTJhYzk4OTkzMDc4YmQwNDlkZTk0OThjZjBiMjc0OGRmYzBkZjAyMjk2MjFhMDgyYmU3OWY4NTY2YjBjZjFlMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGQ4YTkzM2NlZmI0MzJmOGFkNDNiZDM0ZDcwZjY1NTQ2Y2RiZjg5ZmNiZmVhZmJiOWQ5YTIxOWNhM2JjYjM5NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjBjYTQ5OGNmNTFhMWRhNGVhZjU0NTc1MGMyMDgxZWNjOTIxZmM3ZTRjYzA5OTVmOTQwZTllMzFmYmMyYTc2NCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2068fb7029a848aea87cd4999b1cc5fa",
+      "statement": "HLA-PERSIST does not select a concrete database, file format, object store, compression algorithm, indexing engine, cloud service, or deployment model in this Detailed Design; it defines selection criteria only.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-persist-dd.md#L169-L184",
+          "version": "repo-lines-v1:sha256:ff66c1e0df1abac0be233e860809fcb50472f297585998d42e88ef781fb6bf86:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0NDVjYmU3ZjAzYzRiMmM5YTI4NmE5MmZjMTVmMTY3MTNkYmM5MjBlZmU1MWVkY2M5NTkyODA5YmU4OGZiOTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3ODM3MThhMjQ4M2ZiNzI3YzM0MzI4ZDBjMDAyZDdlNjBiMjg1OTQ2MTIzZDlhOTIwMWQ4YjZiZGMzYjdhOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViN2FlMTUzZjk5NDNlOGRmNWI3ZjMwZTJmOGNiMzJmMGVkODUwZjY4ZWQ4MmM5Y2Q0YjY4NGY2OTUzZGU4MDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMWYyZWMxNzU5M2MxMDU0ZWI0NjM2N2Q4NDUzZWYyNGExNzNjZTk2YjcxMTdkOTFmOWE2OGQ0NGZlZjhiMDEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.2",
+    "at": "2026-09-17T22:44:59.369Z"
+  }
+}

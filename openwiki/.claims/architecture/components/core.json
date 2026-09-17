@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:17d1bed7ea409f91f135670ae4ca0e27065c3d4680efaab36628f039ad9d5614",
+  "claims": [
+    {
+      "id": "claim_254b28f0dfdf40f7888975d1591c3668",
+      "statement": "HLA-CORE has no outward dependencies on any other HLA component; it is the center of the hexagonal architecture, and other components access Campaign Reality only through HLA-CORE.",
+      "evidence": [
+        {
+          "resource": "repo://docs/architecture/engine-hla.md#L179-L181",
+          "version": "repo-lines-v1:sha256:b491e029cd5786b563d021d673cbcfdc8f3e369648d8cbe42560212de74be3d2:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWEwMTU1OGYxNWZhN2EzNTI4ZTdkOGY1YWQ5N2Q2Y2JiNjY0YzUwMzBjOWRmZGNhNTZlZTczZDY2NDBjNmM3ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTQzNDIzMTEwMzFjNTAxYWNjNjcwZDI5NTFiOTRkYTRhYjhkNTM3ZmU3NDk5NTA1ZTE0ZDcwNzJiYjBkNWE0YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODliZDI2M2RiNzA5MDU1NDgwMGMxMTVlYmYyY2FjNmUxOTJlNTU3NGQ5ZTYzOWEwMzRiNWE3NGQwZjY2MzE2ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTc3Mjg3OWI2MTdkMDYyNTExYmU4ZjEyYTVlYjI3NDhjZmM4MTI0ZmFmY2ExMDc4YjFkM2Q0NzVlNmUyYzk1NCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b82f74da866f4de5a6f51a357ffee946",
+      "statement": "HLA-CORE uses Event Sourcing because FR-011 (history reconstruction), FR-009 (temporally-bounded state queries), and FR-008 (Fact provenance/temporal validity) are all satisfied by folding an event log; the rejected alternative was a mutable CRUD store with a bolted-on audit log, rejected due to drift risk under NFR-003/NFR-006.",
+      "evidence": [
+        {
+          "resource": "repo://docs/architecture/engine-hla.md#L176-L178",
+          "version": "repo-lines-v1:sha256:89bd263db7090554800c115ebf2cac6e192e5574d9e639a034b5a74d0f66316e:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDI5NDA2NDRlYWNkY2NhMTgyNDM0NzU2ZDA4MmUxMWNlZWFiYWUwN2U4NzI2ZWJmMzkzMTIwMmVjNzE3NDViMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzU3MjczMDhhZTlhZWFjNmUwNDk5YTgyYTY5MGExNWE1ZTFmOTcyMjc0YzYzYzUwZWNhOTBlNWUzODgwZDc5NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGMyN2NiNDA2ZGFiYjgxYTg1NDU5YzFlMjhhNzFkMDc4OTE2MGU1MmFjYTAyZGIwNDczZDYxMjEwOTJmZjY1MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjQ5MWUwMjljZDU3ODZiNTYzZDAyMWQ2NzNjYmNmZGM4ZjNlMzY5NjQ4ZDhjYmU0MjU2MDIxMmRlNzRiZTNkMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_caed267266504e7f8cb7abd0518a7239",
+      "statement": "HLA-CORE is internally decomposed into nine named units (CampaignObjectRegistry, EventAppender, RealityFoldEngine, FactIndex, RelationshipIndex, CampaignTimeIndex, HistoryReader, SnapshotOriginator, AssetReferenceRegistry) each with an explicit ownership boundary, to avoid becoming a God Component.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-core-dd.md#L151-L165",
+          "version": "repo-lines-v1:sha256:198ae388d2b2726b25f6ceee5f9374727b46258f63d679a8f094b65b7de29c92:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxMjBiMWM3MmIzNDBkZWI5ZGI2Y2ZmYzkwMzBiYmM1ODE5NGJmMGZkMDZmOGIwYTUzZmMzMWIzY2UyYjFiZmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3ZTIyOGJkMDBiYTBjZTE0ZTk0ZWIyNjFhMjAwZmQ4OGMyYzdjMzAzMzA1MDY4YzRlMTg3OTdlZWYyMzQxMzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViN2FlMTUzZjk5NDNlOGRmNWI3ZjMwZTJmOGNiMzJmMGVkODUwZjY4ZWQ4MmM5Y2Q0YjY4NGY2OTUzZGU4MDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMWYyZWMxNzU5M2MxMDU0ZWI0NjM2N2Q4NDUzZWYyNGExNzNjZTk2YjcxMTdkOTFmOWE2OGQ0NGZlZjhiMDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7757f06fc5974b72bbdd18c91f05d946",
+      "statement": "A Location is modeled as an Entity with spatial relationship capability; the engine does not hardcode a single spatial model, and spatial semantics are package-defined.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-core-dd.md#L184-L193",
+          "version": "repo-lines-v1:sha256:6750476d8e94808c394ac2d9f024dc899b7cdaeae1462be0042ef130b9cd525d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdiNDk1ZTNkYzllNDJmMzFlOTY1OTk3YzIwOThhNTgxOWY4NTZhY2Q2ZTdjMDhkMjA2OTRiNDY3YTY1MTRmNjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExZjU1ZmQxMGM2YTM5ZjNjNTA5MGUwYzU3MWMxNzkxOTZlODljNjQyMDcwZWNlNjFiOTFlMzBhMTQ4ZTVkYzYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4MDkxOGFjNjQzMDcwNDAzMDA0MzI3OGFiYjE2NzAwMWM2ODM0M2ZjNWEzYWRmN2Y4MmI2MTY5NTI5Yjg0YWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY5YWNmMmY2NDM2ZWQ0ZWRhMDc0MjljY2VjZGY5ZDU1YTY3M2UyYWNiN2JjZDBlZjdlNTU2YWJjZDRjOWZlYTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7aa47c7ae98746d78ee7dd1f29e64cb6",
+      "statement": "Ordinary play mutations after Campaign instantiation enter HLA-CORE only through HLA-RESOLUTION; Events are appended atomically and a failed append leaves the prior stream unchanged.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-core-dd.md#L307-L313",
+          "version": "repo-lines-v1:sha256:982e6530b8f4f2da87f5b609d512d8b5b46f3874a62048838f013ed71a7e233d:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDE5OTQ2YTVhODBhYjdkOTUxNWQxMDBiMDc2OWEzNGM4Mzc5OTYyY2I5N2ZhZTUxZTRlMGRmOTY0ZGE1MDFlMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzNlYzIwM2ZlZDUxMjhlZjk4OWRiNzhmOGUzMTU2OGJlY2MyNzQ3NWYzMjU4ZDc0ZThhMmY5OGQ1NzQzYmQ0ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTZhMzRhYWM1YjNiM2JkNzFiYWYzOGUyYzJiZjQ1YjI5N2FkMzkyOTBjZDc1NGZiNmJlOGZiNjVjZjJlNGQ4NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTQwZGE2MzU2NzRkMjdlNjQ4M2YxYTE3YzVkNDA4YjRjMGM3Y2VhZWUyY2Y3NTE1N2U3ODVlZGUyZGM1MzEwNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_521d23fb39ea4e0eb4868e090ac4100c",
+      "statement": "Undo does not rewrite committed HLA-CORE Event history, and Retcon is represented as a provenance-preserving correction rather than mutation of prior Events.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-core-dd.md#L323-L327",
+          "version": "repo-lines-v1:sha256:bdbfdd3f3c2513a804b4d0ff66c90cff7297f2195b17485ab6711ba11e355525:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDBmMTkzMmIxZjYzNTM1N2Q1NmE1YTE2NTlmMWEzNDFmZTg0MDgwZTQ1NjllNzdiNmRkOWYzNTAwZTI0MjlhNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2E1NTJhZTEzMmI2ZmNiZDZjNTA0MGYzOGZkZmQ2NjYxODMyY2U1NzU5OGYxYTM5OWY1ZTNiOWI2MmNlYjc4YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTAzYzc3ZTI5MDJhN2UxMzNhMmNlNGFjZDE0MWM4MjY2OWQwZjg2NDE3YTljYTVhODc3OTUyOTc3ODEwZDExYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAxZjJlYzE3NTkzYzEwNTRlYjQ2MzY3ZDg0NTNlZjI0YTE3M2NlOTZiNzExN2Q5MWY5YTY4ZDQ0ZmVmOGIwMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_61afd6495414418b945a50f189fc5cc9",
+      "statement": "HLA-CORE exposes only internal write, read, snapshot, and persistence interfaces (appendEvent, stateAt/propertiesAt/relationshipsAt/factsAt/history/reconstructionInputs, createSnapshotPayload/restoreFromSnapshotPayload, eventSegment/loadArchivedSegment); it has no public caller surface.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-core-dd.md#L391-L448",
+          "version": "repo-lines-v1:sha256:0a9ecaa34582f3b0e5e9736749a2e4d35cc73668631c3f440b0bc11f60213824:eyJzZWxlY3RlZExpbmVDb3VudCI6NTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhNzVlZTdmZDYwMGU1Zjg1OTM0ZWJhZDcwYTY1YzNhYWQxZjZhOGZjODEzMjdhM2M4YjU5MjMxNDk4MWM5YWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1NmUyMTliMDM1MGNjNmY3ZmU0N2NiM2EyYmQ2YmZmYmNhZjk2MjIzODIyMzQwMmU4MjlkMTU0NDhkNjE3NzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViN2FlMTUzZjk5NDNlOGRmNWI3ZjMwZTJmOGNiMzJmMGVkODUwZjY4ZWQ4MmM5Y2Q0YjY4NGY2OTUzZGU4MDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMWYyZWMxNzU5M2MxMDU0ZWI0NjM2N2Q4NDUzZWYyNGExNzNjZTk2YjcxMTdkOTFmOWE2OGQ0NGZlZjhiMDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_229c60d9d7ae4d39b4e2ff8e6d2623da",
+      "statement": "HLA-CORE carries AssetRef values as opaque semantic references but explicitly does not store binary asset payloads, storage paths, object-store keys, URLs, export packaging paths, or compression details.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-core-dd.md#L361-L380",
+          "version": "repo-lines-v1:sha256:936b187daaaa96d5cad99d5c8f150522e1365ab9a9d1cfdcde01a2eefcbe3131:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ2ZjFmYTdiNTczMzdhZmJiNjY3NTRmMmVkMWU3ZWI3YzFhZmI4MzBlOWVmZWY1MGIzMzgxMDViZjk0OGJhYzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyOGVhMmVlNzkwNmQ1N2I4NmUxY2YyMTFiMTM1MjAzNjM0MTdlMjllMjRlZGZlZTUyMjE2YzdmNzQzZGI5MGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJjODEwNDM3MGFmM2MyNzBkYmMzYWE3OWFlMGY0ZjFmYWViY2I5Yzg4Njk0MzI5NzhiYTNjMGU3Y2M1NTA0MzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhNTA0MTZmODBkNDQ1YWQ4YWVkNmJlMjU5NDUzYTY2Y2E4NzFhNjM3YzZiYjViMWJhNzc5Nzc0ZjkwYjk4NzMifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.2",
+    "at": "2026-09-17T22:44:59.369Z"
+  }
+}

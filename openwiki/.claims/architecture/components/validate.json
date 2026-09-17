@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:0eb22c1a515f0c66beee105720514da5b314eee003c815792d33773485088603",
+  "claims": [
+    {
+      "id": "claim_ddfd29ba84f643e7a194ccc48d973ea5",
+      "statement": "HLA-VALIDATE treats externally supplied artifacts (Packages, Campaign imports, Oracle results, including LLM-generated or LLM-modified artifacts) as untrusted and potentially hostile, not merely malformed, and AI-generated artifacts receive no special trust.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-validate-dd.md#L66-L66",
+          "version": "repo-lines-v1:sha256:6118d7846cb23e2cb766c6996d524846f101725550ad3aac5088a2f34dd16c52:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjExOGQ3ODQ2Y2IyM2UyY2I3NjZjNjk5NmQ1MjQ4NDZmMTAxNzI1NTUwYWQzYWFjNTA4OGEyZjM0ZGQxNmM1MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjExOGQ3ODQ2Y2IyM2UyY2I3NjZjNjk5NmQ1MjQ4NDZmMTAxNzI1NTUwYWQzYWFjNTA4OGEyZjM0ZGQxNmM1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzI4ZTY3NDAwYjUzM2M5NjA1NmFhZDE1OWMwMzdlYjk5OTFhYWFjYmUyYzFkZGY3ZGQ4ZDk0MzRlYzA2YmVhZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOThkOWUxNjViNWNjNTllN2JlNDE3YmNlMTc4ZTk0YTdlOWFjOTZhNjAwMmU5NzFiZmJjYmFiMTZkYTIyNDdkMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_faf677736a8b4f7f8a006ee10f93febe",
+      "statement": "HLA-VALIDATE uses Chain of Responsibility because validation rules are contributed by multiple sources and must compose without a fixed closed algorithm; Template Method was rejected because it would need rewriting for every new check, and Visitor was rejected for the same open-type-hierarchy reason as HLA-QUERY.",
+      "evidence": [
+        {
+          "resource": "repo://docs/architecture/engine-hla.md#L254-L256",
+          "version": "repo-lines-v1:sha256:1804a08d03544407cb51dad345f8ce0186f568985fe4e34ac613d00ec00a9af3:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjIwOWE0MDZjODQxYjA2Mzg3OTUyZDdlMWI1N2M5ZmY0YTExMDZmMmE1OTlkMWJhMTUzMTMwNjBjN2YyYTExMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjkxNTUzYzlmMzJhMDA0YTY2MDliZjIyYzFkNDJmZGY3MzBjZjk3MTc1NDhlMDcwNTI1Mzg1ZjM2YWY5MzFlNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzM3OGY0NDkyOTM4ZWQxMjk5ZmM0OGI5YzJhOGU3NjM0OGQwMmRkNDI2NTk3MGQwOTNlNWU4MWQzMGVmMjUxYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODM1MTBiNzc2YjhlMDM5MTIzNzRjYzRmMDQ1ODAzMDAzZTdlNGRhMjYzZjRiNDY2YWQ5ZjA3N2JiMjBmOWYzMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_00f6043641994be3b0235d21578e481b",
+      "statement": "HLA-VALIDATE recognizes six validation subject types (packageArtifact, effectiveCampaignDefinition, campaignImportArtifact, oracleResult, migrationPlan, exportArtifact), each with an owning caller and required validation layers; the taxonomy is deliberately limited to subjects visible in the approved HLA/SRS.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-validate-dd.md#L147-L158",
+          "version": "repo-lines-v1:sha256:26bf6a887e664ad208fd0449c3f55407c299792f65bfc0bd83022a41fedbded7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBkMzBjNGFkZDM0N2MyMWQ1NzE5N2M1MGEzMTk5MjQ3MDE2YTk1NTkxZDllMjQyYzI4ZmRhZWM1MzIyZDYwYmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyZDYwZWFlNWNkZGUyNjJkNGQ3NTg2NWRhNWFmMzA3NzBlYTdiYTYyODE1Y2RhYjc2YzRmZjQ1MGU1M2VkNjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViN2FlMTUzZjk5NDNlOGRmNWI3ZjMwZTJmOGNiMzJmMGVkODUwZjY4ZWQ4MmM5Y2Q0YjY4NGY2OTUzZGU4MDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMWYyZWMxNzU5M2MxMDU0ZWI0NjM2N2Q4NDUzZWYyNGExNzNjZTk2YjcxMTdkOTFmOWE2OGQ0NGZlZjhiMDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fafa2a0e90fe40e2a413e0a8349445b9",
+      "statement": "The default validator chain runs envelope, format, schema/contract, dependency, semantic, cross-reference, policy, then Package-contributed validators in that order; Package-contributed validators execute only as declarative contracts/rules interpreted by engine-owned validators and never receive engine-core access.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-validate-dd.md#L169-L189",
+          "version": "repo-lines-v1:sha256:90e23fc7a08e09697096f635520b6282aaf212b130d355597529982b1cb4f6a1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlMjNhM2QyZTMxNDVlOTNhNmU0YWJmNDVmY2MwYjc1YTMyZTBkZmNlYTdiNmNlNTg5NTk4Mjc0MGM1MzllMDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkYzNhZWIzMjE3OGY5ODdiNzUyMmEwZjk3NzY3ZjcwMjZhMGE0ODNlNjUxN2YzYWVmMzVhMGVlYmQ1YTFhMjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwN2RjMjQ5NWFhNjQ0M2IxY2I4OTg3NDg5Zjg5NTU0OWVmZjBlMTM1M2Y2NDM1ODg2ZTRmNTE5YjRhYWM5OTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMWYyZWMxNzU5M2MxMDU0ZWI0NjM2N2Q4NDUzZWYyNGExNzNjZTk2YjcxMTdkOTFmOWE2OGQ0NGZlZjhiMDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b9d6417f922840fbb43a060a02fab112",
+      "statement": "State-admitting trust boundaries require strict accept; acceptWithWarnings never admits Package registration, Effective Campaign Definition use, Campaign import, migration, or Oracle result acceptance, and is permitted only for advisory or non-admitting verification flows.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-validate-dd.md#L187-L187",
+          "version": "repo-lines-v1:sha256:79d701faa21242f39699f575f5e800aa2b0e3849515b23038a1a401c6d4f9a88:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzlkNzAxZmFhMjEyNDJmMzk2OTlmNTc1ZjVlODAwYWEyYjBlMzg0OTUxNWIyMzAzOGExYTQwMWM2ZDRmOWE4OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzlkNzAxZmFhMjEyNDJmMzk2OTlmNTc1ZjVlODAwYWEyYjBlMzg0OTUxNWIyMzAzOGExYTQwMWM2ZDRmOWE4OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGVlMjFiNTI3OWI0ZTQ4Y2M4NDc1NTk5MjFlN2VmMDM4MjY3NTM5MDdlYWVhNWI3ZDk2MDA4N2VmMGI0NDE5YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWE3OGVkOTE5MjVkODUwZmI5NDYwMTA3M2I2NzdiNWFiYzcxN2YyZDg1ZTQzNjJjNWU1ZThmMzdmOWQyNmRiZiJ9"
+        },
+        {
+          "resource": "repo://docs/design/components/hla-validate-dd.md#L467-L467",
+          "version": "repo-lines-v1:sha256:9372e9c8b587abf6cc942eb50777e437889256bbe9359537aa20a82abc5458c5:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTM3MmU5YzhiNTg3YWJmNmNjOTQyZWI1MDc3N2U0Mzc4ODkyNTZiYmU5MzU5NTM3YWEyMGE4MmFiYzU0NThjNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTM3MmU5YzhiNTg3YWJmNmNjOTQyZWI1MDc3N2U0Mzc4ODkyNTZiYmU5MzU5NTM3YWEyMGE4MmFiYzU0NThjNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzY1ODY5OGQyNWU0NGUzZjU1MGY0ZDk4ZTIwY2RiNDNlNmJmYjI1MjZhMGZjNzhmMmI3ZWEyMWJjZjJkMDNjNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmM4MmZmYzM2OTJiMzNmYzc1MWQ5OWFjZWQ2MDQyYjdmNjJjMmE5NmY0OWQ0NDY5YjkyZDczODM4ODYyYjVhYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_258f06dc31ce47a0bfefa29eb863e3ea",
+      "statement": "Every error or fatal ValidationDiagnostic includes an identifiable subject or affected reference, category, and human-readable message; if the affected object can't be identified due to malformation, the diagnostic identifies the smallest known container instead. Diagnostics are not Campaign history.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-validate-dd.md#L309-L311",
+          "version": "repo-lines-v1:sha256:0189437176d72e8705b67bef2fd980f6a1f56eb0149a1e911e81859364a44135:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGI0MGJlMTkzODY3ZWE5MGJjMTRjM2M5ZTcwZjcwNmMzODZiMzdmODBiMWZiZmJmY2FhY2ExN2VhMDcwYzIxOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWNiNjNjYTNlZDViOTUwNWQwOTU2NzcwMDA3YWFkNTY4ZTcxM2QyZGM1NDEzM2NhMzVkYjViYTU3NGIwMDU2ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2NhMzE0NjFlNDE1NGRjYTEwNjMzMjg3MjFjOTE2ZGNmNzJlMjgwNzgzOTg2YjNlNjkxNWIyMmI4YzllMGEwMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAxZjJlYzE3NTkzYzEwNTRlYjQ2MzY3ZDg0NTNlZjI0YTE3M2NlOTZiNzExN2Q5MWY5YTY4ZDQ0ZmVmOGIwMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_38e79afba6ba4b9197f834943eb5ced4",
+      "statement": "validatorTrace detail is exposed only when the caller requests diagnosticDetail=trace and HLA-CONTRACT authorizes trace detail for that caller/context.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-validate-dd.md#L466-L466",
+          "version": "repo-lines-v1:sha256:0b1e1352134d978fdc210088a40704c3f12264e6255618041b0bc708f96131f8:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGIxZTEzNTIxMzRkOTc4ZmRjMjEwMDg4YTQwNzA0YzNmMTIyNjRlNjI1NTYxODA0MWIwYmM3MDhmOTYxMzFmOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGIxZTEzNTIxMzRkOTc4ZmRjMjEwMDg4YTQwNzA0YzNmMTIyNjRlNjI1NTYxODA0MWIwYmM3MDhmOTYxMzFmOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGI5MGVmNzM3ODIxNTJkZWVjOTllYzY1MDIyMGU2OGUyOTI0NTZjZmQzN2JlYWJmMjZmNDhiMDMyNTkzNzc3NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2IzN2FiOWNkNzEyZjZjMTFlODU1OTk0NThiOWEwNzNiMDY5M2I5ZjBjNzkxNTk0YzU0YzYyYmYyN2I0YTNmOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_291307dc761f420c86bab9c4b849b1e2",
+      "statement": "If HLA-VALIDATE rejects an Oracle result, HLA-RESOLUTION leaves the associated element Unresolved and returns diagnostics rather than synthesizing a fallback value; the public validation flow through HLA-CONTRACT remains strictly read-only and never registers, imports, migrates, or resolves anything itself.",
+      "evidence": [
+        {
+          "resource": "repo://docs/design/components/hla-validate-dd.md#L336-L346",
+          "version": "repo-lines-v1:sha256:6be1976d9efa42b022c47c0ec6807f320a341e5178d02d95a5535794628330f2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4NmM3NmY3ZGM5MzRjNzdiYmNmZTAxNWE3ZDQ2OWZlZjg4NWExYzcxYWY0YjMyOTJkMWNmYTliODRlNDc5ZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3YjIzZjA1NjA0ZmZiNGNmYmI0YTgzODAzYjM1NzMwNWZhMmJlOGRmNjFhZWVlYjkzNWE3ODkzODE0NjY2NWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzOWJlNTM1NDUyYTA1OWEwMTIxYjE2NjRjMmIyMjk2NjIxZjZlNjYwZjZhNjA3ZjM2ZGQzYTA3MmRkNTY2NGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMWYyZWMxNzU5M2MxMDU0ZWI0NjM2N2Q4NDUzZWYyNGExNzNjZTk2YjcxMTdkOTFmOWE2OGQ0NGZlZjhiMDEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.2",
+    "at": "2026-09-17T22:44:59.369Z"
+  }
+}

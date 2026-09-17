@@ -1,0 +1,12 @@
+# Files
+
+- [HLA-CONTRACT: Public Contract Facade and Authorization](contract.md) - How HLA-CONTRACT provides the engine's single public operation surface and owns Campaign Authority Binding authorization before requests reach any internal component.
+- [HLA-CORE: Campaign Reality and History](core.md) - How HLA-CORE owns authoritative Campaign Reality as an Event-Sourced log at the center of the engine, with append/fold semantics and no outward dependencies.
+- [HLA-LIFECYCLE: Campaign Lifecycle and Scenario Instantiation](lifecycle.md) - How HLA-LIFECYCLE creates a mutable Campaign from an immutable Scenario via Factory Method, assigns permanent identity/seed, and atomically establishes the initial Campaign Authority Binding.
+- [HLA-OBSERVER: Observer Knowledge](observer.md) - How HLA-OBSERVER keeps what an Observer knows, believes, or misunderstands as a structurally separate, independently-keyed Event stream from Campaign Reality.
+- [HLA-PACKAGE: Package Composition and Versioning](package.md) - How HLA-PACKAGE composes versioned, game-specific Packages into an Effective Campaign Definition through explicit Microkernel/Builder composition, pinning, and migration.
+- [HLA-PERSIST: Persistence and Portability](persist.md) - How HLA-PERSIST durably backs Event-Sourced streams without becoming a second source of truth, via implementation-neutral export/import, strict import admission, and authorized authority rebinding.
+- [HLA-QUERY: Query, POV Resolution, and Presentation](query.md) - How HLA-QUERY is the sole authority over what is presentable, resolving POV against Campaign Reality and Observer Knowledge and materializing Projection-Strategy Presentation Models.
+- [HLA-RESOLUTION: Unresolved State and the Oracle Boundary](resolution.md) - How HLA-RESOLUTION turns unresolved campaign information into authoritative state through provenance-bearing Resolution Commands, owning the deterministic-probabilistic boundary via a generic Oracle Adapter.
+- [HLA-STATE: Checkpoint, Undo, Recovery, and Retcon](state.md) - How HLA-STATE acts as Memento caretaker for Checkpoints, reuses HLA-RESOLUTION's Command infrastructure for Undo, and treats Retcon as a conservative, human-authorized correction rather than a history rewrite.
+- [HLA-VALIDATE: Validation and Diagnostics](validate.md) - How HLA-VALIDATE gates every trust boundary (Packages, Campaign imports, Oracle results) through a Chain-of-Responsibility validator pipeline, treating externally supplied artifacts as potentially hostile.

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:284f8c6dd049cea30d823146fdcd01a32591cd35bfce54c1a5652d0bec3cc5f8",
+  "claims": [
+    {
+      "id": "claim_a9cb83cafafc4596ad43132980e17439",
+      "statement": "FR-001 requires instantiating a Campaign from a Scenario to produce a permanent unique identity distinct from the Scenario's identity while leaving Scenario content unchanged; FR-003 requires multiple Campaigns from the same Scenario to evolve independently with no automatic state propagation.",
+      "evidence": [
+        {
+          "resource": "repo://docs/requirements/engine-srs.md#L154-L179",
+          "version": "repo-lines-v1:sha256:ce6b4a3ed14932c830a3bc524a956e462ea9c926700cd3793fe1aefcca8c1783:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzZWNkZTBjYTc4ZDI5YzdiNTRmZGJhOTQxNDY2NmQ5NWE2YzRiMzM3OGRkNWExMjc1ZWYwN2YzMGVlM2JhZDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY1OWQ3NGVlM2IyMDRiY2I5YTdlODlhNGY4Y2MwY2VlN2Q2NjQzMjA2N2YzY2Q4NTdjZDcyZjNiNmU0MzQxMjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmMzYyZWEwZGJiN2EzZGJiZWM2OTYyMWUxZWJkYTYwZTJmYWRiODQ4ZmU2MjhjYjRjODQ2ZmU3ZTE1OThiNjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmNDNkNzBhZmMzNWI3NDg5MTQ4ZWMzNjIzY2RjMjM3MTcyOTFkMjYzMDdkMjMzYTRlMjA3MjU1ODU2Mjc1ZDcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_864a270b3f014040be256742dc86368c",
+      "statement": "FR-044 requires a persisted per-Campaign seed for package-defined Oracles, guaranteeing only that the seed is assigned/persisted/exposed, not that Oracle output is reproducible from it, and leaves cross-implementation PRNG sharing open for a future platform SRD.",
+      "evidence": [
+        {
+          "resource": "repo://docs/requirements/engine-srs.md#L181-L188",
+          "version": "repo-lines-v1:sha256:c719a1f61eb6e6fdec44f0a3a2ca0d86a4229e5042bb873cf6e3de9ffd80e8f3:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU1MzNmOWVkMTNjYmZhN2UyOGEzODAxYTY3NGZlZTAyN2JjODM4MjdkNjMyOGQ2YzNkOTQzYTYwMzA5ZGQ0YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjAzYmNhNmYyZjlhNDc2ZDRlZjM5YWU3OWVjMjExYzYxMDI2YzgzZDE0ZWI1YTAzMDUzNzFlMTNmNTczZDFiOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmMyYzcyMTAyNTUwMDdlYWUzY2I2OTc3MzBlOGZlZDQ3MmY2NzNjM2QwOTViODA2MzNlZGMyOTBiNmJkODVkMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDk2NjU5N2RhZDcxZDUxMTVmMDJjYzJmN2IzN2NmOWVjZTA1NmNmNGMwZGUyYTA3MjM4NGMxMDkyM2M1ZjEyOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c72651a79f2848bb8b2dc4fb5d2646d9",
+      "statement": "FR-045 (Campaign Authority Binding) was added through a Spiral Development rollback on 2026-09-17 after Test Planning exposed that the actor-aware contract lacked a durable Campaign-to-Principal authority association.",
+      "evidence": [
+        {
+          "resource": "repo://docs/requirements/engine-srs.md#L190-L197",
+          "version": "repo-lines-v1:sha256:ac1a0e83544c46c62795fff587addf535f18aace1db0e9f6028eedfdc430f989:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzNiNWViYTZjNTU1MjZkNjY1MTY3MWNhNTQ5ZWFjMWYzZmQ0M2MwZGE2NDk2MmRmMWRlODUxNzAxOTg4MDhjMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjYwZGFhYzRhNjk5ZGYwNDQ0NjQ1ZGMwNWIwY2ZlYjFhMTUxNjBhNjA0ZWZjYjhhOTNkM2Q1MjExNGJlNTU1MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzFiMWM4NDk5NjA0NWYyY2NjZGE3ZDQ1ZDYwMmY1ZjFhNmFiODMxODEzOTcxZmE0MjlkMjgyMjU3NmNjYjRiNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2FkZjA5ZGI0ZGYwMWYyNTlmNmZlMDNhYjdmZjIwNTQxMDY5N2JhYWMwMDBhMmNjOGZlYjRhODk2MjZmNGFlMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_568bd0853c7e4ecd9416fb7f18e894cb",
+      "statement": "NFR-001 provisionally targets 95% of local Transactions completing within 500ms of engine-local processing time, marked OPEN pending empirical validation and excluding network/transport time; NFR-004 provisionally defaults the active working set to ~30 in-game days, also marked OPEN pending calibration.",
+      "evidence": [
+        {
+          "resource": "repo://docs/requirements/engine-srs.md#L584-L590",
+          "version": "repo-lines-v1:sha256:695ee997d9cad25aad41d78f939e19c8c1e205d3c7840d10e4a97768b296d57b:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWJlMjE2MTZhZTVlMDg1OTdkOGE5NmZkMTcwOTQ3YjNlZDE3NTJlNWEwOTc5Y2ZhZDQwM2M3MzdlYjQ3NDM0NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODFjNTY0ZmUzMzlkM2RmZDQ4ZDFhNzBkYzZlMjg5NThlYTJkNGY1ZGEzYTNkNjNiNjQ4OWRlNjBjNWJkZjhjYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmE5YTk4M2E5ZDY3OTdhNTllM2M2NzMyYjM0MzJlYmU5ODE2NTU1MzI1ZDI0ZTMwZGQyYWIwN2I0NmNhZTQwNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzVjZDNjMGVmYzMzY2Y5ZjgyYzNkNmU3ODdmMjJmMTNlYTFmMDYyZmUxYTgwM2RhODc3OWIzNDk4YTkyMzJkNCJ9"
+        },
+        {
+          "resource": "repo://docs/requirements/engine-srs.md#L606-L611",
+          "version": "repo-lines-v1:sha256:d8cf0fc10e46459e1020d907a5f7ef3631809be319b3ca1d4b5f183fc57abe0b:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzhmZWVjNzYxMmEwNTc0ODcxMmE5MTFkMGJjNGI3MzQ1YWUwNTEzMzQ1MDAzYjVkODZlMWYxNTc4YjYyYjE0NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDU1NTlmMDFlZDczM2UzNjg1YjdjZWIzY2NlZGU0MTZmOGJmZmI1NTZjMjAzZDk2MzZiZmVhZDQ1NTM1NDcwMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDRkNTQ2Mzc4NzlmYWUwNGE2OWMxZmVmN2Y3YTNiMmJlY2I0NTNlNmQ2ZWU1NjA1M2FlMWU2ZmJhZmRhYmI5NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjU1MTE0MzVlOTc5NGY2NWUxNDFmMjY2OTk0NzJlZjI3NzJjN2FkZDU3NDQ4NzkzZTIxYWM4Y2NlN2U2YTNhNyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_394d06a3f1ef4191b81cfbb17687e7e8",
+      "statement": "NFR-007 requires every Campaign-scoped operation to be authorized against active capabilities bound to the requesting Principal, with caller-supplied role names or grants never self-authorizing.",
+      "evidence": [
+        {
+          "resource": "repo://docs/requirements/engine-srs.md#L627-L632",
+          "version": "repo-lines-v1:sha256:d8afb0491c79a2731508e12aca51145a6f0bfeab8c0b2c0baa637cfc4acc8283:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTczNzhkNzVlOGMwOTUwYjdmZTgyOGZkODk1N2U0ODA2OGYxNGIwMWRkZTE3MWMzYzI2N2NhNmU4Y2UzMTU2NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmM4MGNmNTI1NzRkNmE4OWE2ZjgyNGVmNzFjZWIxNDM1ODQ2NjI4YjIzMTM1NTAyNTFkZmRjYjMxZDEzZTAzMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTVkM2IyN2YyODhmNTFmODlhMDg0YmUyOWY1MGQ0NWE1NDIyM2VlODcxZWM2MzI5MGQ5NjZkY2ZkZDYzYzg3OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAxZjJlYzE3NTkzYzEwNTRlYjQ2MzY3ZDg0NTNlZjI0YTE3M2NlOTZiNzExN2Q5MWY5YTY4ZDQ0ZmVmOGIwMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_4aa12c42eeb841efb8cacede122cfe20",
+      "statement": "The deterministic-probabilistic requirements section prohibits unbounded probabilistic integration: no probabilistic subsystem may write directly to Campaign Reality, all writes pass through Resolution with an identifiable source, and a failed Oracle/Procedure leaves the element Unresolved rather than defaulting or guessing.",
+      "evidence": [
+        {
+          "resource": "repo://docs/requirements/engine-srs.md#L641-L649",
+          "version": "repo-lines-v1:sha256:2885d35a1e350800e89a0d0be14aab111e48d891c1b26a5e070cb0f9876c737c:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODhiZGI2NjJlYTAxY2NhOWU3ZTQ1MTA4YmM2OGQ0MmZjNzJhZTZkOTBhNTQyYjVhYTE1MTk2OTA0ODljZjdmNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjRiMjk4YmVmZTU4ZWUwODUyZjUyMDhlNTcyZTBlMGI3NzhhMmI5NTJkNDQyM2FkYmNlNDRiMzM0MDU1OTY5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzYzZDdiMmM0OTc4MDg3NmJiNDQ2NGQ4ZjcxN2EzNmUzMTQ1YzBjZmZhMjRjNGRiOGQzMDJlNGYyNWNkMjUzNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAxZjJlYzE3NTkzYzEwNTRlYjQ2MzY3ZDg0NTNlZjI0YTE3M2NlOTZiNzExN2Q5MWY5YTY4ZDQ0ZmVmOGIwMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6be7e423ee964a36a03de27231f7a3ff",
+      "statement": "Key SRS assumptions include a single-campaign single-user focus at this phase, no regulated data categories (flagged as uncertain), no fixed budget/timeline, trusted-enough Package authorship (structural validation as primary trust concern), an assumed durable storage mechanism with undetermined technology, and an assumed caller invoking the engine through public contracts.",
+      "evidence": [
+        {
+          "resource": "repo://docs/requirements/engine-srs.md#L674-L679",
+          "version": "repo-lines-v1:sha256:719470f31b18c6163628b9f51ba631c6698e61c6cda105e08e69a49bce287e26:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzNmNzY4YzcyODYwZTRlYWQ5OGY0Njg1OGM5MDFhYzk5NTUzNjRlN2NlZTc3ZWRiNzE4ZTNmYjllZjkzZGVkMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWY4OWJlMTJiMjE0MDNlNmRjZjE1MjUyMjIxYTdlOTBlNDIzYmE0ZGFlNjFmMTJmMGE1OWFlYmE0ODY3MzkyOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGEwY2I3YjY2MWNlNDVkNmM2YTI1ODI3ODYxNjc4NmM3MTI3MDcxNDVhMGUzYmE3MjM5ZDVhMDg2NzE0NzEyOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAxZjJlYzE3NTkzYzEwNTRlYjQ2MzY3ZDg0NTNlZjI0YTE3M2NlOTZiNzExN2Q5MWY5YTY4ZDQ0ZmVmOGIwMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2bbe7d6431da4126b564b732a6a424f0",
+      "statement": "SRS error-handling requirements specify that a Package composition collision without explicit override/extension is rejected rather than silently resolved, and Campaign import never activates an exported foreign Principal identifier as a local authority grant.",
+      "evidence": [
+        {
+          "resource": "repo://docs/requirements/engine-srs.md#L716-L716",
+          "version": "repo-lines-v1:sha256:d414a6b5cde8a4bee3b216b0f9af1d15590410a607a476c7ab1ad596ca331456:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDQxNGE2YjVjZGU4YTRiZWUzYjIxNmIwZjlhZjFkMTU1OTA0MTBhNjA3YTQ3NmM3YWIxYWQ1OTZjYTMzMTQ1NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDQxNGE2YjVjZGU4YTRiZWUzYjIxNmIwZjlhZjFkMTU1OTA0MTBhNjA3YTQ3NmM3YWIxYWQ1OTZjYTMzMTQ1NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDdkNmM4MzBlZjFhZDgzNzZjMDk5NThmZjNlZWI4NmRhMDA5YTZiZmE0YTY1YTk5YTZhMzUxN2E3MTZhMDE2ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmUyOTA1NDc4NWJkMGFkOTEzNjM1MWYxZGFmZjU2MWVjMDhiZTc4ZTA4YTVmYTA2YTUxYzY3Yzg4NzJiMmU4ZSJ9"
+        },
+        {
+          "resource": "repo://docs/requirements/engine-srs.md#L724-L724",
+          "version": "repo-lines-v1:sha256:059102ae9546035125b464d40eacbc9e3eefb1e74521d1f08b140fbfd8836db8:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDU5MTAyYWU5NTQ2MDM1MTI1YjQ2NGQ0MGVhY2JjOWUzZWVmYjFlNzQ1MjFkMWYwOGIxNDBmYmZkODgzNmRiOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDU5MTAyYWU5NTQ2MDM1MTI1YjQ2NGQ0MGVhY2JjOWUzZWVmYjFlNzQ1MjFkMWYwOGIxNDBmYmZkODgzNmRiOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDRkOTgwZTU1NDVhZjQ3NDhkMTJkMjA4N2QzZWU4YjZmOWRjY2JhNDg5MTJlMzU1NmVkZWU0NjY5MWI0NGY4MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAxZjJlYzE3NTkzYzEwNTRlYjQ2MzY3ZDg0NTNlZjI0YTE3M2NlOTZiNzExN2Q5MWY5YTY4ZDQ0ZmVmOGIwMSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.2",
+    "at": "2026-09-17T22:44:59.369Z"
+  }
+}
