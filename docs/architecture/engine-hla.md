@@ -1,12 +1,12 @@
 # High-Level Architecture (HLA)
 
 Project Name: Campistoria Engine
-Version: 1.0 (Approved)
-Date (YYYY-MM-DD): 2026-09-12
+Version: 1.1 (Approved)
+Date (YYYY-MM-DD): 2026-09-17
 Author(s): CodeMonki
 Status: Approved
-Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
-RTM Version Reference: `docs/requirements/engine-rtm.md` v1.0 (Architecture mappings updated)
+Requirement Version Reference: `docs/requirements/engine-srs.md` v1.1 (Approved)
+RTM Version Reference: `docs/requirements/engine-rtm.md` v1.2 (Approved)
 Working Glossary Reference: `docs/glossary.md` v0.1
 
 **Terminology note:** The Gang-of-Four *Observer* design pattern (publish/subscribe notification) is unrelated to this project's domain term *Observer* (a viewpoint holding Observer Knowledge, per `engine-srs.md` §3.2). This document does not use the GoF Observer pattern to model the domain Observer concept, and calls this out explicitly wherever the two could be confused.
@@ -44,7 +44,7 @@ Working Glossary Reference: `docs/glossary.md` v0.1
 # 1. Architectural Authority Declaration <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 - Requirements phase approved? **Yes** — `engine-srs.md` v1.0, approved 2026-09-08.
-- Requirement IDs stable? **Yes** — FR-001 through FR-044, NFR-001 through NFR-006.
+- Requirement IDs stable? **Yes** — FR-045 and NFR-007 were approved through controlled Spiral Development rollback.
 - NFRs defined and measurable? **Yes** — see `engine-srs.md` §5; two carry provisional calibration values tracked as risk, not blockers (per project owner determination, 2026-09-08).
 - Advancement to Architecture authorized? **Yes** — Requirements→Architecture gate cleared 2026-09-08 (`engine-srs.md` §16, `engine-rtm.md` §1).
 
@@ -68,6 +68,7 @@ Scope boundaries are unchanged from `engine-srs.md` §2.2: this HLA covers the e
 - FR-013/FR-014 (Resolution vs. Oracle) — demands a structural boundary between deterministic state change and probabilistic input.
 - FR-016/FR-017 (Observer Knowledge separation) — demands Campaign Reality and Observer Knowledge be structurally independent, not layered views of one store.
 - FR-019–FR-026 (Package composition) — demands an extensible, plugin-style boundary for game/world semantics that the engine core does not know about at compile time.
+- FR-045/NFR-007 (Campaign authority binding) — demand durable Campaign-scoped Principal grants and capability enforcement without introducing hosted identity or multiplayer infrastructure.
 - FR-039 (Non-privileged public contracts) — demands a single, symmetric entry surface rather than privileged internal shortcuts.
 - FR-011/NFR-006 (History, Auditability) — demands that every consequential change be reconstructable and attributable.
 
@@ -159,8 +160,8 @@ Each component below states: Responsibility, Related Requirement IDs, Pattern(s)
 
 ## HLA-LIFECYCLE — Campaign Lifecycle & Scenario Instantiation
 
-- **Responsibility:** Instantiate a Campaign from a Scenario with a permanent, unique identity; assign a Campaign seed; keep Scenario content immutable; allow independent divergence of Campaigns sharing a Scenario.
-- **Related Requirements:** FR-001, FR-002, FR-003, FR-040, FR-044.
+- **Responsibility:** Instantiate a Campaign from a Scenario with a permanent, unique identity; assign a Campaign seed; establish the initial solo Campaign Authority Binding; keep Scenario content immutable; allow independent divergence of Campaigns sharing a Scenario.
+- **Related Requirements:** FR-001, FR-002, FR-003, FR-040, FR-044, FR-045.
 - **Pattern:** Factory Method.
 - **Rationale:** Campaign creation is exactly the Factory Method scenario — a creation operation (`instantiate(Scenario)`) that produces a new object (Campaign) from a template (Scenario) without exposing construction internals to the caller, and without the Scenario itself being mutated or consumed in the process (FR-040).
 - **Alternatives considered:** *Prototype* — rejected; Prototype clones an existing instance of the *same* type to make a new one, but a Scenario is not a Campaign instance and is not "cloned into" a Campaign — it is a distinct, immutable template type, which breaks Prototype's core assumption. *Builder* — rejected as the primary pattern here; Builder suits multi-part, order-sensitive assembly (used instead in HLA-PACKAGE, below, for composing the Effective Campaign Definition), whereas Campaign instantiation from an already-resolved Scenario is a single creation step, not a multi-step assembly.
@@ -225,8 +226,8 @@ Each component below states: Responsibility, Related Requirement IDs, Pattern(s)
 
 ## HLA-PERSIST — Persistence & Portability
 
-- **Responsibility:** Durable storage of Campaign Reality/Observer Knowledge/Package composition; implementation-neutral import/export; Campaign-local asset portability; on-demand access to archived history outside the active window.
-- **Related Requirements:** FR-031, FR-032, FR-042, FR-043.
+- **Responsibility:** Durable storage of Campaign Reality/Observer Knowledge/Package composition and Campaign Authority Bindings; implementation-neutral import/export; safe authority rebinding on import; Campaign-local asset portability; on-demand access to archived history outside the active window.
+- **Related Requirements:** FR-031, FR-032, FR-042, FR-043, FR-045.
 - **Pattern:** Adapter, layered over the Event Sourcing store already established in HLA-CORE/HLA-OBSERVER.
 - **Rationale:** Persistence is not a separate storage paradigm — it is the durable backing of the same event logs, exposed through format-specific Adapters (FR-032's "implementation-neutral" representation) that translate the internal event/snapshot model to and from an external representation, without the internal model needing to know about any specific external format.
 - **Alternatives considered:** *A dedicated persistence-specific data model, separate from the Event Sourcing log* — rejected; maintaining a second representation purely for persistence purposes reintroduces the same drift risk that Event Sourcing was chosen in HLA-CORE specifically to avoid.
@@ -260,14 +261,14 @@ Each component below states: Responsibility, Related Requirement IDs, Pattern(s)
 ## HLA-CONTRACT — Public Contract Facade
 
 - **Responsibility:** The single entry surface through which every external actor (reference client, third-party client, authoring tool, third-party integration) invokes engine capability — identically, per FR-039.
-- **Related Requirements:** FR-039 (primary); every other FR indirectly, since all of them are reached through this Facade.
+- **Related Requirements:** FR-039, FR-045, NFR-007 (primary); every other FR indirectly, since all of them are reached through this Facade.
 - **Pattern:** Facade.
 - **Rationale:** FR-039's actual requirement is structural, not just aspirational: there must be *one* surface, not "the reference client's internal shortcut" plus "the public API for everyone else." A Facade forces that by construction — every caller, first-party or third-party, calls the same operations with no alternate path into HLA-CORE, HLA-RESOLUTION, or any other internal component.
 - **Alternatives considered:** *No Facade — expose each subsystem's interface directly* — rejected; this is the real fork here, and it was rejected specifically because it would leave the door open for a first-party client to be built against internal component interfaces directly (a "privileged shortcut"), which is exactly what FR-039 prohibits.
 - **Key interfaces:** Aggregates the public operations of HLA-LIFECYCLE, HLA-RESOLUTION, HLA-OBSERVER (observation-recording only), HLA-PACKAGE, HLA-QUERY, HLA-PERSIST, and HLA-STATE into one documented surface.
-- **Authorization posture:** HLA-CONTRACT is also the expected choke point for actor/session authorization before any mutating operation reaches HLA-RESOLUTION, HLA-OBSERVER, HLA-PACKAGE, HLA-STATE, or HLA-PERSIST. The likely model is role-based assignment of capability bundles with explicit capability checks as the enforcement primitive; the exact role/capability taxonomy remains open (Section 14).
+- **Authorization posture:** HLA-CONTRACT is the authorization choke point before any Campaign-scoped operation reaches an internal component. It owns evaluation of active Campaign Authority Bindings and explicit capabilities. Roles may assign bundles, but caller-supplied role names or grants never self-authorize. Campaign creation establishes the initial solo binding; Campaign import requires authorized local rebinding. Hosted identity and multiplayer administration remain deferred.
 - **Dependency constraints:** Depends on all other components. No other component depends on it.
-- **Data ownership:** None — pure aggregation/routing layer.
+- **Data ownership:** Campaign-scoped authority bindings and their non-Campaign-history provenance. HLA-CONTRACT remains a facade for all other domain data and delegates durable representation to HLA-PERSIST.
 
 **Orphan check:** every component above traces to at least one Requirement ID; every FR group in `engine-srs.md` §4 maps to at least one component (see Section 13).
 
@@ -278,9 +279,9 @@ Each component below states: Responsibility, Related Requirement IDs, Pattern(s)
 
 **Persistence model:** an append-only Event log per Campaign (HLA-CORE) and per Observer (HLA-OBSERVER), with periodic Memento-pattern snapshots (HLA-STATE) bounding replay cost. The active working set (NFR-004) is the most recent segment of that log plus its nearest snapshot; older segments move to archival storage accessible on demand (FR-043) without being loaded for ordinary queries.
 
-**Data ownership boundaries:** Campaign Reality (HLA-CORE) and Observer Knowledge (HLA-OBSERVER) are separate logs, never merged (Section 6, HLA-OBSERVER rationale). Package definitions (HLA-PACKAGE) are independent of any specific Campaign's data. Presentation Models (HLA-QUERY) are never persisted as authoritative data — they are always recomputed from the logs above.
+**Data ownership boundaries:** Campaign Reality (HLA-CORE) and Observer Knowledge (HLA-OBSERVER) are separate logs, never merged (Section 6, HLA-OBSERVER rationale). Package definitions (HLA-PACKAGE) are independent of any specific Campaign's data. Campaign Authority Bindings are Campaign-scoped authorization metadata owned and evaluated by HLA-CONTRACT, with durable representation delegated to HLA-PERSIST; they are not Campaign Reality or Campaign history. Presentation Models (HLA-QUERY) are never persisted as authoritative data — they are always recomputed from the logs above.
 
-**Data lifecycle:** Scenario (immutable) → Campaign instantiation (HLA-LIFECYCLE) → Event append during play (HLA-RESOLUTION writes, HLA-OBSERVER writes) → periodic Checkpoint (HLA-STATE) → archival transition of aged-out segments (HLA-PERSIST) → on-demand archival retrieval (FR-043) → export/import (HLA-PERSIST, FR-032).
+**Data lifecycle:** Scenario (immutable) → Campaign instantiation plus initial local authority binding (HLA-LIFECYCLE/HLA-CONTRACT) → Event append during play (HLA-RESOLUTION writes, HLA-OBSERVER writes) → periodic Checkpoint (HLA-STATE) → archival transition of aged-out segments (HLA-PERSIST) → on-demand archival retrieval (FR-043) → export/import with authorized local authority rebinding (HLA-PERSIST/HLA-CONTRACT, FR-032/FR-045).
 
 **Consistency guarantees:** each Resolution Command (HLA-RESOLUTION) is atomic with respect to Campaign Reality — it either fully appends its Event or has no effect; there is no partially-applied Resolution state. Package migration (FR-023, FR-041) is likewise atomic: a failed migration leaves the prior pinned composition fully intact, never a mixture of old and new.
 
@@ -303,6 +304,7 @@ No hidden data flow exists: every arrow in the Section 3.1 diagram and every "Ke
 | NFR-004 (Scalability) | The active-window/archival split (Section 7) is the direct structural implementation of NFR-004's bounded-working-set requirement; FR-043's on-demand archival retrieval is HLA-PERSIST's `resolveArchived` interface. |
 | NFR-005 (Maintainability) | Hexagonal ports (Section 5) isolate each component behind a fixed interface; HLA-PACKAGE's Microkernel boundary isolates Package semantics from engine mechanics, so either can evolve without the other changing shape. |
 | NFR-006 (Auditability) | Event Sourcing's append-only log is inherently an audit trail; HLA-RESOLUTION's Command pattern additionally records Resolution source on every write (Section 4). |
+| NFR-007 (Authorization) | HLA-CONTRACT evaluates active Campaign Authority Bindings and explicit capabilities before forwarding Campaign-scoped operations; caller-supplied claims do not self-authorize. |
 
 No NFR compliance is assumed without a named mechanism above, per `04-templates/system/architecture-template.md` §8.
 
@@ -351,6 +353,7 @@ No build tooling, dependency manager, or CI/CD platform is selected at this phas
 | Microkernel boundary (HLA-PACKAGE) erodes if a Package is ever allowed engine-core access as a shortcut | Structural / Scope drift | High | HLA-PACKAGE |
 | Facade (HLA-CONTRACT) accumulates a first-party-only "back door" during implementation, silently violating FR-039 | Structural / Scope drift | High | HLA-CONTRACT |
 | Mutating client operations are validated for shape but not authorized by actor capability, allowing player or tool clients to perform GM/campaign-owner operations | Security / Authority | High | HLA-CONTRACT, HLA-RESOLUTION, HLA-STATE |
+| A Campaign has no durable active Principal binding, or import trusts a foreign Principal identifier as a local grant | Security / Authority / Portability | High | HLA-CONTRACT, HLA-LIFECYCLE, HLA-PERSIST |
 | Oracle Adapter boundary (Section 4) is bypassed by a Package invoking Resolution directly | Probabilistic containment | Moderate | HLA-RESOLUTION |
 | Observer Knowledge and Campaign Reality logs are merged for storage convenience during implementation | Structural | Moderate | HLA-OBSERVER, HLA-CORE |
 | Archival tier (HLA-PERSIST) design is deferred so long that NFR-004's active-window default is never empirically validated | Requirement ambiguity | Moderate | HLA-PERSIST |
@@ -368,18 +371,18 @@ Reference: `docs/requirements/engine-rtm.md`. This HLA introduces the following 
 
 | Requirement Group | HLA Component(s) |
 |---|---|
-| FR-001, FR-002, FR-003, FR-040, FR-044 | HLA-LIFECYCLE |
+| FR-001, FR-002, FR-003, FR-040, FR-044, FR-045 | HLA-LIFECYCLE |
 | FR-004–FR-011 | HLA-CORE |
 | FR-012, FR-013, FR-014 | HLA-RESOLUTION |
 | FR-015, FR-016, FR-017, FR-018 | HLA-OBSERVER |
 | FR-019–FR-026 | HLA-PACKAGE |
 | FR-027, FR-028, FR-029, FR-030 | HLA-QUERY |
-| FR-031, FR-032, FR-042, FR-043 | HLA-PERSIST |
+| FR-031, FR-032, FR-042, FR-043, FR-045 | HLA-PERSIST |
 | FR-033, FR-034, FR-035, FR-036 | HLA-STATE |
 | FR-037, FR-038 | HLA-VALIDATE |
-| FR-039 | HLA-CONTRACT |
+| FR-039, FR-045 | HLA-CONTRACT |
 | FR-041 | HLA-PACKAGE, HLA-STATE |
-| NFR-001–NFR-006 | See Section 8 (cross-cutting; no single owning component) |
+| NFR-001–NFR-007 | See Section 8 (cross-cutting; NFR-007 is primarily enforced by HLA-CONTRACT) |
 
 - All Architectural Components map to Requirement IDs? **Yes** (table above).
 - No orphan requirements? **Yes** — every FR/NFR in `engine-srs.md` appears in the table above or in Section 8.
@@ -396,13 +399,13 @@ This table has been applied to `engine-rtm.md` as part of Architecture approval.
 
 - Snapshot/Checkpoint cadence — resolved as a hybrid trigger (60 minutes wall-clock, 50 Events, or graceful close, whichever comes first), both values provisional pending real usage data. See HLA-STATE, Section 6.
 - Oracle Adapter shape — resolved as a single, engine-owned, generic contract rather than per-Package bespoke Adapters. See Section 4 and HLA-RESOLUTION, Section 6.
+- Campaign authority posture — resolved through the v1.1 amendment as durable Campaign-scoped CBAC bindings owned/evaluated by HLA-CONTRACT, created initially by HLA-LIFECYCLE, and persisted/rebound safely through HLA-PERSIST. Full hosted identity and multiplayer authority administration remain deferred.
 
 **Still open:**
 
 - Does Package composition (HLA-PACKAGE, Builder) require a declarative composition language, or is structured data sufficient? `engine-ideation.md` prefers declarative packages generally; this HLA does not decide the specific mechanism.
 - Should HLA-CONTRACT's embedded-vs-hosted deployment adapter be decided now or left fully open through Detailed Design? Currently left fully open (Section 10); flagged here in case that turns out to constrain HLA-PERSIST's storage choice more than currently assumed.
 - Should client synchronization use a revision or delta-number handshake? A client with a previously received reality or Presentation Model state could reconnect by sending its last known delta number, allowing the engine to decide whether to return missing deltas or a fresh full snapshot. This is especially relevant for network-connected clients that may lose connectivity intermittently, but the exact contract belongs in Detailed Design after HLA-CONTRACT and HLA-QUERY interfaces are refined.
-- Should mutation authority be modeled as role-based assignment of capability bundles, with HLA-CONTRACT enforcing explicit capabilities before forwarding mutating requests? Candidate privileged capabilities include retcon, package migration, checkpoint rollback, destructive import, permission management, and direct Campaign Reality mutation; exact role names and capability IDs belong in Detailed Design and may require Requirements review if multi-actor play is reopened.
 - Exact archival storage technology and format for HLA-PERSIST's cold tier — explicitly deferred per `engine-srs.md` §7.
 
 The remaining open questions are Detailed Design inputs rather than Architecture-phase blockers. They do not prevent advancement, provided they are carried forward into Detailed Design and normal RTM/change-control handling. Campistoria is being developed using a Spiral Development model, so later discovery of missed requirements, risk refinements, or needed phase rollback is expected to be handled explicitly rather than treated as an architecture-approval failure.
@@ -415,23 +418,28 @@ The remaining open questions are Detailed Design inputs rather than Architecture
 - All mandatory sections completed? **Yes.**
 - Deterministic–probabilistic boundaries defined? **Yes** (Section 4).
 - NFR-driven structure demonstrated? **Yes** (Section 8).
-- RTM updated? **Yes** — HLA component mappings have been written into `engine-rtm.md`.
-- Human approval granted? **Yes** — approved by the project owner (CodeMonki) on 2026-09-12.
+- RTM updated? **Yes** — FR-045 and NFR-007 mappings are approved in RTM v1.2.
+- Human approval granted? **Pending for v1.1 amendment** — prior v1.0 approval remains recorded below.
 
-All Gate 3→4 criteria are satisfied. Advancement to Detailed Design is authorized as of this approval.
+The original Gate 3→4 approval remains historical. The v1.1 amendment requires approval together with aligned Detailed Design, RTM, and Test Planning updates before lifecycle advancement resumes.
 
 ---
 
 <a id="approval"></a>
 # Approval <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-Approved By: CodeMonki
-Role: Project Owner
-Date: 2026-09-12
-Version Incremented: Yes — v1.0
+Prior Baseline Approved By: CodeMonki
+Prior Baseline Role: Project Owner
+Prior Baseline Date: 2026-09-12
+Prior Baseline Version: v1.0
 
-Advancement to Detailed Design is authorized per lifecycle governance.
+Amendment Approved By: CodeMonki
+Role: Project Owner
+Date: 2026-09-17
+Version Incremented: Yes — v1.1
+
+The v1.1 amendment is approved and aligned through Test Planning.
 
 ---
 
-End of High-Level Architecture (Approved v1.0)
+End of High-Level Architecture (Approved v1.1)

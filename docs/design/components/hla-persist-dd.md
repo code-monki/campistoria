@@ -2,13 +2,13 @@
 
 Project Name: Campistoria Engine
 Component ID: HLA-PERSIST
-Version: 1.0 (Component Baseline)
-Date (YYYY-MM-DD): 2026-09-13
+Version: 1.1 (Approved)
+Date (YYYY-MM-DD): 2026-09-17
 Author(s): CodeMonki
 Status: Approved
-Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
-Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
-Parent Design Reference: `docs/design/engine-detailed-design.md` v1.0 (Approved)
+Architecture Version Reference: `docs/architecture/engine-hla.md` v1.1 (Approved)
+Requirement Version Reference: `docs/requirements/engine-srs.md` v1.1 (Approved)
+Parent Design Reference: `docs/design/engine-detailed-design.md` v1.1 (Approved)
 Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
@@ -43,10 +43,10 @@ Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 - Architecture phase approved? **Yes** — `engine-hla.md` v1.0, approved 2026-09-12.
 - Architectural Component ID stable? **Yes** — HLA-PERSIST.
-- Parent Detailed Design phase opened? **Yes** — [Engine Detailed Design](../engine-detailed-design.md) v1.0 candidate.
-- Advancement to implementation authorized? **No.**
+- Parent Detailed Design approved? **Yes** — [Engine Detailed Design](../engine-detailed-design.md) v1.1.
+- Advancement to implementation authorized? **Yes** — controlled implementation only; Packaging and Release remain unauthorized.
 
-This document refines HLA-PERSIST only. It does not authorize implementation, select storage technology, or introduce a new architectural component.
+This document refines HLA-PERSIST only. It does not select storage technology or introduce a new architectural component.
 
 ---
 
@@ -150,6 +150,7 @@ HLA-PERSIST SHALL be decomposed internally to avoid becoming a God Component:
 | `PersistenceCoordinator` | Coordinates save/load/export/import/archive operations. | None; delegates to submodules. |
 | `EventStreamStoreAdapter` | Persists and retrieves HLA-CORE and HLA-OBSERVER event streams. | Durable backing representation only. |
 | `SnapshotStoreAdapter` | Persists and retrieves HLA-STATE snapshot/checkpoint artifacts as durable backing. | Durable backing representation only. |
+| `AuthorityBindingStoreAdapter` | Persists and retrieves HLA-CONTRACT-owned Campaign Authority Bindings and source-binding provenance. | Durable backing representation only; cannot evaluate or activate grants. |
 | `ExportAssembler` | Builds implementation-neutral export artifacts and manifests. | Export artifact representation. |
 | `ImportReader` | Reads import envelopes enough to identify subject and route validation. | None; cannot admit data alone. |
 | `AssetPortabilityManager` | Resolves campaign-local asset inclusion/access guarantees for export/import. | Asset payload representation and portability metadata. |
@@ -198,6 +199,7 @@ HLA-PERSIST stores durable representations of data owned by other components. It
 | Campaign Reality Events | HLA-CORE | Durable backing, export/import representation, archival segmentation. |
 | Observer Knowledge Events | HLA-OBSERVER | Durable backing, export/import representation, archival segmentation. |
 | Package composition pins | HLA-PACKAGE / Campaign metadata | Durable backing and export/import representation. |
+| Campaign Authority Bindings | HLA-CONTRACT | Durable backing; export of source-binding provenance; import handoff for authorized local rebinding. |
 | Checkpoints/snapshots | HLA-STATE | Durable backing and export/import representation. |
 | Campaign-local assets | Referenced by HLA-CORE/HLA-OBSERVER; payload managed by HLA-PERSIST | Asset payload storage, portability guarantee, export/import representation. |
 | Package-sourced assets | HLA-PACKAGE | Referenced, not duplicated, when Package export independently guarantees portability. |
@@ -291,6 +293,7 @@ resolveAsset(assetRef, accessPurpose) -> AssetResolution
 **Preconditions:**
 
 - HLA-CONTRACT has authorized the caller for export, import, archival query, or asset access as applicable.
+- Campaign import includes an identified local importing Principal authorized through the deployment-scoped import capability.
 - Import artifacts are submitted to HLA-VALIDATE before admission.
 - Export options do not require a storage or packaging technology not selected by the project.
 
@@ -298,6 +301,7 @@ resolveAsset(assetRef, accessPurpose) -> AssetResolution
 
 - Export produces an implementation-neutral artifact or a structured diagnostic.
 - Import either creates/reconstructs an equivalent Campaign or has no effect.
+- Successful import creates an active local `campaignOwner` binding for the authorized importing Principal; exported Principal identifiers remain non-authoritative provenance.
 - Archived retrieval returns requested historical data or explicit unavailability diagnostics.
 - Asset resolution returns payload access, portability diagnostics, or missing-asset diagnostics.
 
@@ -316,10 +320,12 @@ Import flow:
 2. `ImportReader` reads only enough of the envelope to identify artifact type, version, manifest, and validation subject.
 3. HLA-PERSIST submits the artifact to HLA-VALIDATE as `campaignImportArtifact`.
 4. HLA-VALIDATE must return strict `accept` before admission.
-5. HLA-PERSIST reconstructs durable backing data and asset payload references.
-6. HLA-CORE/HLA-OBSERVER/HLA-PACKAGE/HLA-STATE owners admit reconstructed data through their component contracts.
+5. HLA-PERSIST reconstructs durable backing data and asset payload references while treating all exported authority-binding identifiers as provenance only.
+6. HLA-CONTRACT creates a new active local Campaign Authority Binding for the authorized importing Principal.
+7. HLA-CORE/HLA-OBSERVER/HLA-PACKAGE/HLA-STATE owners admit reconstructed data through their component contracts.
+8. Imported Campaign data and the new local binding commit atomically.
 
-`acceptWithWarnings`, `reject`, or `indeterminate` SHALL NOT admit Campaign import data. Partial import is prohibited.
+`acceptWithWarnings`, `reject`, or `indeterminate` SHALL NOT admit Campaign import data. Partial import is prohibited. A foreign Principal or capability grant carried in an export SHALL NOT become active local authority without the explicit HLA-CONTRACT rebinding step.
 
 ---
 
@@ -454,6 +460,7 @@ Future Test Planning SHALL include tests proving:
 - Missing or corrupt archive segments return diagnostics rather than silent empty results.
 - Missing, mismatched, truncated, or corrupt asset payloads and archive segments are detected before being returned as valid.
 - HLA-CORE and HLA-OBSERVER streams remain separately reconstructible after persistence/export/import.
+- Campaign Authority Bindings survive save/reload, while export/import creates a new active local binding and preserves source-binding metadata only as provenance.
 - Future storage/export/archive technology choices can be evaluated against the criteria in Section 6 without altering HLA component boundaries.
 
 Test IDs are intentionally not assigned until the Test Planning phase.
@@ -471,9 +478,11 @@ Test IDs are intentionally not assigned until the Test Planning phase.
 | FR-032 | Implementation-neutral export/import envelope and strict import admission. |
 | FR-042 | Campaign-local asset portability model and asset manifest boundary. |
 | FR-043 | Active-window/archival split and `resolveArchived` retrieval contract. |
+| FR-045 | Durable Campaign Authority Binding backing and authorized import rebinding semantics. |
 | NFR-004 | Active working set separated from archived segments while preserving on-demand retrieval. |
+| NFR-007 | Persistence cannot activate or evaluate authority grants; foreign binding identifiers remain provenance until HLA-CONTRACT creates a local binding. |
 
-This design is sufficient to approve the HLA-PERSIST component-design baseline for continued Detailed Design work and later planning.
+This amended design is prepared for component-level gate review.
 
 ---
 
@@ -499,10 +508,10 @@ None.
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-HLA-PERSIST Detailed Design is **approved at the component-design level**.
+HLA-PERSIST Detailed Design v1.1 is **approved**.
 
-This approval does not authorize implementation by itself. It approves the HLA-PERSIST Detailed Design baseline for continued Detailed Design work and later planning.
+The prior v1.0 baseline remains historically approved. Controlled implementation against v1.1 is authorized through the approved Test Planning gate.
 
-This design establishes persistence and portability boundaries, storage-technology selection criteria, durable backing responsibilities, import/export posture, asset portability guarantees, integrity metadata posture, active-window and archival retrieval behavior, and HLA-VALIDATE admission handoff. No HLA-PERSIST-owned open questions remain at this design level.
+This amendment adds Campaign Authority Binding durability, source-binding provenance, and authorized local rebinding on import to the existing persistence design. No HLA-PERSIST-owned open questions remain for this amendment.
 
 Implementation, testing, package-format SRD work, storage technology selection, archival tuning, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.

@@ -1,12 +1,12 @@
 # Campistoria Engine Test Case Inventory
 
 Project Name: Campistoria Engine
-Version: 0.1 (Test Planning Candidate)
+Version: 1.0 (Approved)
 Date (YYYY-MM-DD): 2026-09-17
 Author(s): CodeMonki
-Status: Draft
-Test Plan Reference: [Engine Test Plan](engine-test-plan.md) v1.0 (Approved)
-RTM Reference: [Engine RTM](../requirements/engine-rtm.md) v1.2 (Test Planned Candidate)
+Status: Approved
+Test Plan Reference: [Engine Test Plan](engine-test-plan.md) v1.1 (Approved)
+RTM Reference: [Engine RTM](../requirements/engine-rtm.md) v1.2 (Approved)
 
 ---
 
@@ -81,6 +81,8 @@ Each case SHALL record concrete preconditions, fixtures, steps, expected results
 | TC-VAL-001 | FR-037 | Integration | Validate missing dependency, malformed artifact, semantic violation, and warning-only admission cases; every state-admitting flow rejects before partial state change. | [HLA-VALIDATE DD](../design/components/hla-validate-dd.md) |
 | TC-VAL-002 | FR-038 | Component | Produce representative validation and migration failures; diagnostics include affected reference, category, severity, and human-readable message where determinable. | [HLA-VALIDATE DD](../design/components/hla-validate-dd.md) |
 | TC-CON-001 | FR-039 | System | Exercise equivalent first-party and third-party callers against the same operation catalog and capability grants; neither has a private operation or internal-component shortcut. | [HLA-CONTRACT DD](../design/components/hla-contract-dd.md) |
+| TC-CON-005 | FR-045 | Integration | Create a Campaign as a locally recognized Principal; an active `campaignOwner` binding is established atomically, remains inspectable, and survives save/reload without relying on Session claims. | [HLA-CONTRACT DD](../design/components/hla-contract-dd.md); [HLA-LIFECYCLE DD](../design/components/hla-lifecycle-dd.md); [HLA-PERSIST DD](../design/components/hla-persist-dd.md) |
+| TC-CON-006 | FR-032, FR-045 | Security | Import a valid Campaign as an authorized local Principal; create a new active local `campaignOwner` binding while retaining source Principal/binding identifiers only as provenance. | [HLA-CONTRACT DD](../design/components/hla-contract-dd.md); [HLA-PERSIST DD](../design/components/hla-persist-dd.md) |
 
 ---
 
@@ -124,10 +126,102 @@ Each case SHALL record concrete preconditions, fixtures, steps, expected results
 | TC-NFR-SCALE-001 | NFR-004 | Performance | With a Package-defined Campaign Time mapping, advance beyond the provisional active window; ordinary queries avoid archive loads while explicit historical queries retrieve correct data on demand. | [HLA-PERSIST DD](../design/components/hla-persist-dd.md); [HLA-QUERY DD](../design/components/hla-query-dd.md) |
 | TC-NFR-MAINT-001 | NFR-005 | Architecture | Introduce a representative Package semantic role and substitute a projection or persistence adapter in a controlled branch; verify unrelated contracts and Reality/Knowledge separation require no redefinition. | [Engine Detailed Design](../design/engine-detailed-design.md) |
 | TC-NFR-AUD-001 | NFR-006 | System | Exercise Resolution, migration, Retcon, Recovery, package-composition change, and other consequential mutations; retrieve records identifying what, when, mechanism, and source/actor as applicable. | [Engine Detailed Design](../design/engine-detailed-design.md) |
+| TC-NFR-AUTH-001 | NFR-007 | Security | For every Campaign-scoped operation group, compare an active sufficient binding with no binding, revoked binding, wrong-Campaign binding, and insufficient capabilities; only the active sufficient binding reaches normal component validation. | [HLA-CONTRACT DD](../design/components/hla-contract-dd.md) |
 
 ---
 
-## 6. Execution Status Vocabulary
+## 6. Feature Negative and Breakage Cases
+
+These cases make negative coverage explicit where the primary functional case is principally nominal. Existing failure-oriented, security, reliability, and boundary cases remain the negative cases for the requirements they already exercise.
+
+| Test Case ID | Requirement ID(s) | Level | Validation Objective and Pass Criterion | Design Reference |
+|---|---|---|---|---|
+| TC-LIF-006 | FR-001 | Component | Reject missing, unknown, invalid, or unvalidated Scenario references and injected initialization failure; no Campaign identity, partial Reality, or orphan persistence artifact remains. | [HLA-LIFECYCLE DD](../design/components/hla-lifecycle-dd.md) |
+| TC-LIF-007 | FR-002 | Integration | Import, reload, or migrate data with a missing, substituted, or conflicting Campaign identity; fail closed rather than silently assigning a different identity. | [HLA-LIFECYCLE DD](../design/components/hla-lifecycle-dd.md) |
+| TC-LIF-008 | FR-003 | Integration | Attempt shared-object, shared-stream, and cross-Campaign reference aliasing between Campaigns from one Scenario; mutation remains isolated or the invalid reference is rejected. | [HLA-LIFECYCLE DD](../design/components/hla-lifecycle-dd.md) |
+| TC-LIF-009 | FR-040 | Security | Attempt direct, indirect, migration-mediated, and Package-reference-mediated Scenario mutation through Campaign operations; every path is rejected or has no effect. | [HLA-LIFECYCLE DD](../design/components/hla-lifecycle-dd.md) |
+| TC-LIF-010 | FR-044 | Component | Inject seed generation failure, malformed caller seed metadata, unauthorized caller-supplied seed, and post-creation seed mutation; creation fails atomically or the mutation is rejected. | [HLA-LIFECYCLE DD](../design/components/hla-lifecycle-dd.md) |
+| TC-CORE-010 | FR-004 | Component | Attempt duplicate, missing, and reassigned Entity identities during append/import; invalid identity transitions are rejected without altering the existing Entity. | [HLA-CORE DD](../design/components/hla-core-dd.md) |
+| TC-CORE-011 | FR-005 | Component | Submit invalid containment cycles, unknown participants, and Location-only queries against non-Locations; return deterministic diagnostics without inventing package spatial semantics. | [HLA-CORE DD](../design/components/hla-core-dd.md) |
+| TC-CORE-012 | FR-006 | Component | Submit an invalid target, invalid semantic reference, and conflicting same-boundary Property change; reject atomically and preserve the prior effective value. | [HLA-CORE DD](../design/components/hla-core-dd.md) |
+| TC-CORE-013 | FR-007 | Component | Create Relationships with missing, cross-Campaign, retired, or invalid participants; no dangling or partially indexed Relationship is admitted. | [HLA-CORE DD](../design/components/hla-core-dd.md) |
+| TC-CORE-014 | FR-008 | Component | Submit a Fact without required provenance, with invalid temporal bounds, or with an unresolved source reference; reject without a partial Fact or Event. | [HLA-CORE DD](../design/components/hla-core-dd.md) |
+| TC-CORE-015 | FR-009 | Component | Query before object creation, across invalid temporal bounds, and after malformed temporal transitions; return explicit absence/diagnostics rather than a fabricated State. | [HLA-CORE DD](../design/components/hla-core-dd.md) |
+| TC-CORE-016 | FR-010 | Component | Submit invalid or incomparable Campaign Time values and equal-time ordering conflicts; reject or apply the documented stable ordering without consulting package display formatting. | [HLA-CORE DD](../design/components/hla-core-dd.md) |
+| TC-CORE-017 | FR-011 | Reliability | Remove, reorder, duplicate, truncate, or corrupt Events and replay boundaries; reconstruction fails diagnostically and never returns silently corrupted authoritative state. | [HLA-CORE DD](../design/components/hla-core-dd.md) |
+| TC-OBS-006 | FR-015 | Component | Use missing, duplicate, retired, or cross-Campaign Observer identity and attempt Observer operations that mutate Core; reject with no cross-boundary side effect. | [HLA-OBSERVER DD](../design/components/hla-observer-dd.md) |
+| TC-OBS-007 | FR-016 | Security | Attempt automatic reconciliation, shared-record aliasing, and raw Core fallback when Observer Knowledge differs or is absent; preserve independence and explicit absence. | [HLA-OBSERVER DD](../design/components/hla-observer-dd.md) |
+| TC-OBS-008 | FR-017 | Security | Record an Observation with the wrong Observer, unknown subject, invalid source, or cross-Observer target; reject without changing any Observer stream or Campaign Reality. | [HLA-OBSERVER DD](../design/components/hla-observer-dd.md) |
+| TC-OBS-009 | FR-018 | Component | Remove, invalidate, or cross-scope an Information Source reference; knowledge admission fails or corruption is diagnosed rather than returning source-free knowledge as valid. | [HLA-OBSERVER DD](../design/components/hla-observer-dd.md) |
+| TC-PKG-010 | FR-019 | Component | Register an exact duplicate, conflicting content under one identity/version, malformed metadata, and an invalid dependency declaration; reject without registry mutation. | [HLA-PACKAGE DD](../design/components/hla-package-dd.md) |
+| TC-PKG-011 | FR-020 | Component | Compose with missing dependencies, invalid extension order, invalid override target, or omitted declared input; composition fails with diagnostics and no partial definition. | [HLA-PACKAGE DD](../design/components/hla-package-dd.md) |
+| TC-PKG-012 | FR-022 | Integration | Attempt implicit pin advancement through registration, reload, query, and save; the existing Campaign pin remains bytewise or semantically unchanged. | [HLA-PACKAGE DD](../design/components/hla-package-dd.md) |
+| TC-PKG-013 | FR-023 | Security | Invoke migration without authorization, without a valid plan, or against incompatible source/target pins; reject before Campaign or pin mutation. | [HLA-PACKAGE DD](../design/components/hla-package-dd.md) |
+| TC-PKG-014 | FR-024 | Integration | Remove, overwrite, or ambiguously resolve one of two concurrently pinned Package versions; the affected operation fails without altering the other Campaign. | [HLA-PACKAGE DD](../design/components/hla-package-dd.md) |
+| TC-PKG-015 | FR-026 | Component | Supply ambiguous, missing, or conflated Package-version and system/edition identifiers; reject ambiguity and preserve independence of the two identity dimensions. | [HLA-PACKAGE DD](../design/components/hla-package-dd.md) |
+| TC-QRY-005 | FR-027 | Component | Query with unknown/retired Observer, invalid context, invalid Campaign Time, or cross-Campaign references; fail closed with no hidden-content fallback. | [HLA-QUERY DD](../design/components/hla-query-dd.md) |
+| TC-QRY-006 | FR-029 | Component | Produce missing envelope fields, projection content outside `content`, or output requiring client-side visibility filtering; validation rejects the Presentation Model. | [HLA-QUERY DD](../design/components/hla-query-dd.md) |
+| TC-QRY-007 | FR-030 | Component | Request unsupported, malformed, or incompatible Projection types; return structured diagnostics without returning a misleading default projection. | [HLA-QUERY DD](../design/components/hla-query-dd.md) |
+| TC-PER-006 | FR-032 | Security | Import malformed, incomplete, incompatible-version, hostile, or integrity-invalid export artifacts; reject before any Campaign, Observer, Package-pin, or asset admission. | [HLA-PERSIST DD](../design/components/hla-persist-dd.md) |
+| TC-PER-007 | FR-042 | Integration | Export with a missing, unreadable, mismatched, or corrupt Campaign-local asset; fail the export with diagnostics rather than producing a degraded importable artifact. | [HLA-PERSIST DD](../design/components/hla-persist-dd.md) |
+| TC-PER-008 | FR-043 | Reliability | Query unavailable, missing, corrupt, truncated, and range-mismatched archived history; return diagnostics rather than silent empty or fabricated history. | [HLA-PERSIST DD](../design/components/hla-persist-dd.md) |
+| TC-STA-007 | FR-036 | Security | Attempt unauthorized Retcon, invalid target, stale prior value, and undeterminable/cross-Campaign references; reject atomically and preserve prior history. | [HLA-STATE DD](../design/components/hla-state-dd.md) |
+| TC-VAL-005 | FR-038 | Component | Force diagnostic production with missing subject, category, severity, or readable message data; reject or normalize the diagnostic so required fields are never silently absent. | [HLA-VALIDATE DD](../design/components/hla-validate-dd.md) |
+| TC-CON-007 | FR-045, NFR-007 | Security | Attempt Campaign access using caller-supplied role/capability claims, a missing or revoked binding, another Campaign's binding, and imported foreign Principal/binding identifiers; reject before forwarding with no authoritative, provenance, or binding side effect. | [HLA-CONTRACT DD](../design/components/hla-contract-dd.md); [HLA-PERSIST DD](../design/components/hla-persist-dd.md) |
+
+### 6.1 Per-Feature Negative Coverage Matrix
+
+| Requirement | Negative / Breakage Test Case ID(s) |
+|---|---|
+| FR-001 | TC-LIF-006 |
+| FR-002 | TC-LIF-007 |
+| FR-003 | TC-LIF-008 |
+| FR-004 | TC-CORE-010 |
+| FR-005 | TC-CORE-011 |
+| FR-006 | TC-CORE-012 |
+| FR-007 | TC-CORE-013 |
+| FR-008 | TC-CORE-014 |
+| FR-009 | TC-CORE-015 |
+| FR-010 | TC-CORE-016 |
+| FR-011 | TC-CORE-017 |
+| FR-012 | TC-DPB-001 |
+| FR-013 | TC-DPB-003, TC-DPB-004 |
+| FR-014 | TC-DPB-001, TC-DPB-002, TC-DPB-004 |
+| FR-015 | TC-OBS-006 |
+| FR-016 | TC-OBS-007 |
+| FR-017 | TC-OBS-008 |
+| FR-018 | TC-OBS-009 |
+| FR-019 | TC-PKG-010 |
+| FR-020 | TC-PKG-011 |
+| FR-021 | TC-PKG-003 |
+| FR-022 | TC-PKG-012 |
+| FR-023 | TC-PKG-013 |
+| FR-024 | TC-PKG-014 |
+| FR-025 | TC-PKG-007 |
+| FR-026 | TC-PKG-015 |
+| FR-027 | TC-QRY-005 |
+| FR-028 | TC-QRY-002, TC-CON-003 |
+| FR-029 | TC-QRY-006 |
+| FR-030 | TC-QRY-007 |
+| FR-031 | TC-STA-003, TC-NFR-REL-001 |
+| FR-032 | TC-PER-006 |
+| FR-033 | TC-STA-006 |
+| FR-034 | TC-STA-005 |
+| FR-035 | TC-STA-003, TC-NFR-REL-001 |
+| FR-036 | TC-STA-007 |
+| FR-037 | TC-VAL-001, TC-CON-004, TC-VAL-003, TC-DPB-002 |
+| FR-038 | TC-VAL-005 |
+| FR-039 | TC-CON-002, TC-CON-004, TC-DPB-004 |
+| FR-040 | TC-LIF-009 |
+| FR-041 | TC-PKG-009, TC-STA-005 |
+| FR-042 | TC-PER-007 |
+| FR-043 | TC-PER-008 |
+| FR-044 | TC-LIF-010 |
+| FR-045 | TC-CON-007 |
+
+---
+
+## 7. Execution Status Vocabulary
 
 | Status | Meaning |
 |---|---|
@@ -142,25 +236,26 @@ All cases in this inventory are **Planned** until implementation references and 
 
 ---
 
-## 7. Inventory Validation
+## 8. Inventory Validation
 
-- FR-001 through FR-044 mapped? **Yes — candidate.**
-- NFR-001 through NFR-006 mapped? **Yes — candidate.**
-- DPB-001 invocation, validation, acceptance, containment, fallback, provenance, and reproducibility covered? **Yes — candidate.**
-- Failure, recovery, rollback, authorization, POV isolation, and hostile-input cases present? **Yes — candidate.**
+- FR-001 through FR-045 mapped? **Yes.**
+- NFR-001 through NFR-007 mapped? **Yes.**
+- Every FR has an explicit negative, boundary, or breakage mapping? **Yes.**
+- DPB-001 invocation, validation, acceptance, containment, fallback, provenance, and reproducibility covered? **Yes.**
+- Failure, recovery, rollback, authorization, POV isolation, and hostile-input cases present? **Yes.**
 - Implementation references available? **No — Implementation not authorized.**
 - Execution evidence available? **No — Test execution has not begun.**
-- Human approval granted? **No — pending review.**
+- Human approval granted? **Yes** — approved by the project owner on 2026-09-17.
 
 ---
 
 ## Approval
 
-Approved By:
-Role:
-Date:
-Version Incremented: Pending — v1.0 candidate
+Approved By: CodeMonki
+Role: Project Owner
+Date: 2026-09-17
+Version Incremented: Yes — v1.0
 
 ---
 
-End of Test Case Inventory Candidate.
+End of Approved Test Case Inventory v1.0.

@@ -1,15 +1,15 @@
 # Campistoria Engine Test Plan
 
 Project Name: Campistoria Engine
-Version: 1.0 (Test Plan Baseline)
+Version: 1.1 (Approved)
 Date (YYYY-MM-DD): 2026-09-17
 Author(s): CodeMonki
 Status: Approved
-Requirement Version Reference: [Engine SRS](../requirements/engine-srs.md) v1.0 (Approved)
-Architecture Version Reference: [Engine HLA](../architecture/engine-hla.md) v1.0 (Approved)
-Detailed Design Version Reference: [Engine Detailed Design](../design/engine-detailed-design.md) v1.0 (Approved)
-RTM Version Reference: [Engine RTM](../requirements/engine-rtm.md) v1.2 (Test Planned Candidate)
-Test Case Inventory Reference: [Engine Test Case Inventory](engine-test-cases.md) v0.1 (Candidate)
+Requirement Version Reference: [Engine SRS](../requirements/engine-srs.md) v1.1 (Approved)
+Architecture Version Reference: [Engine HLA](../architecture/engine-hla.md) v1.1 (Approved)
+Detailed Design Version Reference: [Engine Detailed Design](../design/engine-detailed-design.md) v1.1 (Approved)
+RTM Version Reference: [Engine RTM](../requirements/engine-rtm.md) v1.2 (Approved)
+Test Case Inventory Reference: [Engine Test Case Inventory](engine-test-cases.md) v1.0 (Approved)
 
 ---
 
@@ -36,12 +36,12 @@ Test Case Inventory Reference: [Engine Test Case Inventory](engine-test-cases.md
 <a id="1-test-authority-declaration"></a>
 # 1. Test Authority Declaration
 
-- Requirements approved? **Yes** — Engine SRS v1.0.
-- Architecture approved? **Yes** — Engine HLA v1.0.
-- Detailed Design approved? **Yes** — Engine Detailed Design v1.0.
+- Requirements approved? **Yes** — Engine SRS v1.1.
+- Architecture approved? **Yes** — Engine HLA v1.1.
+- Detailed Design approved? **Yes** — Engine Detailed Design v1.1.
 - RTM initialized and design-mapped? **Yes** — Engine RTM v1.1.
 - Advancement to Test Planning authorized? **Yes** — approved on 2026-09-17.
-- Implementation authorized? **No** — authorization still requires approval of the Test Case Inventory and the test mappings in RTM v1.2.
+- Implementation authorized? **Yes** — controlled implementation is authorized; Packaging and Release remain unauthorized.
 
 This plan defines validation intent before implementation. It does not select an implementation language, test framework, storage technology, deployment platform, or CI provider.
 
@@ -52,7 +52,7 @@ This plan defines validation intent before implementation. It does not select an
 
 **In scope:**
 
-- FR-001 through FR-044 and NFR-001 through NFR-006 from the approved SRS.
+- FR-001 through FR-045 and NFR-001 through NFR-007 from the approved SRS.
 - All ten approved HLA components and their v1.0 Detailed Design baselines.
 - Public-contract behavior, component contracts, cross-component flows, state transitions, failure behavior, recovery, authorization, validation, provenance, and portability.
 - Deterministic-probabilistic containment at DPB-001, including Oracle invocation, validation, human/GM acceptance, fallback, provenance, and prevention of direct state mutation.
@@ -60,7 +60,7 @@ This plan defines validation intent before implementation. It does not select an
 
 **Out of scope:**
 
-- Multiplayer, networking, hosted identity, concurrent-user behavior, cloud services, and remote latency.
+- Multiplayer, networking, hosted identity providers, account management, invitations, concurrent-user behavior, cloud services, and remote latency. The minimal local Principal and Campaign Authority Binding are in scope.
 - AI behavior, model quality, prompt evaluation, or model drift; AI is not an engine capability.
 - Package-specific game correctness beyond conformance to declared Package contracts.
 - Automatic Retcon consequence propagation beyond direct-reference identification.
@@ -78,6 +78,7 @@ Testing SHALL prove that:
 - Observer Knowledge remains separate by Observer and cannot leak across POV boundaries;
 - Package composition, migration, persistence, archival retrieval, checkpoints, Undo, Recovery, and Retcon preserve atomicity and provenance;
 - first-party and third-party callers use the same public contract and capability enforcement;
+- every Campaign-scoped operation is authorized against an active local Campaign Authority Binding rather than caller-supplied role or capability claims;
 - malformed or hostile external content fails closed before state admission;
 - every approved FR and NFR has explicit validation criteria and a stable Test Case ID;
 - failures produce diagnosable results without silent corruption or partial authoritative state;
@@ -132,6 +133,7 @@ Each FR maps to one or more cases in the Test Case Inventory. Cases specify nomi
 | NFR-004 Scalability | Exercise ordinary queries inside a Package-defined approximately 30-day active window and explicit queries outside it while observing archive access. | Ordinary active-window queries do not require archived history; older data remains retrievable on demand. Exact event/entity thresholds remain calibration data, not invented requirements. |
 | NFR-005 Maintainability | Perform controlled design-level change-impact tests using a representative new Package semantic role and projection/adapter substitutions. | The change does not require redefining Campaign Reality/Observer Knowledge separation or unrelated public contracts. |
 | NFR-006 Auditability | Apply each consequential change mechanism and retrieve its provenance. | Records identify what changed, applicable Campaign and operation time, source mechanism, and relevant actor/source references. |
+| NFR-007 Authorization | Exercise each Campaign-scoped operation group with an active sufficient binding, no binding, a revoked binding, the wrong Campaign, and insufficient capabilities; attempt caller-supplied role/capability escalation and imported foreign-binding activation. | Only an active local binding with the required capability permits forwarding; all other attempts fail before side effects and produce structured diagnostics. |
 
 ---
 
@@ -265,6 +267,7 @@ Code-coverage percentages are implementation diagnostics, not substitutes for re
 | Package code or semantics gain direct engine-core access | High | Microkernel boundary and declarative-validator isolation tests. |
 | HLA-CONTRACT develops a first-party or privileged shortcut | High | Equivalent-caller contract tests and internal-port access rejection. |
 | Capability checks are omitted from mutating operations | High | Denial-with-no-side-effect tests for every privileged operation group. |
+| Session claims or imported foreign authority identifiers are treated as active Campaign grants | High | Binding-resolution, spoofing, persistence, and import-rebinding tests across HLA-CONTRACT, HLA-LIFECYCLE, and HLA-PERSIST. |
 | Observer Knowledge or Campaign Reality leaks across POV/observer boundaries | High | Cross-observer, hidden-field, tooling-view, and archived-query isolation tests. |
 | Recovery, Undo, Retcon, or migration violates append-only/provenance semantics | High | Fault injection, atomicity, history, and provenance tests. |
 | Oracle output bypasses validation or human acceptance | High | End-to-end DPB-001 containment tests. |
@@ -279,26 +282,31 @@ Code-coverage percentages are implementation diagnostics, not substitutes for re
 
 - Test Strategy defined? **Yes — approved.**
 - Test Plan defined? **Yes — approved.**
-- Test Case Inventory defined? **Yes — candidate.**
-- Requirement-to-Test mapping complete? **Yes — candidate RTM v1.2.**
+- Test Case Inventory defined? **Yes — approved.**
+- Requirement-to-Test mapping complete? **Yes — approved in RTM v1.2.**
 - NFR validation strategy defined? **Yes — approved.**
 - Failure scenario coverage defined? **Yes — approved.**
 - Deterministic-probabilistic containment validation defined? **Yes — approved.**
-- Human approval granted? **Yes for this Test Plan** — Test Case Inventory and RTM v1.2 approval remain pending.
-- Implementation authorized? **No.**
+- Human approval granted? **Yes** — approved by the project owner on 2026-09-17.
+- Implementation authorized? **Yes** — controlled implementation only; Packaging and Release remain gated.
 
-This Test Plan is approved. Approval of the Test Case Inventory and RTM v1.2 remains necessary to clear the Test Planning to Implementation gate. That later gate approval would authorize controlled implementation, not Packaging or Release.
+The Test Planning to Implementation gate is cleared for the approved v1.1 scope. Packaging and Release require their later gates.
 
 ---
 
 <a id="approval"></a>
 # Approval
 
-Approved By: CodeMonki
+Prior Baseline Approved By: CodeMonki
+Prior Baseline Role: Project Owner
+Prior Baseline Date: 2026-09-17
+Prior Baseline Version: v1.0
+
+Amendment Approved By: CodeMonki
 Role: Project Owner
 Date: 2026-09-17
-Version Incremented: Yes — v1.0
+Version Incremented: Yes — v1.1
 
 ---
 
-End of Test Plan Baseline.
+End of Approved Test Plan v1.1.

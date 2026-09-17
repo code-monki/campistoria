@@ -1,8 +1,8 @@
 # Campistoria Engine Glossary
 
 Project Name: Campistoria Engine
-Version: 0.1 (Working Glossary)
-Date (YYYY-MM-DD): 2026-09-14
+Version: 0.2 (Working Glossary)
+Date (YYYY-MM-DD): 2026-09-17
 Author(s): CodeMonki
 Status: Draft
 
@@ -25,9 +25,12 @@ Definitions in approved phase artifacts remain authoritative for those approved 
 | AssetRef | A semantic reference to an asset used by Campaign Reality or Observer Knowledge without embedding payload bytes or storage mechanics in authoritative state. |
 | Authoritative State | Engine-owned state that determines what is true for its domain, such as Campaign Reality or Observer Knowledge, as distinct from derived views, caches, client renderings, or diagnostics. |
 | Campaign | A persistent, mutable instance of play with durable identity, Campaign Reality, history, package composition, Observer Knowledge, Unresolved State, and user-owned data. |
+| Campaign Authority Binding | The durable, Campaign-scoped association between a locally recognized Principal and the capability bundle or explicit capabilities that Principal may exercise for that Campaign. Imported foreign bindings may be retained as provenance but do not become active local grants. |
+| Campaign Owner | The initial local Principal bound to a Campaign with the `campaignOwner` capability bundle. This is an authorization role bundle, not a claim of ownership over software or project governance. |
 | Campaign Reality | The authoritative record of what is established as true in the campaign. |
 | Campaign Time | The ordering and temporal frame in which campaign Events and State changes occur, independent of any package-specific calendar or time unit. |
 | Capability | A named permission checked by HLA-CONTRACT before an operation is forwarded. Roles may grant capability bundles, but authorization resolves to explicit capabilities. |
+| Capability Grant | An authorization assignment represented by an active Campaign Authority Binding. A capability named only in a caller-supplied request or Session does not grant authority. |
 | Capability-Based Access Control (CBAC) | Authorization based on explicit capabilities required by an operation, rather than hardcoded role names. |
 | Checkpoint | A deliberate, recoverable campaign state used for save, restore, recovery, or replay-bounding purposes. |
 | Client | A reference UI, third-party UI, authoring tool, diagnostic tool, integration, or other external caller using HLA-CONTRACT. |
@@ -55,7 +58,7 @@ Definitions in approved phase artifacts remain authoritative for those approved 
 | Package Composition Pin | A recorded reference to the exact effective package composition used by a Campaign. |
 | Package Semantic Reference | A stable reference from Campaign Reality or related engine data to package-defined meaning, such as an entity type, relationship type, property type, rule, Oracle, Procedure, schema, asset, or scenario element. |
 | Presentation Model | Engine-produced information a client may render for a given observer, context, time, and projection. It is derived, not authoritative. |
-| Principal | The authenticated or otherwise identified security subject represented at the contract boundary. In single-player use this may be a default local principal. |
+| Principal | The authenticated or otherwise locally identified security subject represented at the contract boundary. In single-player use this may be a default local Principal; authority over a Campaign still requires an active Campaign Authority Binding. |
 | Procedure | A package-defined sequence used during play. Procedures may consult Rules and Oracles and may produce Events, State changes, or unresolved/resolved campaign information. |
 | Projection | A purpose-specific representation of campaign information, such as a map, timeline, relationship view, journal index, current scene, or roster. |
 | Property | A value or attribute associated with an Entity, Relationship, State, Event, or other campaign object. Packages define meaning and validation. |
@@ -70,7 +73,7 @@ Definitions in approved phase artifacts remain authoritative for those approved 
 | Rule | Package-defined semantics that interpret campaign information mechanically. |
 | Ruleset Independence | The constraint that engine mechanics do not embed a specific RPG system, setting, genre, edition, or rules vocabulary as intrinsic semantics. |
 | Scenario | An immutable package-defined starting configuration from which a Campaign may be instantiated. |
-| Session | A bounded interaction context between a caller and HLA-CONTRACT carrying identity, actor, observer, capability, and synchronization context as applicable. |
+| Session | A bounded interaction context between a caller and HLA-CONTRACT carrying identity, actor, observer, requested-operation, and synchronization context as applicable. Session claims do not authorize an operation independently of the active Campaign Authority Binding. |
 | Snapshot | A derived representation of component-owned state at a known Event boundary, used to bound replay cost. A snapshot is not more authoritative than committed Events. |
 | State | The current or temporally bounded condition of campaign objects. |
 | Transaction | A single call to a public engine operation, measured from call receipt to result return, exclusive of caller-side network or transport time. |

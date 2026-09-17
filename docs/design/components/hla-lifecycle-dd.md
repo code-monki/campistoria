@@ -2,13 +2,13 @@
 
 Project Name: Campistoria Engine
 Component ID: HLA-LIFECYCLE
-Version: 1.0 (Component Baseline)
-Date (YYYY-MM-DD): 2026-09-15
+Version: 1.1 (Approved)
+Date (YYYY-MM-DD): 2026-09-17
 Author(s): CodeMonki
 Status: Approved
-Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
-Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
-Parent Design Reference: `docs/design/engine-detailed-design.md` v1.0 (Approved)
+Architecture Version Reference: `docs/architecture/engine-hla.md` v1.1 (Approved)
+Requirement Version Reference: `docs/requirements/engine-srs.md` v1.1 (Approved)
+Parent Design Reference: `docs/design/engine-detailed-design.md` v1.1 (Approved)
 Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
@@ -44,10 +44,10 @@ Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 - Architecture phase approved? **Yes** — `engine-hla.md` v1.0, approved 2026-09-12.
 - Architectural Component ID stable? **Yes** — HLA-LIFECYCLE.
-- Parent Detailed Design phase opened? **Yes** — [Engine Detailed Design](../engine-detailed-design.md) v1.0 candidate.
-- Advancement to implementation authorized? **No.**
+- Parent Detailed Design approved? **Yes** — [Engine Detailed Design](../engine-detailed-design.md) v1.1.
+- Advancement to implementation authorized? **Yes** — controlled implementation only; Packaging and Release remain unauthorized.
 
-This document refines HLA-LIFECYCLE only. It does not authorize implementation, introduce a new architectural component, select an identity-generation algorithm, or select a random-number generation algorithm.
+This document refines HLA-LIFECYCLE only. It does not introduce a new architectural component, select an identity-generation algorithm, or select a random-number generation algorithm.
 
 ---
 
@@ -204,11 +204,12 @@ Instantiation flow:
 5. HLA-LIFECYCLE assigns a new Campaign identity.
 6. HLA-LIFECYCLE assigns a Campaign seed from creation seed metadata when supplied, or generates one when absent.
 7. HLA-LIFECYCLE records immutable lifecycle metadata: Campaign identity, seed, Scenario reference, ECD reference, package composition pin, creation source, and creation time.
-8. HLA-LIFECYCLE asks HLA-CORE to initialize Campaign Reality from the validated scenario starting state.
-9. HLA-PERSIST durable backing records the created Campaign through its normal persistence boundary.
-10. HLA-LIFECYCLE returns the creation result through HLA-CONTRACT.
+8. HLA-CONTRACT prepares the initial active Campaign Authority Binding between the new Campaign and the creating or default local Principal with the `campaignOwner` bundle.
+9. HLA-LIFECYCLE asks HLA-CORE to initialize Campaign Reality from the validated scenario starting state.
+10. HLA-PERSIST durable backing records the Campaign, lifecycle metadata, and authority binding through its normal persistence boundary.
+11. The creation transaction commits the Campaign and initial authority binding together, then HLA-LIFECYCLE returns the creation result through HLA-CONTRACT.
 
-The creation operation SHALL be atomic at the component-contract level: either a Campaign exists with identity, seed, lifecycle metadata, package composition basis, and initial Campaign Reality boundary, or no authoritative Campaign exists.
+The creation operation SHALL be atomic at the component-contract level: either a Campaign exists with identity, seed, lifecycle metadata, package composition basis, initial Campaign Reality boundary, and an active local Campaign Authority Binding, or no authoritative Campaign exists.
 
 ---
 
@@ -226,6 +227,7 @@ CampaignIdentity {
   campaignRef
   createdAt
   createdBy?
+  initialAuthorityBindingRef
   scenarioRef
   effectiveDefinitionRef
   packageCompositionPin
@@ -360,7 +362,7 @@ For existing Campaign changes:
 
 Lifecycle metadata is sufficient creation provenance for v1.
 
-HLA-LIFECYCLE SHALL record Campaign identity, Scenario reference, Effective Campaign Definition reference, package composition pin, seed value, seed source, source metadata reference where available, creation time, and caller context where available.
+HLA-LIFECYCLE SHALL record Campaign identity, Scenario reference, Effective Campaign Definition reference, package composition pin, seed value, seed source, source metadata reference where available, creation time, creating Principal reference, and initial Campaign Authority Binding reference.
 
 HLA-CORE initial Events remain the provenance boundary for initial Campaign Reality. HLA-LIFECYCLE SHALL NOT create a separate lifecycle provenance record for v1 unless later Test Planning, audit requirements, or implementation evidence demonstrate that lifecycle metadata is insufficient.
 
@@ -393,6 +395,7 @@ CampaignLifecycleMetadata {
   campaignSeedRef
   createdAt
   createdBy?
+  initialAuthorityBindingRef
   lifecycleVersion
   diagnostics[]
 }
@@ -419,6 +422,7 @@ HLA-LIFECYCLE SHALL fail closed before admitting partial Campaign state.
 | Scenario content mutation requested through Campaign-facing lifecycle API | Reject or no-op with diagnostics; Scenario content remains unchanged. |
 | Campaign identity collision detected | Reject creation before authoritative state is admitted. |
 | Seed assignment fails | Reject creation before authoritative state is admitted. |
+| Initial Campaign Authority Binding cannot be established or persisted | Reject creation atomically; no authoritative Campaign is admitted. |
 | Initial HLA-CORE initialization fails | Roll back lifecycle metadata admission or mark the attempt non-authoritative; no partial Campaign may be returned as created. |
 | Durable backing fails during creation | Return diagnosable failure and preserve no partial authoritative Campaign, or recover to the last valid state under HLA-PERSIST/HLA-STATE semantics. |
 | Package composition changes after Campaign creation | No automatic propagation to existing Campaign; require explicit migration flow. |
@@ -468,6 +472,8 @@ Future Test Planning SHALL cover at least:
 - Seed assignment failure fails closed.
 - Initial HLA-CORE initialization failure leaves no partial authoritative Campaign.
 - Package changes after Campaign creation do not automatically alter existing Campaign Reality.
+- Campaign creation establishes an active local `campaignOwner` binding for the creating/default Principal.
+- Failure to establish or persist the initial binding leaves no authoritative Campaign.
 
 ---
 
@@ -483,6 +489,7 @@ Future Test Planning SHALL cover at least:
 | FR-003 | Independent Divergence Model and separate Campaign Reality/Observer Knowledge streams. |
 | FR-040 | Scenario Immutability Boundary and failure semantics for Scenario mutation attempts. |
 | FR-044 | Campaign Seed Model and public retrieval posture. |
+| FR-045 | Initial Campaign Authority Binding orchestration and atomic creation invariant. |
 | FR-019 through FR-024 | HLA-PACKAGE boundary for Scenario/ECD inputs and composition pins. |
 | FR-031, FR-032 | Identity and seed persistence/export-import invariants. |
 | FR-041 | Migration boundary preserving identity/seed and deferring rollback to owning components. |
@@ -490,6 +497,7 @@ Future Test Planning SHALL cover at least:
 | NFR-003 | Atomic creation and no partial Campaign admission. |
 | NFR-005 | Separation of lifecycle from package, validation, persistence, and core state ownership. |
 | NFR-006 | Lifecycle metadata as creation provenance, with HLA-CORE initial Events covering initial Campaign Reality provenance. |
+| NFR-007 | Creation does not complete without an active local Principal binding. |
 
 ---
 
@@ -514,10 +522,10 @@ Resolved during Detailed Design review:
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-HLA-LIFECYCLE Detailed Design is **approved at the component-design level**.
+HLA-LIFECYCLE Detailed Design v1.1 is **approved**.
 
-This approval does not authorize implementation by itself. It approves the HLA-LIFECYCLE Detailed Design baseline for continued Detailed Design work and later planning.
+The prior v1.0 baseline remains historically approved. Controlled implementation against v1.1 is authorized through the approved Test Planning gate.
 
-This design establishes the HLA-LIFECYCLE component boundary, Campaign creation model, Campaign identity model, Campaign seed model, Scenario immutability boundary, independent divergence model, package/migration boundary, creation provenance posture, interface contracts, and failure semantics. No HLA-LIFECYCLE-owned open questions remain at this design level.
+This amendment adds initial Campaign Authority Binding orchestration and atomicity to the existing lifecycle design. No HLA-LIFECYCLE-owned open questions remain for this amendment.
 
 Implementation, testing, future clone/fork/branch rescoping, package-format SRD work, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.

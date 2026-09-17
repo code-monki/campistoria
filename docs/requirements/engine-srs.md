@@ -1,12 +1,12 @@
 # Software Requirements Specification (SRS)
 
 Project Name: Campistoria Engine
-Version: 1.0 (Approved)
-Date (YYYY-MM-DD): 2026-09-08
+Version: 1.1 (Approved)
+Date (YYYY-MM-DD): 2026-09-17
 Author(s): CodeMonki
 Status: Approved
 Project Primer Version Reference: `docs/agent/engine-primer.md` (current, as approved during Ideation)
-RTM Scaffold Version: 0.1 (`docs/requirements/engine-rtm.md`, created alongside this SRS)
+RTM Version Reference: 1.2 approved (`docs/requirements/engine-rtm.md`)
 
 **Terminology note:** This project does not use a separate "Project Primer" artifact in the toolkit's generic sense. `docs/agent/engine-primer.md` and `docs/concept/engine-ideation.md` jointly serve that role and are treated as equivalent for the purposes of this declaration. Consolidated working terminology is maintained in `docs/glossary.md`; this SRS remains authoritative for approved requirement meanings unless changed through lifecycle change control.
 
@@ -110,6 +110,7 @@ The following terms are normative for this document and carry the meanings defin
 | Term | Meaning |
 |---|---|
 | Campaign | A persistent, mutable instance of play with durable identity, campaign reality, history, package composition, observer knowledge, and unresolved state. |
+| Campaign Authority Binding | A durable, Campaign-scoped association between a Principal and granted capabilities. It authorizes access to one Campaign without requiring hosted accounts or multiplayer identity infrastructure. |
 | Campaign Reality | The authoritative record of what is established as true in the campaign. |
 | Entity | A campaign object with persistent identity. |
 | Location | An entity capable of participating in spatial relationships and projections. |
@@ -132,6 +133,7 @@ The following terms are normative for this document and carry the meanings defin
 | Projection | A purpose-specific representation of campaign information. |
 | Presentation Model | Engine-produced information a client may render for a given observer/context/time/projection. |
 | POV (Point of View) | The observer/context basis for determining what may be presented. |
+| Principal | The identified security subject presented at the public contract boundary. Solo play may use a default local Principal without requiring external authentication. |
 | Checkpoint | A deliberate, recoverable campaign state. |
 | Undo | Reversal of an accidental or unwanted operation; not campaign history. |
 | Recovery | Restoration of valid state after technical failure; not campaign history. |
@@ -184,6 +186,15 @@ Requirements are grouped by capability area for readability. Grouping does not i
 **Dependencies:** FR-001, FR-002
 **Constraints:** The engine guarantees only that a stable seed value is assigned, persisted, and exposed — not that any given Oracle's output is reproducible from it. That depends on the Oracle's own package-defined implementation, and does not apply to Oracles whose output originates from a physical/real-world source (e.g., manually recorded dice rolls or drawn cards), which are inherently non-reproducible regardless of seeding. Whether two different conformant engine implementations must produce identical sequences from the same seed (i.e., a shared PRNG algorithm as a normative interoperability contract) is a separate, unresolved question, left open for the future platform SRD rather than assumed here.
 **Notes:** Raised during Requirements review (2026-09-08); resolves the Section 6 "Reproducibility expectations" open item for software-implemented Oracles.
+
+**Requirement ID:** FR-045
+**Title:** Campaign Authority Binding
+**Description:** The engine shall establish and durably preserve at least one active Campaign-scoped authority binding between a Campaign and an identified Principal, granting that Principal the capabilities required to operate the Campaign. Campaign creation shall establish the initial solo binding. Campaign import shall not activate foreign Principal identifiers as local grants; an authorized importing Principal shall receive a new local binding while source-binding information is retained only as provenance.
+**Acceptance Criteria:** Creating a Campaign establishes an active binding between its Campaign identity and the creating/default local Principal with the `campaignOwner` capability bundle; the binding remains effective across save/reload. Export/import on another installation requires an authorized importer, creates a new active local binding for that importer, preserves source-binding metadata only as non-authoritative provenance, and does not treat the exported Principal identifier as an active local grant.
+**Priority:** High
+**Dependencies:** FR-001, FR-002, FR-031, FR-032, FR-039
+**Constraints:** This requirement does not introduce hosted accounts, external authentication, invitations, collaboration, or multiplayer user administration. Principal identity establishment remains deployment-adapter owned; Campaign-scoped binding and capability enforcement are engine contract responsibilities.
+**Notes:** Added through Spiral Development rollback on 2026-09-17 after Test Planning exposed that the actor-aware contract lacked a durable Campaign-to-Principal authority association.
 
 ## 4.2 Campaign Reality
 
@@ -613,6 +624,13 @@ Several NFRs below contain a quantitative target marked *(OPEN)*. `docs/concept/
 **Constraints:** None.
 **Dependencies:** FR-008, FR-011, FR-036.
 
+**Requirement ID:** NFR-007
+**Category:** Authorization
+**Description:** Every Campaign-scoped operation shall be authorized against active capabilities bound to the requesting Principal for the targeted Campaign; caller-supplied role names or grants shall not self-authorize access.
+**Measurement Criteria:** For each Campaign-scoped operation group, an unbound Principal or a Principal lacking the required capability is denied before component forwarding and produces no authoritative, authority-binding, or provenance side effect; a bound Principal with the required capability is allowed to reach normal component validation.
+**Constraints:** Capability-based enforcement is required. Roles may assign capability bundles, but authorization checks resolve to explicit capabilities. Authentication providers and multiplayer identity administration remain out of scope.
+**Dependencies:** FR-039, FR-045.
+
 ---
 
 <a id="6-deterministicprobabilistic-requirements"></a>
@@ -653,7 +671,7 @@ No regulatory, budgetary, or timeline constraints have been identified for this 
 <a id="8-assumptions"></a>
 # 8. Assumptions <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-- **Single-campaign, single-user focus at this phase.** The primary usage context is assumed to be one human player/GM operating one Campaign at a time per engine instance. Multiplayer and concurrent multi-actor access are explicitly deferred (Section 13). **Flagged as uncertain** — not yet confirmed against future stress-test scenarios beyond those already run during Ideation (`docs/concept/engine-ideation.md`, "Stress-Test Findings").
+- **Single-campaign, single-user focus at this phase.** The primary usage context is one human player/GM operating one Campaign at a time per engine instance through a default or deployment-supplied local Principal. The Campaign retains an active authority binding for that Principal, but no hosted account, external authentication, invitation, or concurrent multi-user service is required. Multiplayer and concurrent multi-actor access remain deferred (Section 13).
 - **No regulated data categories.** The engine is assumed not to process data subject to specific regulatory regimes (e.g., payment data, health data, data covered by children's-privacy law) at this phase. **Flagged as uncertain** — should be revisited if scope changes.
 - **No fixed budget or timeline.** Per the hobby-project context recorded for this repository, no budget or delivery-date constraint currently applies. This assumption should be revisited if the project's organizational status changes.
 - **Trusted-enough Package authorship at this phase.** Structural/schema validation (NFR-002) is assumed to be the primary trust concern for Packages at this phase, rather than adversarial security review, consistent with no networked or cloud-hosted package distribution being in scope yet (Section 13).
@@ -670,6 +688,7 @@ No architectural structure (transport, protocol, or component decomposition) is 
 - A query interface for Campaign Reality, Observer Knowledge (via POV resolution), and Presentation Models (FR-027, FR-028, FR-029, FR-030).
 - A Package construction, validation, import, and export interface, available identically to first-party and third-party callers (FR-039).
 - A Campaign import/export interface producing an implementation-neutral representation (FR-032).
+- A Campaign authority interface that creates, evaluates, and inspects Campaign-scoped Principal capability bindings without requiring hosted identity infrastructure (FR-045, NFR-007).
 - A Resolution-invocation interface through which human decisions, procedures, rules, and Oracle results can be submitted (FR-013).
 - A diagnostics interface returning structured validation and migration failure information (FR-038).
 
@@ -684,6 +703,7 @@ No hardware interfaces are anticipated. No external system integrations are in s
 - **Observer Knowledge data:** per-observer knowledge units, each with a recorded Information Source (FR-018).
 - **Package data:** package identity, version, declared dependencies/capabilities, and content, sufficient to satisfy FR-019 through FR-026.
 - **Asset references:** Campaign Reality and Observer Knowledge may hold references to binary assets (images, audio, video, or other media) as opaque Property values (FR-006). The engine requires no built-in knowledge of asset formats, encoding, or rendering; it requires only that referenced assets remain portable per FR-042.
+- **Campaign authority data:** active local Campaign Authority Bindings associate a Campaign identity, local Principal reference, and capability grants. Exported source-binding metadata is provenance only and cannot become an active local grant without an authorized import/rebinding operation (FR-045, NFR-007).
 - **Retention:** compression, archiving, compaction, and deletion are distinct operations (per `docs/concept/engine-ideation.md`, "Persistence And Portability"); archived data must remain semantically available for reconstruction and search, not merely retained in raw form.
 - **Privacy/compliance:** campaign data is user-owned (Section 7); no regulated personal data category is currently in scope (Section 8). This should be re-examined if scope changes.
 - **Audit:** provenance for Facts, Resolutions, migrations, and Retcons must be retrievable (NFR-006).
@@ -700,6 +720,8 @@ No hardware interfaces are anticipated. No external system integrations are in s
 - An interrupted write is recoverable to the last valid state without manual repair (FR-035, NFR-003).
 - A Package migration that fails partway leaves the Campaign in its prior valid, pinned composition (FR-041).
 - A query for a Presentation Model with no valid content for the given POV returns an explicit empty/insufficient-information result rather than fabricated content (supports FR-028, FR-029).
+- An unbound Principal or a Principal lacking a required Campaign-scoped capability is denied before component forwarding and causes no side effect (NFR-007).
+- Campaign import never activates an exported foreign Principal identifier as a local authority grant; an authorized importer receives a new local binding and the source binding remains provenance only (FR-045).
 
 ---
 
@@ -707,9 +729,10 @@ No hardware interfaces are anticipated. No external system integrations are in s
 # 12. Security and Compliance Requirements <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 - **Validation at trust boundaries:** Packages, imported campaign data, and external assets must be validated before being incorporated into a Campaign (NFR-002).
-- **Authorization of presentation:** the engine, not the client, determines what may be presented for a given POV (FR-028); this is the engine's core authorization mechanism at this phase.
+- **Authorization of presentation:** the engine, not the client, determines what may be presented for a given POV (FR-028). POV filtering is distinct from Campaign operation authorization under FR-045 and NFR-007.
 - **Audit logging:** consequential changes must be traceable to their source (NFR-006).
-- **Authentication:** not required at this phase — no multi-user or networked access is in scope (Section 8, Section 13). This is an assumption to revisit, not a settled exclusion, if multiplayer or cloud services are ever reopened.
+- **Authentication:** an external authentication provider is not required at this phase. A Principal must still be identified at the contract boundary and authorized through Campaign-scoped capability bindings (FR-045, NFR-007). Hosted identity and stronger authentication requirements must be revisited if multiplayer or cloud services are reopened.
+- **Authorization:** HLA-CONTRACT shall evaluate active Campaign Authority Bindings and required capabilities before forwarding Campaign-scoped operations. Caller-supplied role names or capability claims are not sufficient authority by themselves.
 - **Regulatory obligations:** none identified at this phase (Section 8).
 
 ---
@@ -721,7 +744,7 @@ Restated from `docs/concept/engine-ideation.md`, "Deferred Or Out Of Scope":
 
 - Full authoring IDE (visual editors, map editing, schema editing, oracle/procedure editors, Git integration, asset workflows).
 - AI as an engine capability, AI-specific campaign semantics, AI oracle interpretation, or AI GM function.
-- Multiplayer implementation (networking, synchronization, authentication, signaling, conflict resolution, host migration).
+- Multiplayer implementation (networking, synchronization, external authentication, signaling, concurrent authority administration, conflict resolution, host migration). Minimal Campaign-scoped authority binding for solo play is not deferred.
 - Cloud services (accounts, hosted campaigns, cloud sync, telemetry, subscriptions, remote backup).
 - Collaboration (shared editing, co-GMs, distributed authoring, simultaneous assistants).
 - Branching campaigns / alternate timelines.
@@ -745,6 +768,8 @@ Also deferred from this document specifically (Section 2.2): detailed requiremen
 | Persistence becomes tied to a specific implementation, weakening user ownership | Dependency | High | FR-032, Section 7 |
 | Package migration silently alters campaign semantics | Scope drift | High | FR-022, FR-023, FR-041 |
 | Public contracts underspecified, making third-party packages/clients second-class | Requirement ambiguity | High | FR-039 |
+| Campaign operation is authorized from caller-supplied claims rather than an active Campaign Authority Binding | Security / Authority | High | FR-045, NFR-007 |
+| Imported foreign Principal identifiers become active local grants without authorized rebinding | Security / Portability | High | FR-032, FR-045, NFR-007 |
 | Engine absorbs authoring-tool responsibilities | Scope drift | Moderate | Section 2.2, Section 13 |
 | Retcon semantics become dangerously automatic | Scope drift | Moderate | FR-036 |
 | Project prematurely chooses technology before quality attributes are known | Scope drift | Moderate | Section 7, NFR *(OPEN)* items |
@@ -776,26 +801,31 @@ Risk levels are this author's judgment based on the risks already surfaced durin
 <a id="16-phase-gate-declaration"></a>
 # 16. Phase Gate Declaration <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-- Requirements stable? **Yes** — approved by the project owner (CodeMonki) on 2026-09-08.
+- Requirements stable? **Yes** — v1.1 approved by the project owner on 2026-09-17 following controlled Spiral Development rollback.
 - NFRs measurable? **Yes** — every NFR defines an objective measurement criterion. NFR-001 and NFR-004 additionally carry provisional calibration values pending empirical data (no production workload exists yet to calibrate against); this is tracked as a Moderate risk (Section 14) and resolved through normal RTM change control as data becomes available, not treated as a gate blocker.
 - Scope boundaries explicit? **Yes.**
 - Traceability scaffold prepared? **Yes.**
-- Human approval granted? **Yes** — see Approval section below.
+- Human approval granted? **Yes** — the v1.1 amendment was approved on 2026-09-17.
 
-All criteria read "Yes." The Requirements→Architecture gate is cleared as of 2026-09-08.
+The original Requirements→Architecture gate was cleared on 2026-09-08. The v1.1 amendment and its downstream artifacts were approved on 2026-09-17, completing the controlled rollback.
 
 ---
 
 <a id="approval"></a>
 # Approval <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-Approved By: CodeMonki
-Role: Project Owner
-Date: 2026-09-08
-Version Incremented: Yes (0.1 → 1.0)
+Prior Baseline Approved By: CodeMonki
+Prior Baseline Role: Project Owner
+Prior Baseline Date: 2026-09-08
+Prior Baseline Version: v1.0
 
-Advancement to High-Level Architecture is authorized as of this approval, per lifecycle governance.
+Amendment Approved By: CodeMonki
+Role: Project Owner
+Date: 2026-09-17
+Version Incremented: Yes — v1.1
+
+The v1.1 amendment is approved and aligned through Test Planning.
 
 ---
 
-End of Requirements Specification (Approved v1.0)
+End of Requirements Specification (Approved v1.1)

@@ -2,13 +2,13 @@
 
 Project Name: Campistoria Engine
 Component ID: HLA-CONTRACT
-Version: 1.0 (Component Baseline)
-Date (YYYY-MM-DD): 2026-09-13
+Version: 1.1 (Approved)
+Date (YYYY-MM-DD): 2026-09-17
 Author(s): CodeMonki
 Status: Approved
-Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
-Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
-Parent Design Reference: `docs/design/engine-detailed-design.md` v1.0 (Approved)
+Architecture Version Reference: `docs/architecture/engine-hla.md` v1.1 (Approved)
+Requirement Version Reference: `docs/requirements/engine-srs.md` v1.1 (Approved)
+Parent Design Reference: `docs/design/engine-detailed-design.md` v1.1 (Approved)
 Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
@@ -41,10 +41,10 @@ Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 - Architecture phase approved? **Yes** — `engine-hla.md` v1.0, approved 2026-09-12.
 - Architectural Component ID stable? **Yes** — HLA-CONTRACT.
-- Parent Detailed Design phase opened? **Yes** — [Engine Detailed Design](../engine-detailed-design.md) v1.0 candidate.
-- Advancement to implementation authorized? **No.**
+- Parent Detailed Design approved? **Yes** — [Engine Detailed Design](../engine-detailed-design.md) v1.1.
+- Advancement to implementation authorized? **Yes** — controlled implementation only; Packaging and Release remain unauthorized.
 
-This document refines HLA-CONTRACT only. It does not authorize implementation and does not introduce a new architectural component.
+This document refines HLA-CONTRACT only and does not introduce a new architectural component.
 
 ---
 
@@ -57,15 +57,16 @@ This document refines HLA-CONTRACT only. It does not authorize implementation an
 
 **Component purpose:** HLA-CONTRACT is the engine's public boundary. It gives first-party clients, third-party clients, authoring tools, and integrations one documented operation surface while keeping authorization, request/response conventions, diagnostics, and synchronization envelopes consistent across all callers.
 
-**Primary requirement:** FR-039.
+**Primary requirements:** FR-039 and FR-045.
 
-**Cross-cutting NFRs:** NFR-001 and NFR-005 directly; NFR-002 and NFR-006 indirectly because contract routing controls validation and provenance entry.
+**Cross-cutting NFRs:** NFR-001, NFR-005, and NFR-007 directly; NFR-002 and NFR-006 indirectly because contract routing controls validation and provenance entry.
 
 **In scope:**
 
 - Public facade rules for first-party and third-party callers.
 - Request, response, session, authorization, diagnostic, and synchronization envelopes.
 - Capability-based authorization posture for mutating operations.
+- Durable Campaign Authority Binding ownership and evaluation for all Campaign-scoped operations.
 - Actor/session/authority vocabulary that works for current single-player use without preventing future multi-user refinement.
 - Transport-neutral operation grouping across embedded, in-process service, and future network adapters.
 - Reconnect behavior using a caller-supplied last-known revision or delta number.
@@ -75,7 +76,7 @@ This document refines HLA-CONTRACT only. It does not authorize implementation an
 - Concrete programming language, API protocol, serialization format, schema language, authentication provider, persistence backend, or network transport.
 - Complete internal contracts for HLA-LIFECYCLE, HLA-RESOLUTION, HLA-OBSERVER, HLA-PACKAGE, HLA-QUERY, HLA-PERSIST, HLA-STATE, or HLA-VALIDATE.
 - Multi-user collaboration semantics beyond authorization and reconnect posture already needed to prevent privileged mutation.
-- Hosted account management, player invitation flows, concurrent-player conflict resolution, multiplayer latency requirements, and persistent user-management storage.
+- Hosted account management, player invitation flows, concurrent-player conflict resolution, multiplayer latency requirements, and persistent user-account storage. Durable Campaign Authority Bindings are in scope and are not a hosted user-management subsystem.
 
 ---
 
@@ -89,7 +90,7 @@ HLA-CONTRACT SHALL preserve the approved HLA constraints:
 - It is the only public entry surface for reference clients, third-party clients, authoring tools, and integrations.
 - It exposes identical documented operations to first-party and third-party callers.
 - It depends on all other HLA components; no other HLA component depends on it.
-- It owns no Campaign Reality, Observer Knowledge, Package, Checkpoint, or persistence data.
+- It owns no Campaign Reality, Observer Knowledge, Package, Checkpoint, or storage representation; it does own Campaign Authority Bindings, whose durable representation is delegated to HLA-PERSIST.
 - It performs authorization before forwarding mutating requests.
 - It keeps deployment shape open: embedded library call, in-process service call, and future network API remain adapter choices.
 - It does not let callers bypass HLA-VALIDATE for Package registration, Campaign import, or Oracle result acceptance.
@@ -108,7 +109,9 @@ HLA-CONTRACT SHALL:
 - Publish the complete engine operation catalog available to all callers.
 - Normalize caller input into component-facing requests.
 - Establish caller/session identity at the contract boundary.
-- Evaluate required capabilities before any mutating operation is forwarded.
+- Resolve the targeted Campaign's active authority binding for the caller Principal.
+- Evaluate required capabilities before any Campaign-scoped operation is forwarded.
+- Establish the initial `campaignOwner` binding atomically with Campaign creation and establish a new active local owner binding during authorized Campaign import.
 - Route accepted requests to the owning HLA component.
 - Return structured results, diagnostics, and synchronization metadata.
 - Preserve a local, in-process invocation path for NFR-001.
@@ -116,7 +119,8 @@ HLA-CONTRACT SHALL:
 
 HLA-CONTRACT SHALL NOT:
 
-- Own authoritative campaign data.
+- Own Campaign Reality, Observer Knowledge, or other authoritative play-state data.
+- Treat caller-supplied role names, capability grants, or foreign Principal identifiers as self-authorizing.
 - Persist Presentation Models as authoritative state.
 - Perform Resolution, Validation, Package composition, Query projection, Persistence, Checkpointing, Undo, Recovery, or Retcon logic itself.
 - Grant special capabilities to the reference client, first-party authoring tools, or first-party Packages.
@@ -125,7 +129,8 @@ HLA-CONTRACT SHALL NOT:
 **Invariants:**
 
 - Every public operation has one documented contract path.
-- Every mutating operation declares at least one required capability.
+- Every Campaign-scoped operation declares its required capability posture.
+- Every Campaign has at least one active local Campaign Authority Binding.
 - Permission checks resolve to explicit capabilities, not hardcoded role names.
 - Denied operations have no side effect.
 - A successful forwarded operation returns either a result or a structured diagnostic from the owning component.
@@ -209,7 +214,27 @@ Principal, role, actor, session, capability, RBAC, and CBAC terminology SHALL al
 
 Single-player operation SHALL use this same authority vocabulary with default principal, actor, and session references. HLA-CONTRACT SHALL NOT model single-player as "no actor model." This avoids a later contract retrofit if hosted or multi-user play is reopened, while preserving the current single-player scope.
 
-HLA-CONTRACT defines the contract-level meaning of principal, actor, session, role bundle, and capability grant. In the current scope, authority assignments MAY be supplied by the embedding application or default solo-session setup. HLA-CONTRACT SHALL NOT require a hosted account store, multiplayer service, or persistent user-management subsystem.
+HLA-CONTRACT defines the contract-level meaning of principal, actor, session, role bundle, capability grant, and Campaign Authority Binding. The embedding application or default solo-session setup establishes the local Principal identity, but caller-supplied grants do not authorize Campaign access. HLA-CONTRACT SHALL NOT require a hosted account store, multiplayer service, or persistent user-management subsystem.
+
+Conceptual binding:
+
+```text
+CampaignAuthorityBinding {
+  bindingRef
+  campaignRef
+  principalRef
+  capabilityBundleRef
+  explicitCapabilities[]
+  status
+  bindingSource
+  createdAt
+  sourceBindingProvenance?
+}
+```
+
+For v1, `status` is `active` or `revoked`. Campaign creation SHALL atomically create an active binding for the creating or default local Principal with the `campaignOwner` bundle. Campaign import SHALL require a deployment-authorized importer, create a new active local `campaignOwner` binding, and retain exported source-binding identifiers only as provenance. A foreign Principal identifier SHALL NOT become an active local grant merely because it appears in an import artifact.
+
+Authorization evaluation SHALL use the tuple `(principalRef, campaignRef, requiredCapability)` against active local bindings. Actor, Observer, Session, caller class, role name, and request-declared grants may provide context but SHALL NOT replace that check. Operations that are not yet Campaign-scoped, such as initial Campaign creation or importing a new Campaign, use deployment-scoped bootstrap capabilities supplied by the local adapter.
 
 Capability granularity SHALL follow a justified-split rule: each added capability ID must earn its place by representing a materially different authority level, information exposure risk, mutation risk, recovery risk, or test assertion. HLA-CONTRACT SHALL NOT decompose capabilities merely to create a large permission matrix.
 
@@ -244,11 +269,11 @@ This design therefore deepens the taxonomy only around privileged knowledge, aut
 | `reality.retcon` | Perform a human-authorized Retcon | HLA-STATE operations |
 | `authority.manage` | Manage roles/capability grants where the deployment supports that concept | HLA-CONTRACT authority operations |
 
-**Candidate role bundles:**
+**Initial role bundles:**
 
 | Role Bundle | Default Capabilities | Notes |
 |---|---|---|
-| `campaignOwner` | All capabilities for the owned Campaign, including `authority.manage` | Administrative default; exact ownership semantics remain deployment-neutral. |
+| `campaignOwner` | All capabilities for the bound Campaign, including `authority.manage` | Initial solo binding created at Campaign creation or authorized import; not a hardcoded authorization check. |
 | `gameMaster` | `campaign.query.presentation`, `campaign.query.archive`, `tooling.inspect.campaign`, `observer.record.other`, `resolution.apply`, `resolution.override`, `oracle.invoke`, `provenance.query`, `checkpoint.create`, `resolution.undo`, `reality.retcon`, Package migration if granted | Models high-trust play authority without making GM a hardcoded authorization primitive. |
 | `player` | `campaign.query.presentation`, `observer.record.self`, `resolution.submit` where granted | Supports player actions that mutate state only through ordinary authorized submission paths. |
 | `authoringTool` | `package.validate`, `package.register`, `package.remove`, `tooling.inspect.campaign` where granted, import/export capabilities as granted | Same public contracts as any other tool. |
@@ -276,7 +301,7 @@ The public catalog groups operations by owning HLA component. Exact method names
 | Persistence | HLA-PERSIST | `export`, `importPackage`, `importCampaign`, `destructiveImport`, `resolveArchived` | Mixed | `persistence.export`, `persistence.import.package`, `persistence.import.campaign`, `persistence.import.destructive`, `campaign.query.archive` |
 | State | HLA-STATE | `checkpoint`, `restore`, `undo`, `recover`, `retcon` | Yes | `checkpoint.create`, `checkpoint.restore`, `resolution.undo`, `reality.retcon` |
 | Validation | HLA-VALIDATE | `validate` | No authoritative mutation | Depends on validation subject and caller context |
-| Authority | HLA-CONTRACT | `describeOperations`, `describeCapabilities`, `assignCapabilityBundle` | Mixed | none for descriptions; `authority.manage` for assignment |
+| Authority | HLA-CONTRACT | `describeOperations`, `describeCapabilities`, `getCampaignAuthorityBindings`, `assignCapabilityBundle`, `revokeCampaignAuthorityBinding` | Mixed | none for descriptions; Campaign-bound `authority.manage` for inspection/mutation after bootstrap creation/import |
 
 Read operations may still require a capability because Observer Knowledge and Presentation Models are subject to POV Resolution and caller context.
 
@@ -346,7 +371,7 @@ This design captures reconnect behavior without deciding whether clients are loc
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-HLA-CONTRACT owns no authoritative domain data. It defines transient envelope structures and may rely on a deployment-provided session authority for caller identity and capability grants.
+HLA-CONTRACT owns Campaign Authority Bindings as authoritative Campaign-scoped authorization metadata. It defines transient envelope structures and relies on a deployment-provided identity/session authority to establish local Principal identity. HLA-PERSIST provides durable backing but does not evaluate grants.
 
 **Transient structures:**
 
@@ -360,13 +385,15 @@ HLA-CONTRACT owns no authoritative domain data. It defines transient envelope st
 - `ActorRef`
 - `SessionRef`
 - `CapabilityGrant`
+- `CampaignAuthorityBinding`
 - `DiagnosticEnvelope`
 
 **Ownership boundaries:**
 
 - Caller/session identity source is deployment-adapter owned, not engine-domain owned.
-- Capability evaluation is HLA-CONTRACT behavior.
-- Capability grants may be supplied by an embedding application or persisted later by an authority-management design, but this document does not select that storage.
+- Campaign Authority Binding ownership and capability evaluation are HLA-CONTRACT behavior.
+- HLA-PERSIST stores bindings and binding provenance through an adapter boundary; it does not decide whether a request is authorized.
+- Exported source-binding identifiers are provenance only. Authorized import creates a new active local binding for the importing Principal.
 - Campaign revisions are produced by HLA-CORE/HLA-OBSERVER/HLA-QUERY-facing operations, not invented by HLA-CONTRACT.
 
 ---
@@ -382,6 +409,10 @@ HLA-CONTRACT owns no authoritative domain data. It defines transient envelope st
 | Malformed envelope | `rejected` | No forwarding. |
 | Missing caller/session identity for an operation that requires it | `unauthorized` | No forwarding. |
 | Missing required capability | `unauthorized` | No forwarding. |
+| No active binding for caller Principal and target Campaign | `unauthorized` | No forwarding and no binding side effect. |
+| Caller supplies a role/grant not present in the active local binding | `unauthorized` | Ignore the claim for authorization; no forwarding. |
+| Campaign creation cannot commit its initial binding | `componentFailure` | Campaign creation fails atomically; no authoritative Campaign remains. |
+| Import cannot create the authorized importer's local binding | `componentFailure` | Import fails atomically; foreign source binding remains non-authoritative provenance only. |
 | Stale synchronization state that cannot be satisfied as a delta | `conflict` or `accepted` with full state, depending on `acceptsFullState` | No mutation unless the underlying operation is otherwise accepted. |
 | Owning component validation failure | `validationFailed` | Owning component guarantees no partial state change. |
 | Owning component conflict | `conflict` | Owning component guarantees no partial state change. |
@@ -402,6 +433,7 @@ HLA-CONTRACT does not retry mutating operations by default. Retry and idempotenc
 | NFR-002 Security | HLA-CONTRACT enforces authorization before forwarding and preserves mandatory HLA-VALIDATE routing for untrusted content. |
 | NFR-005 Maintainability | Operation groups route to owning components; changes in Package semantics, persistence, projection, or validation do not require redefining unrelated public contracts. |
 | NFR-006 Auditability | HLA-CONTRACT passes caller context and provenance-relevant request metadata to mutating components so consequential changes can record source. |
+| NFR-007 Authorization | Active Campaign Authority Bindings and explicit capability checks gate every Campaign-scoped operation before component forwarding. |
 
 Performance targets remain those of NFR-001. No new numeric target is invented here.
 
@@ -418,6 +450,9 @@ Future Test Planning SHALL include tests proving:
 - No public operation exposes direct internal component access.
 - Every mutating operation declares required capabilities.
 - A missing capability prevents forwarding and produces no side effect.
+- An unbound Principal cannot access a Campaign even when the request claims a role or capability.
+- Campaign creation and authorized import establish exactly one initial active local `campaignOwner` binding atomically with the operation.
+- Export/import preserves source-binding provenance without activating foreign Principal identifiers locally.
 - Role bundles grant capabilities, but enforcement checks capabilities rather than role names.
 - Package registration, import, and Oracle result flows cannot bypass HLA-VALIDATE.
 - A reconnecting caller with last-known revision/delta number receives delta, compacted delta, full state, unchanged, or diagnostic behavior as specified.
@@ -450,12 +485,14 @@ HLA-CONTRACT imposes only these future packaging constraints:
 | Requirement | Coverage in This Design |
 |---|---|
 | FR-039 | Same public operation catalog, no first-party shortcut, public operation groups, identical capability surface. |
+| FR-045 | Campaign Authority Binding ownership, creation/import bootstrap, persistence boundary, and local rebinding semantics. |
 | NFR-001 | In-process facade path preserved; transport overhead excluded from component contract. |
 | NFR-005 | Operation groups route to owning components without merging Package, persistence, projection, validation, and public contract responsibilities. |
 | NFR-002 | Authorization gate and HLA-VALIDATE routing posture captured. |
 | NFR-006 | Provenance metadata forwarding posture captured for mutating operations. |
+| NFR-007 | Campaign-scoped capability evaluation against active local bindings before forwarding. |
 
-This design is sufficient to approve the HLA-CONTRACT component-design baseline for continued Detailed Design work and later planning.
+This amended design is prepared for component-level gate review.
 
 ---
 
@@ -478,10 +515,10 @@ This design is sufficient to approve the HLA-CONTRACT component-design baseline 
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-HLA-CONTRACT Detailed Design is **approved at the component-design level**.
+HLA-CONTRACT Detailed Design v1.1 is **approved**.
 
-This approval does not authorize implementation by itself. It approves the HLA-CONTRACT Detailed Design baseline for continued Detailed Design work and later planning.
+The prior v1.0 baseline remains historically approved. Controlled implementation against v1.1 is authorized through the approved Test Planning gate.
 
-This design establishes the public contract facade, operation grouping, capability-based authorization posture, role-bundle vocabulary, request/response envelope, synchronization envelope semantics, diagnostic posture, and cross-component routing responsibilities. No HLA-CONTRACT-owned open questions remain at this design level.
+This amendment adds Campaign Authority Binding ownership, bootstrap creation/import semantics, and Campaign-scoped capability evaluation to the existing public contract facade. No HLA-CONTRACT-owned open questions remain for this amendment.
 
 Implementation, testing, future multiplayer rescoping, hosted identity/account design, or later component designs may reveal a need to revisit this design. Any material change SHALL be handled through the project's normal lifecycle change-control process.

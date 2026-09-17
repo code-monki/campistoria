@@ -1,13 +1,13 @@
 # Campistoria Engine Detailed Design
 
 Project Name: Campistoria Engine
-Version: 1.0 (Detailed Design Baseline)
+Version: 1.1 (Approved)
 Date (YYYY-MM-DD): 2026-09-17
 Author(s): CodeMonki
 Status: Approved
-Architecture Version Reference: `docs/architecture/engine-hla.md` v1.0 (Approved)
-Requirement Version Reference: `docs/requirements/engine-srs.md` v1.0 (Approved)
-RTM Version Reference: `docs/requirements/engine-rtm.md` v1.1 (Detailed Design Mapped, Approved)
+Architecture Version Reference: `docs/architecture/engine-hla.md` v1.1 (Approved)
+Requirement Version Reference: `docs/requirements/engine-srs.md` v1.1 (Approved)
+RTM Version Reference: `docs/requirements/engine-rtm.md` v1.2 (Approved)
 Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 
 ---
@@ -49,11 +49,11 @@ Terminology used by this document and component-level Detailed Design artifacts 
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-This document records the Detailed Design baseline candidate for the Campistoria Engine. It establishes phase authority, shared design constraints, approved component-level refinements, and the remaining boundaries deferred to later lifecycle phases. It does not authorize implementation.
+This document records the approved v1.1 Detailed Design amendment for the Campistoria Engine. It preserves the approved ten-component structure while adding Campaign Authority Binding behavior discovered through Spiral Development during Test Planning.
 
 **Architectural Component IDs in scope:** all ten approved HLA components: HLA-LIFECYCLE, HLA-CORE, HLA-RESOLUTION, HLA-OBSERVER, HLA-PACKAGE, HLA-QUERY, HLA-PERSIST, HLA-STATE, HLA-VALIDATE, and HLA-CONTRACT.
 
-**Requirement IDs in scope:** FR-001 through FR-044 and NFR-001 through NFR-006 as approved in `engine-srs.md` v1.0.
+**Requirement IDs in scope:** FR-001 through FR-045 and NFR-001 through NFR-007 as proposed in `engine-srs.md` v1.1.
 
 **Document boundaries:**
 
@@ -105,16 +105,16 @@ The components below SHALL be refined into component-level Detailed Design secti
 
 | Priority | Component | Requirement IDs | Design Focus |
 |---|---|---|---|
-| 1 | HLA-CONTRACT | FR-039; cross-cutting NFR-001, NFR-005 | Public operation catalog, embedded/hosted adapter neutrality, actor/session identity, capability enforcement, error exposure, request/response conventions. Approved: `docs/design/components/hla-contract-dd.md`. |
+| 1 | HLA-CONTRACT | FR-039, FR-045; cross-cutting NFR-001, NFR-005, NFR-007 | Public operation catalog, embedded/hosted adapter neutrality, actor/session identity, Campaign Authority Binding ownership, capability enforcement, error exposure, request/response conventions. Approved amendment: `docs/design/components/hla-contract-dd.md`. |
 | 2 | HLA-VALIDATE | FR-037, FR-038, NFR-002 | Validation subject taxonomy, validator chain ordering, diagnostic schema, import/Package/Oracle validation contracts, XML/SVG-style structural validation posture where applicable. Approved: `docs/design/components/hla-validate-dd.md`. |
 | 3 | HLA-RESOLUTION | FR-012, FR-013, FR-014, NFR-006 | Resolution Command model, Oracle Adapter contract, acceptance/rejection criteria, deterministic fallback, undo relationship, provenance records. Approved: `docs/design/components/hla-resolution-dd.md`. |
 | 4 | HLA-CORE | FR-004 through FR-011, NFR-003, NFR-004, NFR-006 | Campaign Reality event model, state fold rules, Fact/Relationship/Time invariants, atomic append semantics, history reconstruction. Approved: `docs/design/components/hla-core-dd.md`. |
 | 5 | HLA-OBSERVER | FR-015 through FR-018, NFR-003, NFR-004, NFR-006 | Observer Knowledge event model, information-source provenance, isolation from Campaign Reality, POV query support. Approved: `docs/design/components/hla-observer-dd.md`. |
 | 6 | HLA-PACKAGE | FR-019 through FR-026, FR-041, NFR-005 | Package registry, version pinning, composition rules, dependency removal, migration contract, conflict diagnostics. Approved: `docs/design/components/hla-package-dd.md`. |
 | 7 | HLA-STATE | FR-033 through FR-036, FR-041, NFR-003 | Checkpoint schema, snapshot cadence configuration, recovery orchestration, undo inverse-command semantics, retcon provenance. Approved: `docs/design/components/hla-state-dd.md`. |
-| 8 | HLA-PERSIST | FR-031, FR-032, FR-042, FR-043, NFR-004 | Storage abstraction, archival boundary, import/export representation, asset portability, active-window retrieval behavior. Approved: `docs/design/components/hla-persist-dd.md`. |
+| 8 | HLA-PERSIST | FR-031, FR-032, FR-042, FR-043, FR-045, NFR-004, NFR-007 | Storage abstraction, archival boundary, import/export representation, authority-binding durability/rebinding, asset portability, active-window retrieval behavior. Approved amendment: `docs/design/components/hla-persist-dd.md`. |
 | 9 | HLA-QUERY | FR-027 through FR-030 | Query contract, POV resolution, Projection strategy selection, Presentation Model lifecycle, reconnect delta/snapshot behavior. Approved: `docs/design/components/hla-query-dd.md`. |
-| 10 | HLA-LIFECYCLE | FR-001, FR-002, FR-003, FR-040, FR-044 | Scenario-to-Campaign instantiation, Campaign identity, seed assignment, immutable Scenario reference, branching/divergence semantics. Approved: `docs/design/components/hla-lifecycle-dd.md`. |
+| 10 | HLA-LIFECYCLE | FR-001, FR-002, FR-003, FR-040, FR-044, FR-045 | Scenario-to-Campaign instantiation, Campaign identity, seed assignment, initial Campaign Authority Binding orchestration, immutable Scenario reference, branching/divergence semantics. Approved amendment: `docs/design/components/hla-lifecycle-dd.md`. |
 
 Each component-level refinement defines responsibilities, explicit interface contracts, data structures, validation rules, error semantics, preconditions, postconditions, side effects, determinism expectations, failure behavior, NFR derivation, and test alignment at the level appropriate for Detailed Design. Concrete implementation signatures, executable schemas, and test IDs remain follow-on lifecycle artifacts.
 
@@ -130,17 +130,18 @@ The following rules are mandatory acceptance criteria for component-level Detail
 1. No external caller, first-party or third-party, may bypass HLA-CONTRACT.
 2. Every mutating HLA-CONTRACT operation SHALL declare required capabilities before component forwarding is allowed.
 3. Authorization SHALL be capability-enforced. Roles MAY assign capability bundles, but permission checks SHALL resolve to explicit capabilities rather than hardcoded role names.
-4. All Package content, imported Campaign data, and Oracle results SHALL pass HLA-VALIDATE before they can influence authoritative state.
-5. HLA-RESOLUTION is the exclusive Campaign Reality write path after Campaign instantiation.
-6. Campaign Reality, Observer Knowledge, Package definitions, Checkpoints, and exported artifacts SHALL have explicit ownership and lifecycle rules.
-7. Campaign Reality and Observer Knowledge SHALL remain independently reconstructible from their own event streams.
-8. Undo SHALL reverse an unwanted Resolution without becoming Campaign history; Retcon SHALL append provenance-preserving correction history rather than rewriting Events.
-9. Client synchronization SHALL distinguish initial state transfer from subsequent delta transfer; reconnecting clients MAY present a last-known revision or delta number so the engine can choose missing deltas or a fresh snapshot.
-10. Performance and scalability designs SHALL derive from NFR-001 and NFR-004, including provisional calibration values, rather than invented targets.
-11. Security design SHALL include authentication boundary, authorization enforcement, input validation, diagnostic exposure, and audit boundaries.
-12. Component designs SHALL identify failure triggers, error propagation, retry/degradation posture, and recovery behavior before implementation starts.
-13. HLA components SHALL NOT become "God Components" that own unrelated mechanisms directly. Where a component has coordinator responsibility, component-level Detailed Design SHALL decompose it into explicit internal subcomponents, modules, or equivalent interfaces with clear ownership, while preserving the approved HLA boundary.
-14. Component designs SHALL preserve the distinction between the Campistoria Engine and a Virtual Tabletop. The engine owns authoritative campaign state, observer knowledge, validation, resolution, persistence, contracts, and Presentation Models; clients own the play-surface experience used to render and manipulate those outputs.
+4. Every Campaign SHALL have at least one active local Campaign Authority Binding. Caller-supplied role names, grants, and imported foreign Principal identifiers SHALL NOT self-authorize.
+5. All Package content, imported Campaign data, and Oracle results SHALL pass HLA-VALIDATE before they can influence authoritative state.
+6. HLA-RESOLUTION is the exclusive Campaign Reality write path after Campaign instantiation.
+7. Campaign Reality, Observer Knowledge, Package definitions, Checkpoints, Campaign Authority Bindings, and exported artifacts SHALL have explicit ownership and lifecycle rules.
+8. Campaign Reality and Observer Knowledge SHALL remain independently reconstructible from their own event streams.
+9. Undo SHALL reverse an unwanted Resolution without becoming Campaign history; Retcon SHALL append provenance-preserving correction history rather than rewriting Events.
+10. Client synchronization SHALL distinguish initial state transfer from subsequent delta transfer; reconnecting clients MAY present a last-known revision or delta number so the engine can choose missing deltas or a fresh snapshot.
+11. Performance and scalability designs SHALL derive from NFR-001 and NFR-004, including provisional calibration values, rather than invented targets.
+12. Security design SHALL include authentication boundary, Campaign-scoped authorization enforcement, input validation, diagnostic exposure, and audit boundaries.
+13. Component designs SHALL identify failure triggers, error propagation, retry/degradation posture, and recovery behavior before implementation starts.
+14. HLA components SHALL NOT become "God Components" that own unrelated mechanisms directly. Where a component has coordinator responsibility, component-level Detailed Design SHALL decompose it into explicit internal subcomponents, modules, or equivalent interfaces with clear ownership, while preserving the approved HLA boundary.
+15. Component designs SHALL preserve the distinction between the Campistoria Engine and a Virtual Tabletop. The engine owns authoritative campaign state, observer knowledge, validation, resolution, persistence, contracts, and Presentation Models; clients own the play-surface experience used to render and manipulate those outputs.
 
 ---
 
@@ -194,6 +195,7 @@ The following HLA risks become explicit Detailed Design acceptance concerns:
 | HLA-PACKAGE Microkernel boundary erodes | HLA-PACKAGE SHALL define Package extension points and explicitly prohibit engine-core access. |
 | HLA-CONTRACT gains first-party-only shortcuts | HLA-CONTRACT SHALL enumerate all public operations and reject internal-call paths for reference clients. |
 | Mutating operations validate shape but not actor capability | HLA-CONTRACT SHALL define capability checks for every mutating operation. |
+| Campaign ownership is implicit or caller-asserted | HLA-CONTRACT SHALL own active Campaign Authority Bindings; HLA-LIFECYCLE SHALL create the initial binding atomically; HLA-PERSIST SHALL preserve durability and safe import rebinding. |
 | Oracle Adapter boundary is bypassed | HLA-RESOLUTION SHALL define Oracle invocation, validation, rejection, and unresolved fallback contracts. |
 | Campaign Reality and Observer Knowledge logs merge for storage convenience | HLA-CORE, HLA-OBSERVER, and HLA-PERSIST SHALL preserve separate streams and ownership. |
 | Archival tier design is deferred too long | HLA-PERSIST SHALL refine the active-window/archival contract before implementation planning. |
@@ -209,16 +211,16 @@ The following HLA risks become explicit Detailed Design acceptance concerns:
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 - Detailed Design phase entry authorized? **Yes.**
-- Component-level Detailed Design complete? **Yes.**
+- Component-level Detailed Design complete? **Pending v1.1 amendment review** — HLA-CONTRACT, HLA-LIFECYCLE, and HLA-PERSIST are amended.
 - Interface contracts complete? **Yes, at Detailed Design level.**
 - Data schemas complete? **Yes, conceptual Detailed Design structures defined; executable schemas deferred where explicitly stated.**
 - Failure semantics complete? **Yes, at component level.**
 - NFR derivation complete? **Yes, at component level.**
 - Test alignment complete? **Yes, component-level test planning signals defined; Test Case IDs deferred to Test Planning.**
-- RTM DD Artifact mappings approved? **Yes — `engine-rtm.md` v1.1 approved with this baseline.**
-- Implementation authorized? **No.**
+- RTM DD Artifact mappings approved? **Yes** — RTM v1.2 includes approved FR-045/NFR-007 mappings.
+- Implementation authorized? **Yes** — controlled implementation is authorized by the approved Test Planning gate; Packaging and Release remain unauthorized.
 
-This baseline closes component-level Detailed Design. The concurrently approved RTM v1.1 completes Traceability Consolidation and authorizes Test Planning, not Implementation.
+The v1.0 baseline remains the prior approved design. The v1.1 amendment must be approved with Requirements, Architecture, RTM, and Test Planning alignment before lifecycle advancement resumes.
 
 ---
 
@@ -227,11 +229,16 @@ This baseline closes component-level Detailed Design. The concurrently approved 
 
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
-Approved By: CodeMonki
+Prior Baseline Approved By: CodeMonki
+Prior Baseline Role: Project Owner
+Prior Baseline Date: 2026-09-17
+Prior Baseline Version: v1.0
+
+Amendment Approved By: CodeMonki
 Role: Project Owner
 Date: 2026-09-17
-Version Incremented: Yes — v1.0
+Version Incremented: Yes — v1.1
 
 ---
 
-End of Detailed Design Baseline.
+End of Approved Detailed Design v1.1.

@@ -257,14 +257,18 @@ Open interoperability is foundational:
 
 Authoring tools and third-party tools must use public contracts rather than privileged internals.
 
+Every Campaign-scoped operation requires an active local Campaign Authority Binding between the requesting Principal and the target Campaign. HLA-CONTRACT owns and evaluates these bindings; HLA-LIFECYCLE establishes the initial `campaignOwner` binding atomically with Campaign creation; HLA-PERSIST stores it durably. Session, role, or capability claims supplied by a caller do not authorize themselves. Import creates a new active local binding for the authorized importer and treats foreign Principal/binding identifiers as provenance only.
+
+This minimal single-player authorization boundary is v1 engine scope. It does not introduce hosted identity, account management, invitations, or multiplayer authority administration.
+
 ## Deferred / Out Of Engine Scope
 
 Do not pull these into immediate engine requirements unless the user explicitly reopens them:
 
 - full authoring IDE;
 - AI engine capability or AI-specific campaign semantics;
-- multiplayer implementation;
-- cloud accounts/sync/hosting/telemetry/subscriptions;
+- multiplayer implementation and multiplayer authority administration;
+- cloud accounts/identity providers/sync/hosting/telemetry/subscriptions;
 - collaboration protocols;
 - branching campaigns / alternate timelines;
 - automatic retcon consequence rewriting;
