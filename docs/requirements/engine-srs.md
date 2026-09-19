@@ -790,11 +790,11 @@ Risk levels are this author's judgment based on the risks already surfaced durin
 
 - All requirements uniquely identified? **Yes.**
 - Acceptance criteria defined? **Yes**, for all FRs and NFRs.
-- No architectural decisions embedded? **Yes**, self-attested; pending human review.
-- No implementation bias present? **Yes**, self-attested; pending human review.
+- No architectural decisions embedded? **Yes** — affirmed in the approved v1.1 SRS baseline.
+- No implementation bias present? **Yes** — affirmed in the approved v1.1 SRS baseline.
 - Waiting room separated? **Yes** (Section 13).
 - Probabilistic requirements bounded? **Yes** (Section 6).
-- RTM scaffold updated? **Yes** — `docs/requirements/engine-rtm.md` created alongside this draft, listing all FR/NFR IDs with Architecture/Design/Test/Packaging/Orchestration columns marked not-yet-applicable pending later phases.
+- RTM aligned? **Yes** — approved RTM v1.2 maps all FR/NFR IDs to Architecture, Detailed Design, and planned Test Cases; later-phase columns remain unpopulated until their artifacts exist.
 
 ---
 

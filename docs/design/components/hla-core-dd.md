@@ -44,7 +44,7 @@ Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 - Architecture phase approved? **Yes** — `engine-hla.md` v1.0, approved 2026-09-12.
 - Architectural Component ID stable? **Yes** — HLA-CORE.
 - Parent Detailed Design phase opened? **Yes** — [Engine Detailed Design](../engine-detailed-design.md) v1.0 candidate.
-- Advancement to implementation authorized? **No.**
+- Advancement to implementation authorized? **Yes** — controlled Implementation was authorized by the approved Test Planning gate on 2026-09-17; this component baseline alone did not grant that authorization.
 
 This document refines HLA-CORE only. It does not authorize implementation and does not introduce a new architectural component.
 

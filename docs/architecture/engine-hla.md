@@ -419,9 +419,9 @@ The remaining open questions are Detailed Design inputs rather than Architecture
 - Deterministic–probabilistic boundaries defined? **Yes** (Section 4).
 - NFR-driven structure demonstrated? **Yes** (Section 8).
 - RTM updated? **Yes** — FR-045 and NFR-007 mappings are approved in RTM v1.2.
-- Human approval granted? **Pending for v1.1 amendment** — prior v1.0 approval remains recorded below.
+- Human approval granted? **Yes** — the v1.1 amendment was approved by the project owner on 2026-09-17; prior v1.0 approval remains recorded below.
 
-The original Gate 3→4 approval remains historical. The v1.1 amendment requires approval together with aligned Detailed Design, RTM, and Test Planning updates before lifecycle advancement resumes.
+The original Gate 3→4 approval remains historical. The v1.1 amendment and aligned Detailed Design, RTM, and Test Planning updates were approved on 2026-09-17; controlled Implementation is authorized by the Test Planning gate.
 
 ---
 

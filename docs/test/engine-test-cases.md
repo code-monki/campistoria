@@ -243,7 +243,7 @@ All cases in this inventory are **Planned** until implementation references and 
 - Every FR has an explicit negative, boundary, or breakage mapping? **Yes.**
 - DPB-001 invocation, validation, acceptance, containment, fallback, provenance, and reproducibility covered? **Yes.**
 - Failure, recovery, rollback, authorization, POV isolation, and hostile-input cases present? **Yes.**
-- Implementation references available? **No — Implementation not authorized.**
+- Implementation references available? **No — controlled Implementation is authorized, but implementation units have not yet been created.**
 - Execution evidence available? **No — Test execution has not begun.**
 - Human approval granted? **Yes** — approved by the project owner on 2026-09-17.
 

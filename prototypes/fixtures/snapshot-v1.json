@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "reality_events": [
+    {
+      "campaign_id": "campaign-1",
+      "kind": "created",
+      "payload": {"source": "test"}
+    },
+    {
+      "campaign_id": "campaign-1",
+      "kind": "resolved",
+      "payload": {"source": "test"}
+    }
+  ],
+  "knowledge_events": [
+    {
+      "campaign_id": "campaign-1",
+      "kind": "observed",
+      "payload": {"source": "test"}
+    }
+  ]
+}

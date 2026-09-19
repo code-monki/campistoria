@@ -38,7 +38,7 @@ Glossary Reference: `docs/glossary.md` v0.1 (Working Glossary)
 - Requirement-to-Architecture mapping complete? **Yes** — `engine-rtm.md` v1.0, Architecture Mapped.
 - Advancement to Detailed Design authorized? **Yes** — `engine-hla.md` §15 authorizes Architecture to Detailed Design advancement.
 
-Detailed Design work is therefore permitted. Implementation remains prohibited during this phase.
+Detailed Design work was permitted under the prior Architecture gate. The approved Test Planning gate now authorizes controlled Implementation against this design.
 
 Terminology used by this document and component-level Detailed Design artifacts should align with `docs/glossary.md`. Approved Requirements and Architecture definitions remain authoritative for their approved phase artifacts unless changed through explicit lifecycle change control.
 
@@ -174,10 +174,10 @@ Traceability SHALL remain continuous from Requirement ID to HLA Component ID to 
 |---|---|---|
 | Requirement to HLA Component | Complete in `engine-rtm.md` v1.0 | Preserve unchanged unless change control reopens Architecture. |
 | HLA Component to Detailed Design | Complete for all ten approved HLA components | Preserve links and update only through change control. |
-| Detailed Design to Test Case | Not yet created | Assign test IDs during Test Planning after component DD approval. |
+| Detailed Design to Test Case | Complete in RTM v1.2 and the approved Test Case Inventory v1.0 | Preserve and update mappings through change control during Implementation. |
 | Detailed Design to Implementation Unit | Not yet created | Populate only after implementation planning begins. |
 
-The RTM's DD Artifact column is ready to map each Requirement/NFR to the approved component-level Detailed Design artifact. Test Case IDs remain pending until Test Planning.
+The RTM's DD Artifact column maps each Requirement/NFR to an approved component-level Detailed Design artifact. Test Case IDs are mapped in RTM v1.2 to the approved Test Case Inventory v1.0.
 
 ---
 
@@ -211,7 +211,7 @@ The following HLA risks become explicit Detailed Design acceptance concerns:
 <sup>[↩](#table-of-contents "Back to ToC")</sup>
 
 - Detailed Design phase entry authorized? **Yes.**
-- Component-level Detailed Design complete? **Pending v1.1 amendment review** — HLA-CONTRACT, HLA-LIFECYCLE, and HLA-PERSIST are amended.
+- Component-level Detailed Design complete? **Yes** — the v1.1 amendments to HLA-CONTRACT, HLA-LIFECYCLE, and HLA-PERSIST were approved on 2026-09-17.
 - Interface contracts complete? **Yes, at Detailed Design level.**
 - Data schemas complete? **Yes, conceptual Detailed Design structures defined; executable schemas deferred where explicitly stated.**
 - Failure semantics complete? **Yes, at component level.**
@@ -220,7 +220,7 @@ The following HLA risks become explicit Detailed Design acceptance concerns:
 - RTM DD Artifact mappings approved? **Yes** — RTM v1.2 includes approved FR-045/NFR-007 mappings.
 - Implementation authorized? **Yes** — controlled implementation is authorized by the approved Test Planning gate; Packaging and Release remain unauthorized.
 
-The v1.0 baseline remains the prior approved design. The v1.1 amendment must be approved with Requirements, Architecture, RTM, and Test Planning alignment before lifecycle advancement resumes.
+The v1.0 baseline remains the prior approved design. The v1.1 amendment and aligned Requirements, Architecture, RTM, and Test Planning artifacts were approved on 2026-09-17.
 
 ---
 
