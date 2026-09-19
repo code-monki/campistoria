@@ -52,16 +52,3 @@ Agents MUST NOT add, insert, append, embed, or generate visible or hidden attrib
 This rule applies to document text, source comments, headers, footers, metadata, generated-file properties, manifests, commit-message text, embedded identifiers, and machine-readable fields.
 
 Agents MUST NOT alter existing authorship, copyright, licensing, ownership, attribution, or provenance unless explicitly instructed. AI assistance does not authorize modification of project attribution or ownership.
-
-<!-- OPENWIKI:START -->
-
-## OpenWiki
-
-This repository has a generated `openwiki/` evidence index. It is optional just-in-time context, not required startup reading.
-
-- Treat source code and tests as authoritative. A brief's unknowns and review items are verification gaps, not automatic requirements.
-- Prefer the narrowest quiet validation that proves the changed behavior. Preserve complete failure output.
-
-The scheduled OpenWiki GitHub Actions workflow refreshes the repository wiki. Do not hand-edit generated OpenWiki pages unless explicitly asked; prefer updating source code/docs and letting OpenWiki regenerate.
-
-<!-- OPENWIKI:END -->

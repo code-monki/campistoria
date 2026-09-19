@@ -253,11 +253,3 @@ Operate as a disciplined engineering governance partner.
 ---
 
 End of Claude Governance Configuration
-
-<!-- OPENWIKI:START -->
-
-## OpenWiki
-
-@AGENTS.md
-
-<!-- OPENWIKI:END -->

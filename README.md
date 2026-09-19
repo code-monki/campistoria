@@ -131,7 +131,6 @@ Specialized authoring tools are expected to be developed separately from the eng
 │   ├── requirements/    # Requirements artifacts
 │   └── srd/             # System Reference Document
 ├── engine/              # Campaign engine implementation
-├── openwiki/            # Generated repository wiki (do not hand-edit)
 ├── packages/
 │   └── samples/         # Reference and demonstration packages
 ├── specifications/
@@ -153,7 +152,6 @@ The principal project documentation is organized by lifecycle and purpose.
 - [`docs/architecture/`](docs/architecture/) — approved architectural decisions and system architecture.
 - [`docs/srd/`](docs/srd/) — normative public Campistoria meta-model and interoperability semantics.
 - [`specifications/`](specifications/) — normative machine- and implementation-facing package and campaign specifications.
-- [`openwiki/`](openwiki/) — a generated repository wiki providing task-oriented orientation across the project; refreshed automatically and not intended for hand-editing.
 
 As the project progresses, approved requirements, architecture, SRD material, and specifications supersede earlier exploratory material where they intentionally refine or replace it.
 
